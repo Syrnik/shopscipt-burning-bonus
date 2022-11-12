@@ -1,0 +1,28 @@
+<form action="?plugin=burningbonus&module=settings&action=saveaffiliate" id="s-settings-affiliate-burningbonus-form"
+      method="post">
+  <div class="fields form">
+    <div class="field">
+      <div class="name">[`Периодичность сгорания`]</div>
+      <div class="value no-shift">
+        <ul class="menu-v">
+          <li>
+            <label><input type="radio" name="period" value="never"{if 'never'===$settings.period} checked{/if}>
+              Никогда <span class="hint">— плагин выключен</span></label>
+          </li>
+          <li><label><input type="radio" name="period" value="daily"{if 'daily'===$settings.period} checked{/if}>
+              Ежедневно <span class="hint">— в начале каждого дня</span></label></li>
+          <li><label><input type="radio" name="period" value="weekly"{if 'weekly'===$settings.period} checked{/if}>
+              Еженедельно <span class="hint">— в начале каждой недели, по понедельникам</span></label></li>
+          <li><label><input type="radio" name="period" value="monthly"{if 'monthly'===$settings.period} checked{/if}>
+              Ежемесячно <span class="hint">— в начале каждого месяца, 1-го числа</span></label></li>
+      </div>
+        </ul>
+      </div>
+    <div class="field">
+      <div class="name">Срок действия бонусов</div>
+      <div class="value">
+        <input name="lifetime" type="number" min="0" step="1" value="{$settings.lifetime}" class="short numerical"> дней
+      </div>
+    </div>
+  </div>
+</form>
