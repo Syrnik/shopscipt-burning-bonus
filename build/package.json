@@ -1,0 +1,22 @@
+{
+  "name": "burningbonus",
+  "version": "1.0.0",
+  "dependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.0",
+    "core-js": "^3.26.0",
+    "terser-webpack-plugin": "^5.3.6",
+    "vue": "^3.2.45",
+    "vue-loader": "^17.0.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "scripts": {
+    "borningbonus:notifications:dev": "node ./node_modules/webpack/bin/webpack.js --config webpack.notifications.config.js --mode development",
+    "borningbonus:notifications:prod": "node ./node_modules/webpack/bin/webpack.js --config webpack.notifications.config.js --mode production"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.19.6"
+  }
+}

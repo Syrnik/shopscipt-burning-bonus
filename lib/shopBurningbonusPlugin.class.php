@@ -28,12 +28,32 @@ class shopBurningbonusPlugin extends shopPlugin
         return parent::getSettings($name);
     }
 
+    /**
+     * @EventHandler backend_settings_affiliate
+     * @return string[]
+     */
     public function backendSettingsAffiliateHandler(): array
     {
         return [
             'id'   => 'burningbonus',
             'name' => 'Сгорание бонусов',
             'url'  => '?plugin=burningbonus&module=settings&action=affiliate'
+        ];
+    }
+
+    /**
+     * @EventHandler backend_marketing_sidebar
+     * @return string[]
+     * @throws waException
+     */
+    public function backendMarketingSidebarHandler(): array
+    {
+        return [
+            'settings_li' => '<li><a href="' .
+                wa()->getAppUrl('shop') .
+                '?plugin=burningbonus&module=notifications"><i class="icon16 yes"></i><span class="s-name">' .
+                _wp('Уведомления о сгорании бонусов') .
+                '</span></a></li>'
         ];
     }
 }

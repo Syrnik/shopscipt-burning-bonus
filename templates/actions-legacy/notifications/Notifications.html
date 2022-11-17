@@ -1,0 +1,31 @@
+<div id="s-burningbonus-notifications-container" class="s-burningbonus-notifications-page double-padded block">
+</div>
+<script>
+    const sources = [
+        {
+            id: "wa-content-ace-js",
+            type: "js",
+            uri: "{$wa_url}wa-content/js/ace/ace.js?v={$wa->version(true)}"
+        },
+        {
+            id: 's-plugin-burningbonus-notifications-js',
+            type: 'js',
+            uri: '{$wa_app_static_url}plugins/burningbonus/js/notifications-settings.js?v={time()}'
+        },
+        {
+            id: 's-plugin-burningbonus-notifications-css',
+            type: 'css',
+            uri: '{$wa_app_static_url}plugins/burningbonus/css/notifications-settings.css?v={time()}'
+        }
+    ];
+    {$references['wa_app_static_url'] = $wa_app_static_url|cat:''}
+    $.shop.marketing.load(sources).then(
+        () => BurningbonusNotificationsSettings({
+            references: {$references|json_encode:256},
+            props: {
+                notificationsList: {$notifications_list|json_encode:256}
+            }
+        }).mount('#s-burningbonus-notifications-container'),
+        r => console.error(r)
+    );
+</script>

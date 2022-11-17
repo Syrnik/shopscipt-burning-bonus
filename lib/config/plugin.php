@@ -12,6 +12,7 @@ return [
     'vendor'        => '670917',
     'shop_settings' => true,
     'handlers'      => [
-        'backend_settings_affiliate'=>'backendSettingsAffiliateHandler'
+        'backend_settings_affiliate' => 'backendSettingsAffiliateHandler',
+        'backend_marketing_sidebar'  => 'backendMarketingSidebarHandler'
     ],
 ];
