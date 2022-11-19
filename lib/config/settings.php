@@ -8,4 +8,5 @@
 return [
     'period'   => ['value' => 'never'], // 'never', 'daily', 'weekly' or 'monthly'
     'lifetime' => ['value' => 365], // days
+    'delay'    => ['value' => '']
 ];
