@@ -1,3 +1,9 @@
+<h1>Сгорание бонусов</h1>
+
+<p>Бонусы, у которых есть срок действия, стимулируют покупателей чаще их использовать и, тем самым делать повторные
+    заказы. Настройте также уведомления о сгорании бонусов, чтобы напомнить покупателям о магазине и стимулировать их
+    сделать ещё заказ.</p>
+
 <form action="?plugin=burningbonus&module=settings&action=saveaffiliate" id="s-settings-affiliate-burningbonus-form"
       method="post">
     <div class="fields form">
@@ -5,7 +11,7 @@
             <div class="name">Срок действия бонусов</div>
             <div class="value">
                 <input name="setting[lifetime]" type="number" min="0" step="1" value="{$settings.lifetime}"
-                       class="short numerical"> дней
+                       class="short numerical" required/> дней
             </div>
         </div>
         <div class="field">
@@ -37,5 +43,34 @@
                     нужно дать им какое-то время, чтобы они получали уведомления и успели истратить бонусы.</span>
             </div>
         </div>
+
+        <div class="submit field">
+            <div class="submit value">
+                <button type="submit" class="submit green button">Сохранить</button>
+            </div>
+        </div>
     </div>
 </form>
+
+<script>
+    (function ($) {
+        $('#s-settings-affiliate-burningbonus-form').off()
+            .on('submit', function (event) {
+                event.preventDefault();
+                const $this = $(this);
+                $('.submit.value', $this).append('<i class="icon16 loading"></i>');
+                $.shop.jsonPost(
+                    $this.attr('action'),
+                    $this.serialize(),
+                    () => {
+                        $('.submit.value', $this).append('<span class="success green"><i class="icon16 yes" style="vertical-align: middle"></i>Записано</span>');
+                        window.setTimeout(() => $('.submit.value', $this).find('span.success').remove(), 3000)
+                    },
+                    () => {
+                        $('.submit.value', $this).append('<span class="red error"><i class="icon16 no" style="vertical-align: middle"></i>Ошибка сохранения настроек</span>');
+                        window.setTimeout(() => $('.submit.value', $this).find('span.error').remove(), 5000)
+                    }
+                ).always(() => $('.submit.value', $this).find('.loading').remove());
+            })
+    })(jQuery);
+    </script>
