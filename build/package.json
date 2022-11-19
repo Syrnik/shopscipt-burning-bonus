@@ -13,8 +13,8 @@
     "webpack-cli": "^4.10.0"
   },
   "scripts": {
-    "borningbonus:notifications:dev": "node ./node_modules/webpack/bin/webpack.js --config webpack.notifications.config.js --mode development",
-    "borningbonus:notifications:prod": "node ./node_modules/webpack/bin/webpack.js --config webpack.notifications.config.js --mode production"
+    "burningbonus:notifications:dev": "node ./node_modules/webpack/bin/webpack.js --config webpack.notifications.config.js --mode development",
+    "burningbonus:notifications:prod": "node ./node_modules/webpack/bin/webpack.js --config webpack.notifications.config.js --mode production"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.19.6"
