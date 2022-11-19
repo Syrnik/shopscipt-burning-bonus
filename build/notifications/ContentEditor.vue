@@ -3,6 +3,7 @@
     <div class="value ace-fix">
       <div class="ace bordered">
         <WaAceEditor :lang="['css','smarty']" :content="messages[transport]"
+                     :options="{maxLines: Infinity}"
                      @update:content="setContent($event)"
                      @update:editor="editor=$event" :base-path="wa_url" style="min-height: 50px"/>
       </div>
@@ -26,16 +27,17 @@ const emit = defineEmits(['update:modelValue']);
 
 /** @type String */
 const wa_url = inject('wa_url');
+const references = inject('references');
 
 const messages = {
-  email: props.transport === 'email' && typeof props.modelValue !== 'string' ? props.modelValue : '',
-  sms: props.transport === 'sms' && typeof props.modelValue !== 'string' ? props.modelValue : ''
+  email: props.transport === 'email' && typeof props.modelValue !== 'string' ? (references.body_templates?.email ?? '') : props.modelValue,
+  sms: props.transport === 'sms' && typeof props.modelValue !== 'string' ? (references.body_templates?.sms ?? '') : props.modelValue
 }
 
 let editor = null;
 
 function setContent(content) {
-  if (content !== false) messages[props.transport] = typeof content === 'string' ? content : '';
+  if (content !== false) messages[props.transport] = typeof content === 'string' ? content : (references.body_templates?.[props.transport] ?? '');
   emit('update:modelValue', messages[props.transport]);
 }
 

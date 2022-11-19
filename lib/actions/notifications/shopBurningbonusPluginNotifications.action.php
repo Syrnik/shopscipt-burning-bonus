@@ -26,7 +26,8 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
         /** @noinspection PhpPossiblePolymorphicInvocationInspection */
         $references = [
             'default_email_address' => $config->getGeneralSettings('email'),
-            'notification_template' => $this->getNotificationTemplate()
+            'notification_template' => $this->getNotificationTemplate(),
+            'body_templates'        => $this->getBodyTemplates()
         ];
 
         $notifications_list = $this->getList();
@@ -61,10 +62,36 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
     protected function getNotificationTemplate(): array
     {
         $template = $this->getModel()->getEmptyRow();
-        $template['id'] = $template['scheduled_time'] = null;
+        $template['id'] = $template['scheduled_time'] = $template['body'] = null;
         $template['status'] = $template['registered_only'] = $template['burned_only'] = true;
         $template['schedule_day'] = 1;
+        $template['subject'] = '{$customer->get(\'firstname\')}, ваши бонусы скоро сгорят!';
 
         return $template;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getBodyTemplates(): array
+    {
+        try {
+            $dir = wa('shop')->getAppPath('plugins/burningbonus/templates/notification-templates/');
+            $plugin = wa('shop')->getPlugin('burningbonus');
+        } catch (waException $e) {
+            return ['email' => '', 'sms' => ''];
+        }
+        $period = $plugin->getSettings('period');
+        $period = in_array($period, ['monthly', 'weekly'], true) ? $period : 'monthly';
+
+        $result = ['email' => '', 'sms' => ''];
+
+        foreach (['email', 'sms'] as $transport) {
+            $file = "$dir$transport-$period.html";
+            if (file_exists($file) && is_readable($file) && is_file($file))
+                $result[$transport] = file_get_contents($file);
+        }
+
+        return $result;
     }
 }

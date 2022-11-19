@@ -75,6 +75,7 @@ const emit = defineEmits(['update:notification', 'delete']);
 const form = ref(null);
 
 const notification = reactive(Object.assign({}, references.notification_template));
+
 const notificationName = computed(() => {
   if (!!notification.name) return notification.name;
   if ((typeof notification.name === 'string') && props.notificationId) return "<без названия>";
