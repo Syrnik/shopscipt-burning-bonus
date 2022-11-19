@@ -51,7 +51,7 @@ class shopBurningbonusPlugin extends shopPlugin
         return [
             'settings_li' => '<li><a href="' .
                 wa()->getAppUrl('shop') .
-                '?plugin=burningbonus&module=notifications"><i class="icon16 yes"></i><span class="s-name">' .
+                '?plugin=burningbonus&module=notifications"><i class="icon16 ss notification-bw"></i><span class="s-name">' .
                 _wp('Уведомления о сгорании бонусов') .
                 '</span></a></li>'
         ];

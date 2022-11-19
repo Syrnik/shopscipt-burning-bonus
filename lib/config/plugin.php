@@ -7,7 +7,7 @@
 
 return [
     'name'          => 'Сгорание бонусов',
-    'img'           => 'img/burningbonus.gif',
+    'img'           => 'img/icon16.png',
     'version'       => '1.0.0',
     'vendor'        => '670917',
     'shop_settings' => true,
