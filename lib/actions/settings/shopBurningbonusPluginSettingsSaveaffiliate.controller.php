@@ -27,7 +27,6 @@ class shopBurningbonusPluginSettingsSaveaffiliateController extends shopMarketin
             foreach ($settings as $key => $setting) {
                 $asm->set('shop.burningbonus', $key, $setting);
             }
-
         }
     }
 }
