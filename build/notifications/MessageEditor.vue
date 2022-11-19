@@ -34,11 +34,17 @@
     </Form.SimpleField>
     <content-editor v-model="notification.body" :transport="notification.transport"/>
     <Form.SimpleField>
+      <button class="button" type="button" :disabled="submitting" @click.prevent="dialog_open=true">Попробовать
+        отправку
+      </button>
       <button class="green submit button" type="submit" :disabled="submitting">Сохранить</button>
       <i class="icon16 loading" v-if="submitting"></i>
     </Form.SimpleField>
   </form>
   <preloader v-if="!disablePreloader && (loading || submitting)"/>
+  <Teleport to="body">
+    <send-test-message-dialog v-if="dialog_open" @close="dialog_open=false"/>
+  </Teleport>
 </template>
 
 <script>
@@ -57,6 +63,7 @@ import ContentEditor from "./ContentEditor";
 import Preloader from "./Preloader";
 import ScheduledDays from "./ScheduledDays";
 import TimePicker from "./TimePicker";
+import SendTestMessageDialog from "./SendTestMessageDialog";
 
 const props = defineProps({
   notificationId: {type: Number},
@@ -69,6 +76,7 @@ const references = inject('references');
 
 const submitting = ref(false);
 const loading = ref(false);
+const dialog_open = ref(false);
 
 const emit = defineEmits(['update:notification', 'delete']);
 
