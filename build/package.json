@@ -6,6 +6,7 @@
     "@babel/preset-env": "^7.20.2",
     "babel-loader": "^9.1.0",
     "core-js": "^3.26.0",
+    "number-formatter": "^1.2.0",
     "terser-webpack-plugin": "^5.3.6",
     "vue": "^3.2.45",
     "vue-loader": "^17.0.1",

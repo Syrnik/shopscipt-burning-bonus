@@ -3,12 +3,6 @@
       :src="references.wa_app_static_url + 'plugins/burningbonus/img/loading128.gif'" width="128" height="128"/></div>
 </template>
 
-<script>
-export default {
-  name: "Preloader"
-}
-</script>
-
 <script setup>
 import {inject} from "vue";
 

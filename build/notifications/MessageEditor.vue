@@ -34,10 +34,10 @@
     </Form.SimpleField>
     <content-editor v-model="notification.body" :transport="notification.transport"/>
     <Form.SimpleField>
+      <button class="green submit button" type="submit" :disabled="submitting">Сохранить</button>
       <button class="button" type="button" :disabled="submitting" @click.prevent="dialog_open=true">Попробовать
         отправку
       </button>
-      <button class="green submit button" type="submit" :disabled="submitting">Сохранить</button>
       <i class="icon16 loading" v-if="submitting"></i>
     </Form.SimpleField>
   </form>
