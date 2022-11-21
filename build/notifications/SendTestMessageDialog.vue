@@ -9,7 +9,8 @@
             <div class="field">
               <div class="name">Кому</div>
               <div class="value"><input v-model.trim="recipient_address"
-                                        :type="transport === 'email' ? 'email' : 'phone'" class="long"></div>
+                                        :type="notification.transport === 'email' ? 'email' : 'phone'" class="long">
+              </div>
             </div>
           </div>
           <p class="clear-left message" style="margin: 1.5em 0 0">Выберите контакт для получения тестовых данных</p>
@@ -35,13 +36,18 @@
             <preloader v-if="loading_data"/>
           </div>
         </div>
+        <preloader v-if="sending_message"/>
       </div>
       <div class="dialog-buttons">
         <div class="dialog-buttons-gradient">
-          <button class="button blue" type="button" :disabled="!selected_contact">Проверить отправку</button>
+          <button v-if="!sent" class="button blue" type="button" :disabled="!form_valid" @click.prevent="sendMessage">
+            Проверить отправку
+          </button>
+          <a v-else href="#" @click.prevent="clearSent">попробовать ещё раз</a>
           или
-          <a href="#" @click.prevent="emit('close')">отмена</a>
-
+          <a href="#" @click.prevent="emitClose">отмена</a>
+          <span class="red error" v-if="errors.length"
+                style="display: inline-block;margin-left: 1em"><b>Ошибка:</b> {{ errors[0] }}</span>
         </div>
       </div>
     </div>
@@ -49,19 +55,24 @@
 </template>
 
 <script setup>
-import {inject, reactive, ref} from "vue";
+import {computed, inject, reactive, ref} from "vue";
 import numFormat from 'number-formatter';
 import Preloader from "./Preloader";
+import ErrorParser from "../components/webasyst-error-parser";
 
 const emit = defineEmits(['close']);
-const props = defineProps({transport: {type: String, default: 'email'}});
+const props = defineProps({notification: {type: Object}});
 
 const test_data = reactive([]);
 const references = inject('references');
 
 const loading_data = ref(true);
+const sending_message = ref(false);
 const selected_contact = ref(0);
-const recipient_address = ref(props.transport === 'email' ? references.default_email_address : "");
+const sent = ref(false);
+const recipient_address = ref(props.notification.transport === 'email' ? references.default_email_address : "");
+const form_valid = computed(() => selected_contact.value && !!recipient_address.value);
+const errors = reactive([]);
 
 function loadContactsForTest() {
   loading_data.value = true;
@@ -71,6 +82,35 @@ function loadContactsForTest() {
         if (r && r.status && r.status === 'ok') test_data.splice(0, Infinity, ...r.data)
       }
   ).always(() => loading_data.value = false);
+}
+
+function sendMessage() {
+  sending_message.value = true;
+  $.shop.jsonPost(
+      '?plugin=burningbonus&module=notification&action=sendtest',
+      {
+        contact_id: selected_contact.value,
+        recipient: recipient_address.value,
+        notification: props.notification
+      },
+      r => true,
+      r => {
+        errors.splice(0, Infinity, ...ErrorParser.parse(r));
+        return false;
+      }
+  ).always(() => {
+    sending_message.value = false;
+    sent.value = true;
+  });
+}
+
+function clearSent() {
+  sent.value = false;
+  errors.splice(0, Infinity);
+}
+
+function emitClose() {
+  emit('close');
 }
 
 loadContactsForTest();

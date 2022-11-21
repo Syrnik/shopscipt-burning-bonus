@@ -100,4 +100,65 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
 
         $this->response = ['id' => $id];
     }
+
+    /**
+     * @ControllerAction sendtest
+     * @return void
+     */
+    public function sendtestAction(): void
+    {
+        $contact_id = (int)waRequest::post('contact_id', 0, waRequest::TYPE_INT);
+        $recipient = waRequest::post('recipient', '', waRequest::TYPE_STRING_TRIM);
+        $notification_data = waRequest::post('notification', '', waRequest::TYPE_ARRAY);
+
+        try {
+//            $notification_data = waUtils::jsonDecode($notification_data, true);
+//            if (!is_array($notification_data) || !$notification_data)
+//                throw new waException("Не передано данные уведомления");
+
+            $schedule_type = $notification_data['schedule_type'] ?? '';
+            if (!in_array($schedule_type, ['monthly', 'weekly']))
+                throw new waException("Неизвестный тип списания '$schedule_type'");
+
+            $date = (new DateTime($schedule_type === 'monthly' ? 'first day of next month' : 'next monday'))
+                ->format('Y-m-d');
+
+            $burning_data = (new shopBurningbonusAffiliateModel)->getBurningById($contact_id, $date);
+
+            if (!($burning_data['to_burn']))
+                throw new waException("Нет бонусов для списания у покупателя с ID=$contact_id");
+        } catch (waException|Exception $e) {
+            $this->errors[] = $e->getMessage();
+            return;
+        }
+
+        $transport = $notification_data['transport'] ?? '';
+
+        try {
+            switch ($transport) {
+                case 'email':
+                    $notification = new shopBurningbonusPluginEmailNotification($notification_data);
+                    break;
+                case 'sms':
+                    $notification = new shopBurningbonusPluginSmsNotification($notification_data);
+                    break;
+                default:
+                    $this->errors[] = "Доставка $transport не поддерживается";
+                    return;
+            }
+        } catch (waException $e) {
+            $this->errors[] = $e->getMessage();
+            return;
+        }
+
+        try {
+            if ($notification->send($contact_id, $burning_data['to_burn'], $recipient))
+                $this->response = "Уведомление успешно отправлено";
+            else $this->errors[] = "Не удалось отправить уведомление";
+        } catch (SmartyException|SmartyCompilerException $e) {
+            $this->errors[] = "Ошибка шаблона: {$e->getMessage()}";
+        } catch (waException $e) {
+            $this->errors[] = $e->getMessage();
+        }
+    }
 }

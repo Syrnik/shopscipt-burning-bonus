@@ -20,14 +20,6 @@
         после
         <time-picker v-model="notification.scheduled_time"/>
       </Form.SimpleField>
-      <Form.Field name="Покупатели">
-        <div class="value">
-          <label><input type="checkbox" v-model="notification.registered_only"> — только зарегистрированным покупателям</label>
-        </div>
-        <div class="value">
-          <label><input type="checkbox" v-model="notification.burned_only"> — только тем, у кого сгорают бонусы</label>
-        </div>
-      </Form.Field>
     </div>
     <Form.SimpleField name="Тема сообщения" v-if="notification.transport === 'email'">
       <input type="text" class="long" v-model="notification.subject" required>
@@ -35,15 +27,15 @@
     <content-editor v-model="notification.body" :transport="notification.transport"/>
     <Form.SimpleField>
       <button class="green submit button" type="submit" :disabled="submitting">Сохранить</button>
-      <button class="button" type="button" :disabled="submitting" @click.prevent="dialog_open=true">Попробовать
-        отправку
+      <button v-if="notificationId" class="button" type="button" :disabled="submitting"
+              @click.prevent="dialog_open=true">Проверить отправку
       </button>
       <i class="icon16 loading" v-if="submitting"></i>
     </Form.SimpleField>
   </form>
   <preloader v-if="!disablePreloader && (loading || submitting)"/>
   <Teleport to="body">
-    <send-test-message-dialog v-if="dialog_open" @close="dialog_open=false"/>
+    <send-test-message-dialog :notification="notification" v-if="dialog_open" @close="dialog_open=false"/>
   </Teleport>
 </template>
 

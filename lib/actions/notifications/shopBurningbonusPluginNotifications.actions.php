@@ -53,11 +53,11 @@ class shopBurningbonusPluginNotificationsActions extends waJsonActions
                 return;
             }
 
-            $date = $period === 'weekly' ? new DateTime('next monday'): new DateTime('first day of next month');
+            $date = $period === 'weekly' ? new DateTime('next monday') : new DateTime('first day of next month');
             $date->modify("-{$lifetime} days");
 
             $date = $date->format('Y-m-d');
-            $this->response = $this->getModel()->getBurning($date);
+            $this->response = (new shopBurningbonusAffiliateModel)->getBurning($date);
             array_walk($this->response, function (&$row) {
                 $customer = new shopCustomer($row['contact_id']);
                 $row['customer_name'] = $customer->getName();

@@ -30,9 +30,11 @@ const wa_url = inject('wa_url');
 const references = inject('references');
 
 const messages = {
-  email: props.transport === 'email' && typeof props.modelValue !== 'string' ? (references.body_templates?.email ?? '') : props.modelValue,
-  sms: props.transport === 'sms' && typeof props.modelValue !== 'string' ? (references.body_templates?.sms ?? '') : props.modelValue
+  email: references.body_templates?.email ?? '',
+  sms: references.body_templates?.sms ?? ''
 }
+
+setContent(props.modelValue);
 
 let editor = null;
 
