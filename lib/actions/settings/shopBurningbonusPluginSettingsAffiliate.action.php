@@ -23,7 +23,10 @@ class shopBurningbonusPluginSettingsAffiliateAction extends waViewAction
             throw new waRightsException(_w('Access denied'));
 
         $settings = wa('shop')->getPlugin('burningbonus')->getSettings();
+        $info = [
+            'root_path' => wa()->getConfig()->getRootPath()
+        ];
 
-        $this->view->assign(compact(['settings']));
+        $this->view->assign(compact(['settings', 'info']));
     }
 }
