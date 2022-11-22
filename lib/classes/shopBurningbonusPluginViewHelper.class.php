@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 /**
  * View helper
+ * @property shopBurningbonusPlugin $plugin
  */
 class shopBurningbonusPluginViewHelper extends waPluginViewHelper
 {
@@ -26,5 +27,21 @@ class shopBurningbonusPluginViewHelper extends waPluginViewHelper
         } catch (waException $e) {
             return 0;
         }
+    }
+
+    /**
+     * Дата следующего сгорания бонусов
+     *
+     * @return string|null
+     */
+    public function next_burn(): ?string
+    {
+        try {
+            $next_burn_date = $this->plugin->closestBurnDate();
+        } catch (Exception $e) {
+            return null;
+        }
+
+        return $next_burn_date ? $next_burn_date->format('Y-m-d') : null;
     }
 }

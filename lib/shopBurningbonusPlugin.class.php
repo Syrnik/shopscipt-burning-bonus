@@ -56,4 +56,34 @@ class shopBurningbonusPlugin extends shopPlugin
                 '</span></a></li>'
         ];
     }
+
+    /**
+     * @return bool
+     */
+    public function isBurningEnabled(): bool
+    {
+        return in_array($this->getSettings('period'), ['monthly', 'weekly'], true);
+    }
+
+    /**
+     * @return DateTime|null
+     * @throws Exception
+     */
+    public function closestBurnDate(): ?DateTime
+    {
+        if (!$this->isBurningEnabled()) return null;
+
+        $period = $this->getSettings('period');
+        $delay = $this->getSettings('delay');
+
+        if ($delay && $delay > date('Y-m-d')) $date = new DateTime($delay);
+        else {
+            if ($delay) self::getSettingsModel()->set($this->getSettingsKey(), 'delay', '');
+            $date = new DateTime('now');
+        }
+
+        if ('weekly' === $period) return $date->modify('next monday');
+
+        return $date->modify('first day of next month');
+    }
 }
