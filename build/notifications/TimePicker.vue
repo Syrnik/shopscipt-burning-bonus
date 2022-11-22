@@ -11,9 +11,8 @@
 const props = defineProps(['modelValue']);
 const emit = defineEmits(['update:modelValue']);
 const options = [];
-for (let i = 0; i < 24; i++) {
+for (let i = 0; i < 24; i=i+2) {
   const hr = ('0' + i).slice(-2);
   options.push(hr + ':00');
-  options.push(hr + ':30');
 }
 </script>
