@@ -57,11 +57,19 @@ class shopBurningbonusPluginNotificationsActions extends waJsonActions
             $date->modify("-{$lifetime} days");
 
             $date = $date->format('Y-m-d');
-            $this->response = (new shopBurningbonusAffiliateModel)->getBurning($date);
-            array_walk($this->response, function (&$row) {
+
+            $count = 0;
+            $burningbonusAffiliateModel = new shopBurningbonusAffiliateModel;
+            $sentenced = $burningbonusAffiliateModel->queryBurning($date);
+
+            while (10 > $count && $row = $sentenced->fetchAssoc()) {
+                if (!($row['contact_id'] ?? null)) continue;
+                $row = $burningbonusAffiliateModel->typecastBurningRow($row);
                 $customer = new shopCustomer($row['contact_id']);
-                $row['customer_name'] = $customer->getName();
-            });
+                if (!$customer->exists()) continue;
+                $this->response[] = $row + ['customer_name' => $customer->getName()];
+                $count++;
+            }
         } catch (waException $exception) {
             $this->errors = [$exception->getMessage(), $exception->getCode()];
         }
