@@ -28,9 +28,9 @@
               <tr v-for="r in test_data">
                 <td><input type="radio" :value="r.contact_id" v-model="selected_contact"></td>
                 <td>{{ !!r.customer_name ? r.customer_name : `(contact id=${r.contact_id})` }}</td>
-                <td style="text-align: center">{{ numFormat('0.####', r.balance) }}</td>
+                <td style="text-align: center">{{ numFormat('0.####', r.actual_balance) }}</td>
                 <td style="text-align: center">{{ numFormat('0.####', r.to_burn) }}</td>
-                <td style="text-align: center">{{ numFormat('0.####', r.balance-r.to_burn) }}</td>
+                <td style="text-align: center">{{ numFormat('0.####', r.actual_balance-r.to_burn) }}</td>
               </tr>
             </table>
             <preloader v-if="loading_data"/>

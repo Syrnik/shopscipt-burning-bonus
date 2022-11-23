@@ -46,14 +46,37 @@ class shopBurningbonusAffiliateModel extends shopAffiliateTransactionModel
 
         $q_params = ['date' => $date];
 
-        $query = "SELECT last_date.contact_id, balance.balance, COALESCE(decrease.decsum,0) as decrision, balance.balance-COALESCE(decrease.decsum,0) AS to_burn " .
-            "FROM (" .
-            "SELECT contact_id, MAX(create_datetime) as last_date FROM shop_affiliate_transaction WHERE create_datetime < s:date GROUP BY contact_id) AS last_date " .
-            "LEFT JOIN shop_affiliate_transaction AS balance ON balance.contact_id = last_date.contact_id AND balance.create_datetime = last_date.last_date " .
-            "LEFT JOIN (" .
-            "SELECT contact_id, SUM(ABS(amount)) AS decsum FROM shop_affiliate_transaction WHERE create_datetime >= s:date AND amount<0 GROUP BY contact_id ) AS decrease " .
-            "ON decrease.contact_id=last_date.contact_id " .
-            "WHERE";
+        $query =<<<SQL
+SELECT
+    last_date.contact_id,
+    balance.balance,
+    actual_balance.balance as actual_balance, COALESCE(decrease.decsum,0) as decrision,
+    balance.balance-COALESCE(decrease.decsum,0) AS to_burn
+FROM (SELECT contact_id, MAX(create_datetime) as last_date
+      FROM shop_affiliate_transaction
+      WHERE create_datetime < s:date
+      GROUP BY contact_id) AS last_date
+         LEFT JOIN shop_affiliate_transaction AS balance
+                   ON balance.contact_id = last_date.contact_id AND balance.create_datetime = last_date.last_date
+         LEFT JOIN (SELECT last_transaction.contact_id, actual_balance.balance
+                    FROM (SELECT contact_id, MAX(create_datetime) AS last_transaction_date
+                          FROM shop_affiliate_transaction
+                          GROUP BY contact_id) AS last_transaction
+                        LEFT JOIN shop_affiliate_transaction AS actual_balance
+                            ON actual_balance.contact_id=last_transaction.contact_id
+                                   AND actual_balance.create_datetime=last_transaction.last_transaction_date ) AS actual_balance
+            ON last_date.contact_id=actual_balance.contact_id
+         LEFT JOIN (SELECT contact_id, SUM(ABS(amount)) AS decsum
+                    FROM shop_affiliate_transaction
+                    WHERE create_datetime >= s:date AND amount < 0
+                    GROUP BY contact_id
+) AS decrease
+                   ON decrease.contact_id=last_date.contact_id
+WHERE
+    actual_balance.balance > 0
+    AND balance.balance-COALESCE(decrease.decsum,0) > 0
+    AND
+SQL;
 
         if ($contact_id = $params['contact_id'] ?? null) {
             $query .= ' last_date.contact_id=i:contact_id';

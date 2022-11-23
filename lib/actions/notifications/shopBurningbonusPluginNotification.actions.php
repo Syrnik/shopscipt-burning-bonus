@@ -12,6 +12,8 @@ declare(strict_types=1);
  */
 class shopBurningbonusPluginNotificationActions extends waJsonActions
 {
+    protected ?shopBurningbonusPlugin $plugin = null;
+
     /**
      * @return void
      * @throws waException
@@ -120,10 +122,12 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
             if (!in_array($schedule_type, ['monthly', 'weekly']))
                 throw new waException("Неизвестный тип списания '$schedule_type'");
 
-            $date = (new DateTime($schedule_type === 'monthly' ? 'first day of next month' : 'next monday'))
-                ->format('Y-m-d');
+            $date = (new DateTime($schedule_type === 'monthly' ? 'first day of next month' : 'next monday'));
 
-            $burning_data = (new shopBurningbonusAffiliateModel)->getBurningById($contact_id, $date);
+            $lifetime = (int)$this->getPlugin()->getSettings('lifetime');
+            $date->modify("-{$lifetime} days");
+
+            $burning_data = (new shopBurningbonusAffiliateModel)->getBurningById($contact_id, $date->format('Y-m-d'));
 
             if (!($burning_data['to_burn']))
                 throw new waException("Нет бонусов для списания у покупателя с ID=$contact_id");
@@ -160,5 +164,14 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
         } catch (waException $e) {
             $this->errors[] = $e->getMessage();
         }
+    }
+
+    /**
+     * @return shopBurningbonusPlugin
+     * @throws waException
+     */
+    protected function getPlugin(): shopBurningbonusPlugin
+    {
+        return $this->plugin ?? $this->plugin = wa('shop')->getPlugin('burningbonus');
     }
 }
