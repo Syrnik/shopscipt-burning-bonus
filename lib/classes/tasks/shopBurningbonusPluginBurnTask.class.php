@@ -90,6 +90,11 @@ class shopBurningbonusPluginBurnTask implements shopBurningbonusPluginTaskInterf
         foreach ($burning_men as $row) {
             $row = $affiliateModel->typecastBurningRow($row);
             if (!$row['contact_id'] || !$row['to_burn']) continue;
+            try {
+                if (!(new shopCustomer($row['contact_id']))->exists()) continue;
+            } catch (waException $e) {
+                continue;
+            }
             $affiliateModel->applyBonus($row['contact_id'], 0 - $row['to_burn'], null, 'Списание неиспользованных просроченных бонусных баллов', 'burn_bonus');
         }
 
