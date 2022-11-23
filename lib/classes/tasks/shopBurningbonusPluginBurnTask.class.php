@@ -71,8 +71,6 @@ class shopBurningbonusPluginBurnTask implements shopBurningbonusPluginTaskInterf
      */
     public function run(): bool
     {
-        echo $this->today->format('Y-m-d');
-
         if (!$this->plugin->isBurningEnabled() || $this->isLaunchedToday() || $this->isBurningDelayed() || !$this->isBurnDay()) return true;
 
         $control_date = clone $this->today;
