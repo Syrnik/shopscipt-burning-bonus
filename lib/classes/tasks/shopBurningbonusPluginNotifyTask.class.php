@@ -87,6 +87,7 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
         }
 
         foreach ($sentencedCustomers as $customer) {
+            if (!(new shopCustomer((int)$customer['contact_id']))->exists()) continue;
             foreach ($notifications as $index => $notification) {
                 if (!($notificationMessage = $notification['_message'] ?? null)) {
                     switch ($notification['transport']) {
