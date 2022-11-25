@@ -1,35 +1,34 @@
 <template>
   <wa-field name="Когда отправлять">
-    <div class="value"><input type="radio" value="monthly" v-model="schedule_type" @change.prevent="emitUpdates">
+    <div class="value"><input type="radio" value="monthly" v-model="schedule_type"
+                              @change.prevent="emitUpdate">
       Каждое <input type="number" min="1" max="31" step="1" class="short numerical"
-                    v-model.number="schedule_days.monthly" @input="emitUpdates"
+                    v-model.number="month_day" @input="emitUpdate"
                     :disabled="schedule_type !== 'monthly'" required> число
       месяца
     </div>
-    <div class="value"><input type="radio" value="weekly" v-model="schedule_type" @change.prevent="emitUpdates"> По
-      <select v-model="schedule_days.weekly" @change="emitUpdates" :disabled="schedule_type !== 'weekly'" required>
-        <option v-for="d in dow" :value="d.day">{{ d.name }}</option>
+    <div class="value"><input type="radio" value="weekly" v-model="schedule_type"
+                              @change.prevent="emitUpdate"> По
+      <select v-model="week_day" @change="emitUpdate" :disabled="schedule_type !== 'weekly'" required>
+        <option v-for="d in dow" :value="d.day" :selected="d.day === week_day">{{ d.name }}</option>
       </select></div>
   </wa-field>
 </template>
 
 <script setup>
 import WaField from "../components/wa-form/wa-field";
-import {reactive, ref} from "vue";
+import {ref, watch} from "vue";
 
 const props = defineProps({
-  day: {type: Number, default: 1},
-  type: {type: String, default: 'monthly'}
+  value: {type: Object, default: () => ({day: 1, type: 'monthly'})},
 });
 
-const emit = defineEmits(['update:type', 'update:day']);
+const emit = defineEmits(['update']);
 
-const schedule_type = ref(props.type);
+const schedule_type = ref(props.value.type);
 
-const schedule_days = reactive({
-  monthly: props.type === 'monthly' ? props.day : 1,
-  weekly: props.type === 'weekly' ? props.day : 1
-});
+const week_day = ref(schedule_type.value === 'weekly' ? props.value.day : 1);
+const month_day = ref(schedule_type.value === 'monthly' ? props.value.day : 1)
 
 const dow = [
   {day: 1, name: 'понедельникам'},
@@ -41,9 +40,14 @@ const dow = [
   {day: 7, name: 'воскресеньям'},
 ];
 
-function emitUpdates() {
-  emit('update:type', schedule_type.value);
-  emit('update:day', schedule_days[schedule_type.value]);
+function emitUpdate() {
+  emit('update', {type: schedule_type.value, day: schedule_type.value === 'monthly' ? month_day.value : week_day.value});
 }
+
+watch(() => props.value, v => {
+  schedule_type.value = v.type;
+  if(v.type === 'monthly') month_day.value=v.day;
+  else week_day.value=v.day;
+})
 
 </script>
