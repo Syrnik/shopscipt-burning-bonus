@@ -82,12 +82,21 @@ const notificationName = computed(() => {
   return "Новое уведомление"
 });
 
+const message_bodies = reactive({
+  email: references.body_templates.email,
+  sms: references.body_templates.sms
+});
+
+
+
 if (props.notificationId) loadNotification(props.notificationId);
 
 function setSchedule(e) {
   notification.schedule_day = e.day;
   notification.schedule_type = e.type;
 }
+
+
 
 watch(() => props.notificationId, (newId, oldId) => {
   if ((newId === oldId) && (newId !== notification.id)) return;
@@ -122,7 +131,7 @@ function loadNotification(id) {
         }
     ).always(() => loading.value = false);
   } else {
-    Object.assign(notification, references.notification_template);
+    Object.assign(notification, references.notification_template, {body:references.body_templates.email});
   }
 }
 

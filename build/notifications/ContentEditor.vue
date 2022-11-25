@@ -2,9 +2,8 @@
   <wa-field html-name="Текст сообщения<br><span class='hint'>HTML+Smarty</span>">
     <div class="value ace-fix">
       <div class="ace bordered">
-        <WaAceEditor :lang="['css','smarty']" :content="messages[transport]"
+        <WaAceEditor :lang="['css','smarty']" v-model:content="messageBody"
                      :options="{maxLines: Infinity}"
-                     @update:content="setContent($event)"
                      @update:editor="editor=$event" :base-path="wa_url" style="min-height: 150px"/>
       </div>
     </div>
@@ -20,7 +19,7 @@ export default {
 <script setup>
 import WaField from "../components/wa-form/wa-field";
 import WaAceEditor from "../components/wa-ace-editor";
-import {inject, nextTick, reactive, watch} from "vue";
+import {computed, inject, nextTick, reactive, watch} from "vue";
 
 const props = defineProps({modelValue: String, transport: {type: String, default: 'email'}});
 const emit = defineEmits(['update:modelValue']);
@@ -34,19 +33,19 @@ const messages = reactive({
   sms: references.body_templates?.sms ?? ''
 });
 
-//setContent(props.modelValue);
-messages[props.transport] = props.modelValue;
+const messageBody = computed({
+  get() {
+    return messages[props.transport];
+  },
+  set(v) {
+    messages[props.transport] = v;
+    emit('update:modelValue', v);
+  }
+});
 
 let editor = null;
 
-function setContent(content) {
-  if (content !== false) messages[props.transport] = typeof content === 'string' ? content : (references.body_templates?.[props.transport] ?? '');
-  emit('update:modelValue', messages[props.transport]);
-}
+watch(()=>props.modelValue, v=>messages[props.transport]=v);
 
-watch(() => props.transport, () => setContent(false));
-watch(() => props.modelValue, v => nextTick().then(()=>{
-  if(null!==v) setContent(v);
-}));
 
 </script>
