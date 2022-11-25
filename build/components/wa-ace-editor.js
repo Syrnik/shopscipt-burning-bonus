@@ -49,6 +49,7 @@ export default {
         watch(()=>props.content, ()=>{
             if(props.content !== _editor.getValue()) {
                 _editor.setValue(props.content);
+                _editor.resize();
                 // noinspection JSIgnoredPromiseFromCall
                 nextTick(()=>_editor.navigateFileEnd());
             }
