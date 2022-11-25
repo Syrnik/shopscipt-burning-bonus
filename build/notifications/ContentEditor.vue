@@ -5,7 +5,7 @@
         <WaAceEditor :lang="['css','smarty']" :content="messages[transport]"
                      :options="{maxLines: Infinity}"
                      @update:content="setContent($event)"
-                     @update:editor="editor=$event" :base-path="wa_url" style="min-height: 50px"/>
+                     @update:editor="editor=$event" :base-path="wa_url" style="min-height: 150px"/>
       </div>
     </div>
   </wa-field>
@@ -20,7 +20,7 @@ export default {
 <script setup>
 import WaField from "../components/wa-form/wa-field";
 import WaAceEditor from "../components/wa-ace-editor";
-import {inject, watch} from "vue";
+import {inject, nextTick, reactive, watch} from "vue";
 
 const props = defineProps({modelValue: String, transport: {type: String, default: 'email'}});
 const emit = defineEmits(['update:modelValue']);
@@ -29,12 +29,13 @@ const emit = defineEmits(['update:modelValue']);
 const wa_url = inject('wa_url');
 const references = inject('references');
 
-const messages = {
+const messages = reactive({
   email: references.body_templates?.email ?? '',
   sms: references.body_templates?.sms ?? ''
-}
+});
 
-setContent(props.modelValue);
+//setContent(props.modelValue);
+messages[props.transport] = props.modelValue;
 
 let editor = null;
 
@@ -44,5 +45,8 @@ function setContent(content) {
 }
 
 watch(() => props.transport, () => setContent(false));
+watch(() => props.modelValue, v => nextTick().then(()=>{
+  if(null!==v) setContent(v);
+}));
 
 </script>
