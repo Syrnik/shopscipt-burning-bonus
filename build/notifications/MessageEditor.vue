@@ -15,7 +15,7 @@
     <transport-selector :allow-change="!notification.id" v-model="notification.transport"/>
     <sender-input v-model="notification.from" :transport="notification.transport ?? 'email'"/>
     <div class="field-group">
-      <scheduled-days v-model:day="notification.schedule_day" v-model:type="notification.schedule_type"/>
+      <scheduled-days :value="{day:notification.schedule_day, type:notification.schedule_type}" @update="setSchedule($event)" />
       <Form.SimpleField name="Время отправки">
         после
         <time-picker v-model="notification.scheduled_time"/>
@@ -82,7 +82,21 @@ const notificationName = computed(() => {
   return "Новое уведомление"
 });
 
+const message_bodies = reactive({
+  email: references.body_templates.email,
+  sms: references.body_templates.sms
+});
+
+
+
 if (props.notificationId) loadNotification(props.notificationId);
+
+function setSchedule(e) {
+  notification.schedule_day = e.day;
+  notification.schedule_type = e.type;
+}
+
+
 
 watch(() => props.notificationId, (newId, oldId) => {
   if ((newId === oldId) && (newId !== notification.id)) return;
@@ -117,7 +131,7 @@ function loadNotification(id) {
         }
     ).always(() => loading.value = false);
   } else {
-    Object.assign(notification, references.notification_template);
+    Object.assign(notification, references.notification_template, {body:references.body_templates.email});
   }
 }
 
