@@ -55,6 +55,7 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
             unset($data['id']);
             $model->updateById($id, $data);
         } else {
+            unset($data['id']); // из формы может передаться id=null, не все БД это поймут
             $id = $model->insert($data);
         }
 
