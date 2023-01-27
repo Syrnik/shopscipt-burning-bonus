@@ -89,7 +89,9 @@ class shopBurningbonusPluginBurnTask implements shopBurningbonusPluginTaskInterf
             $row = $affiliateModel->typecastBurningRow($row);
             if (!$row['contact_id'] || !$row['to_burn']) continue;
             try {
-                if (!(new shopCustomer($row['contact_id']))->exists()) continue;
+                $customer = new shopCustomer($row['contact_id']);
+                if (!$customer->exists()) continue;
+                if (0 >= floatval($customer->affiliateBonus())) continue;
             } catch (waException $e) {
                 continue;
             }
