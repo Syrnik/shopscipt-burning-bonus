@@ -8,7 +8,7 @@
 return [
     'name'          => 'Сгорание бонусов',
     'img'           => 'img/icon16.png',
-    'version'       => '1.0.3',
+    'version'       => '1.0.4',
     'vendor'        => '670917',
     'shop_settings' => true,
     'handlers'      => [
