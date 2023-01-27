@@ -12,6 +12,9 @@ declare(strict_types=1);
  */
 class shopBurningbonusCli extends waCliController
 {
+    /**
+     *
+     */
     protected const LOG_FILE = 'shop/plugins/burningbonus.cli.log';
 
     /** @var resource|SysvSemaphore */
@@ -20,6 +23,9 @@ class shopBurningbonusCli extends waCliController
     /** @var string|null */
     protected ?string $semafore_file = null;
 
+    /**
+     * @var array|string[]
+     */
     protected array $task_classmap = [
         'burn'   => shopBurningbonusPluginBurnTask::class,
         'notify' => shopBurningbonusPluginNotifyTask::class,
@@ -29,16 +35,6 @@ class shopBurningbonusCli extends waCliController
      * @var shopBurningbonusPlugin
      */
     protected shopBurningbonusPlugin $plugin;
-
-    /**
-     * @return void
-     * @throws waException
-     */
-    protected function preExecute()
-    {
-        parent::preExecute();
-        $this->plugin = wa('shop')->getPlugin('burningbonus');
-    }
 
     /**
      * @return void
@@ -84,6 +80,9 @@ class shopBurningbonusCli extends waCliController
         return array_key_exists('help', $params);
     }
 
+    /**
+     * @return void
+     */
     protected function showHelp()
     {
         echo $str = trim("shopBurningbonus CLI script v" . $this->plugin->getVersion() . ", PHP версии " . PHP_VERSION) . "\n";
@@ -107,16 +106,9 @@ class shopBurningbonusCli extends waCliController
     }
 
     /**
-     * @return string[] Array of task ID
+     * @return bool
+     * @throws waException
      */
-    protected function getTasks(): array
-    {
-        $params = waRequest::param();
-        $params = array_filter($params, 'is_numeric', ARRAY_FILTER_USE_KEY);
-
-        return $params ?: array_keys($this->task_classmap);
-    }
-
     protected function acquireSemaphore(): bool
     {
         if (function_exists('sem_get')) {
@@ -161,6 +153,20 @@ class shopBurningbonusCli extends waCliController
         return true;
     }
 
+    /**
+     * @return string[] Array of task ID
+     */
+    protected function getTasks(): array
+    {
+        $params = waRequest::param();
+        $params = array_filter($params, 'is_numeric', ARRAY_FILTER_USE_KEY);
+
+        return $params ?: array_keys($this->task_classmap);
+    }
+
+    /**
+     * @return void
+     */
     protected function releaseSemaphore(): void
     {
         if (function_exists('sem_get')) {
@@ -170,5 +176,15 @@ class shopBurningbonusCli extends waCliController
         } else {
             @unlink($this->semafore_file);
         }
+    }
+
+    /**
+     * @return void
+     * @throws waException
+     */
+    protected function preExecute()
+    {
+        parent::preExecute();
+        $this->plugin = wa('shop')->getPlugin('burningbonus');
     }
 }
