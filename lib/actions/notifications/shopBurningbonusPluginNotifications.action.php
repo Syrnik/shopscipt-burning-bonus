@@ -42,13 +42,11 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
     {
         $data = $this->getModel()->select('*')->order('id')->fetchAll();
 
-        return array_values(array_map(function ($row) {
-            return [
-                'id'        => (int)$row['id'],
-                'name'      => (string)$row['name'],
-                'transport' => (string)$row['transport']
-            ];
-        }, (array)$data));
+        return array_values(array_map(fn($row) => [
+            'id'        => (int)$row['id'],
+            'name'      => (string)$row['name'],
+            'transport' => (string)$row['transport']
+        ], (array)$data));
     }
 
     /**

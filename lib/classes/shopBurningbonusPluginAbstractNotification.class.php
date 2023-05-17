@@ -15,7 +15,7 @@ abstract class shopBurningbonusPluginAbstractNotification
     /**
      *
      */
-    const EXCEPTION_NO_ADDRESS = 701;
+    public const EXCEPTION_NO_ADDRESS = 701;
 
     /**
      * @var array

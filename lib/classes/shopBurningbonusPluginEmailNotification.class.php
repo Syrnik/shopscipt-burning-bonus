@@ -49,7 +49,7 @@ class shopBurningbonusPluginEmailNotification extends shopBurningbonusPluginAbst
      */
     public function send(int $customer_id, float $burning_amount, ?string $address = null): bool
     {
-        list($customer, $address, $body, $subject) = $this->buildMessage($customer_id, $address, $burning_amount);
+        [$customer, $address, $body, $subject] = $this->buildMessage($customer_id, $address, $burning_amount);
 
         $message = new waMailMessage($subject, $body);
         $message->setFrom($this->getFrom(), $this->from_name);

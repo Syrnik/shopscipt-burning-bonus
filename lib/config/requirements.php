@@ -7,8 +7,9 @@
  *
  * Требования к системе, чтобы плагин работал
  */
+
 return array(
-    'app.installer' => ['version' => '2.0', 'strict' => true],
+    'app.installer' => ['version' => '2.7', 'strict' => true],
     'app.shop'      => ['version' => '8.18.0', 'strict' => true],
     'php'           => ['version' => '>=7.4.0', 'strict' => true],
 );

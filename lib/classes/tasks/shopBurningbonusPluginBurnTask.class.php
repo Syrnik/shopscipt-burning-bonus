@@ -15,7 +15,7 @@ class shopBurningbonusPluginBurnTask implements shopBurningbonusPluginTaskInterf
     /**
      *
      */
-    const LAST_BURN_KEY = 'last.burn';
+    public const LAST_BURN_KEY = 'last.burn';
 
     /**
      * @var shopBurningbonusPlugin

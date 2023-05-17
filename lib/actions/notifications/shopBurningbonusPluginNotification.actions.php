@@ -48,7 +48,7 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
         $data = waUtils::jsonDecode($data, true);
         $model = new shopBurningbonusNotificationsModel;
 
-        $data['name'] = $data['name'] ?? '';
+        $data['name'] ??= '';
 
         if ($data['id'] ?? false) {
             $id = $data['id'];
