@@ -50,21 +50,21 @@ class shopBurningbonusAffiliateModel extends shopAffiliateTransactionModel
 SELECT
     last_date.contact_id,
     balance.balance,
-    actual_balance.balance as actual_balance, COALESCE(decrease.decsum,0) as decrision,
+    actual_balance.balance as actual_balance,
+    COALESCE(decrease.decsum,0) as decrision,
     balance.balance-COALESCE(decrease.decsum,0) AS to_burn
-FROM (SELECT contact_id, MAX(create_datetime) as last_date
+FROM (SELECT contact_id, MAX(id) as last_id
       FROM shop_affiliate_transaction
       WHERE create_datetime < s:date
       GROUP BY contact_id) AS last_date
          LEFT JOIN shop_affiliate_transaction AS balance
-                   ON balance.contact_id = last_date.contact_id AND balance.create_datetime = last_date.last_date
+                   ON balance.id = last_date.last_id
          LEFT JOIN (SELECT last_transaction.contact_id, actual_balance.balance
-                    FROM (SELECT contact_id, MAX(create_datetime) AS last_transaction_date
+                    FROM (SELECT contact_id, MAX(id) AS last_id
                           FROM shop_affiliate_transaction
                           GROUP BY contact_id) AS last_transaction
                         LEFT JOIN shop_affiliate_transaction AS actual_balance
-                            ON actual_balance.contact_id=last_transaction.contact_id
-                                   AND actual_balance.create_datetime=last_transaction.last_transaction_date ) AS actual_balance
+                            ON actual_balance.id=last_transaction.last_id ) AS actual_balance
             ON last_date.contact_id=actual_balance.contact_id
          LEFT JOIN (SELECT contact_id, SUM(ABS(amount)) AS decsum
                     FROM shop_affiliate_transaction
