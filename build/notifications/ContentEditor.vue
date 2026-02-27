@@ -17,8 +17,8 @@ export default {
 </script>
 
 <script setup>
-import WaField from "../components/wa-form/wa-field";
-import WaAceEditor from "../components/wa-ace-editor";
+import WaField from "../components/wa-form/wa-field.vue";
+import WaAceEditor from "../components/wa-ace-editor.js";
 import {computed, inject, nextTick, reactive, watch} from "vue";
 
 const props = defineProps({modelValue: String, transport: {type: String, default: 'email'}});

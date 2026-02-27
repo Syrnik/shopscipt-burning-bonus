@@ -18,7 +18,7 @@ export default {
 </script>
 
 <script setup>
-import WaField from '../components/wa-form/wa-field';
+import WaField from '../components/wa-form/wa-field.vue';
 import {inject, reactive, watch} from "vue";
 
 const references = inject('references');

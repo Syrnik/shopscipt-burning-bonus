@@ -18,7 +18,7 @@ export default {
 </script>
 
 <script setup>
-import TransportIcon from "./TransportIcon";
+import TransportIcon from "./TransportIcon.vue";
 
 const props = defineProps({
   notifications: {type: Array, default: () => []},

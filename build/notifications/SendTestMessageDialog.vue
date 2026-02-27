@@ -57,7 +57,7 @@
 <script setup>
 import {computed, inject, reactive, ref} from "vue";
 import numFormat from 'number-formatter';
-import Preloader from "./Preloader";
+import Preloader from "./Preloader.vue";
 import ErrorParser from "../components/webasyst-error-parser";
 
 const emit = defineEmits(['close']);

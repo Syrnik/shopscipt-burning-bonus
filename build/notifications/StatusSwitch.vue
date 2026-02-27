@@ -12,8 +12,8 @@ export default {
 
 <script setup>
 
-import WaField from '../components/wa-form/wa-field'
-import WaSimpleCheckbox from '../components/wa-form/wa-simple-checkbox'
+import WaField from '../components/wa-form/wa-field.vue'
+import WaSimpleCheckbox from '../components/wa-form/wa-simple-checkbox.vue'
 
 const props = defineProps({modelValue: {type: Boolean}});
 const emits = defineEmits(['update:modelValue']);

@@ -22,10 +22,10 @@ export default {
 </script>
 
 <script setup>
-import MessageEditor from "./MessageEditor";
-import MessageList from "./MessageList";
+import MessageEditor from "./MessageEditor.vue";
+import MessageList from "./MessageList.vue";
 import {reactive, ref} from "vue";
-import Preloader from "./Preloader";
+import Preloader from "./Preloader.vue";
 
 const props = defineProps({notificationsList: {type: Array, default: () => []}});
 

@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import WaField from "../components/wa-form/wa-field";
+import WaField from "../components/wa-form/wa-field.vue";
 import {ref, watch} from "vue";
 
 const props = defineProps({
