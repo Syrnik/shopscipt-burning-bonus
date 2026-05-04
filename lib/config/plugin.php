@@ -1,18 +1,19 @@
 <?php
 /**
  * @author Serge Rodovnichenko <serge@syrnik.com>
- * @copyright Serge Rodovnichenko, 2022
+ * @copyright Serge Rodovnichenko, 2022-2026
  * @license http://www.webasyst.com/terms/#eula Webasyst
  */
 
 return [
-    'name'          => 'Сгорание бонусов',
-    'img'           => 'img/icon16.png',
-    'version'       => '1.0.4',
-    'vendor'        => '670917',
+    'name' => 'Сгорание бонусов',
+    'img' => 'img/icon16.png',
+    'version' => '1.0.4',
+    'vendor' => '670917',
     'shop_settings' => true,
-    'handlers'      => [
+    'handlers' => [
         'backend_settings_affiliate' => 'backendSettingsAffiliateHandler',
-        'backend_marketing_sidebar'  => 'backendMarketingSidebarHandler'
+        'backend_marketing_sidebar' => 'backendMarketingSidebarHandler',
+        'backend_extended_menu' => 'backendExtendedMenuHandler',
     ],
 ];
