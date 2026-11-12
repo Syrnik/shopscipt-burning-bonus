@@ -13,7 +13,7 @@ declare(strict_types=1);
 class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsViewAction
 {
     /** @var shopBurningbonusNotificationsModel|null */
-    protected ?shopBurningbonusNotificationsModel $Notifications = null;
+    protected ?shopBurningbonusNotificationsModel $notifications_model = null;
 
     /**
      * @return void
@@ -54,7 +54,7 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
      */
     protected function getModel(): shopBurningbonusNotificationsModel
     {
-        return $this->Notifications ?? $this->Notifications = new shopBurningbonusNotificationsModel;
+        return $this->notifications_model ?? $this->notifications_model = new shopBurningbonusNotificationsModel;
     }
 
     protected function getNotificationTemplate(): array

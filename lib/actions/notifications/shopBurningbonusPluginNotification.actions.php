@@ -31,10 +31,13 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
     /**
      * @ControllerAction default
      * @return void
+     * @throws SmartyException
+     * @throws waException
      */
     public function defaultAction(): void
     {
         $id = waRequest::get('id', null, waRequest::TYPE_INT);
+        $view = new waSmarty3View(wa());
     }
 
     /**
