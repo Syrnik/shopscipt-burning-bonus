@@ -87,7 +87,15 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
         }
 
         foreach ($sentencedCustomers as $customer) {
-            if (!(new shopCustomer((int)$customer['contact_id']))->exists()) continue;
+            $shopCustomer = new shopCustomer((int)$customer['contact_id']);
+            if (!$shopCustomer->exists()) continue;
+
+            // Журнал транзакций может расходиться с реальным балансом покупателя.
+            // Если на счёте ничего нет — сгорать нечему и уведомлять не о чем
+            $balance = (float)$shopCustomer->affiliateBonus();
+            if (0 >= $balance) continue;
+            $to_burn = min((float)$customer['to_burn'], $balance);
+
             foreach ($notifications as $index => $notification) {
                 if (!($notificationMessage = $notification['_message'] ?? null)) {
                     switch ($notification['transport']) {
@@ -104,7 +112,7 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
                 }
 
                 try {
-                    $notificationMessage->send((int)$customer['contact_id'], (float)$customer['to_burn']);
+                    $notificationMessage->send((int)$customer['contact_id'], $to_burn);
                 } catch (SmartyException|waException $e) {
                     //todo log
                 }

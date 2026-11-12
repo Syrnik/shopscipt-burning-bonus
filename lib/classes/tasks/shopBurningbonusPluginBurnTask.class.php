@@ -91,11 +91,14 @@ class shopBurningbonusPluginBurnTask implements shopBurningbonusPluginTaskInterf
             try {
                 $customer = new shopCustomer($row['contact_id']);
                 if (!$customer->exists()) continue;
-                if (0 >= floatval($customer->affiliateBonus())) continue;
+                $balance = (float)$customer->affiliateBonus();
+                if (0 >= $balance) continue;
             } catch (waException $e) {
                 continue;
             }
-            $affiliateModel->applyBonus($row['contact_id'], 0 - $row['to_burn'], null, 'Списание неиспользованных просроченных бонусных баллов', 'burn_bonus');
+            // Журнал транзакций может расходиться с реальным балансом покупателя. Больше, чем есть на счёте, не списываем
+            $to_burn = min($row['to_burn'], $balance);
+            $affiliateModel->applyBonus($row['contact_id'], 0 - $to_burn, null, 'Списание неиспользованных просроченных бонусных баллов', 'burn_bonus');
         }
 
         $this->getAppSettingsModel()->set(['shop', $this->plugin->getId()], self::LAST_BURN_KEY, date('Y-m-d H:i:s'));
@@ -109,11 +112,12 @@ class shopBurningbonusPluginBurnTask implements shopBurningbonusPluginTaskInterf
      */
     protected function isLaunchedToday(): bool
     {
-        $lastBurn = trim((string)$this->getAppSettingsModel()->get('shop.bugningbonus', self::LAST_BURN_KEY));
+        $lastBurn = trim((string)$this->getAppSettingsModel()->get(['shop', $this->plugin->getId()], self::LAST_BURN_KEY));
         if (!$lastBurn) return false;
 
         try {
-            return (new DateTime($lastBurn)) >= $this->today;
+            // сравниваем только даты, без времени
+            return (new DateTime($lastBurn))->format('Y-m-d') >= $this->today->format('Y-m-d');
         } catch (Exception $e) {
             return false;
         }
