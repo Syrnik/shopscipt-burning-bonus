@@ -35,9 +35,9 @@ class shopBurningbonusPlugin extends shopPlugin
     public function backendSettingsAffiliateHandler(): array
     {
         return [
-            'id'   => 'burningbonus',
+            'id' => 'burningbonus',
             'name' => 'Сгорание бонусов',
-            'url'  => '?plugin=burningbonus&module=settings&action=affiliate'
+            'url' => '?plugin=burningbonus&module=settings&action=affiliate',
         ];
     }
 
@@ -46,8 +46,11 @@ class shopBurningbonusPlugin extends shopPlugin
      * @return string[]
      * @throws waException
      */
-    public function backendMarketingSidebarHandler(): array
+    public function backendMarketingSidebarHandler()
     {
+        if (version_compare(wa()->whichUI(), '2.0', '>=')) {
+            return [];
+        }
         return [
             'settings_li' => '<li><a href="' .
                 wa()->getAppUrl('shop') .
@@ -55,6 +58,20 @@ class shopBurningbonusPlugin extends shopPlugin
                 _wp('Уведомления о сгорании бонусов') .
                 '</span></a></li>'
         ];
+    }
+
+    public function backendExtendedMenuHandler(array &$params): void
+    {
+        $id = $this->id;
+
+        if (isset($params['menu']['marketing']['submenu'])) {
+            $menu_item = [
+                'name' => _wp('Уведомления о сгорании бонусов'),
+                'url' => wa()->getAppUrl('shop') . '?plugin=burningbonus&module=notifications',
+            ];
+
+            $params['menu']['marketing']['submenu'][$id] = $menu_item;
+        }
     }
 
     /**
@@ -71,18 +88,25 @@ class shopBurningbonusPlugin extends shopPlugin
      */
     public function closestBurnDate(): ?DateTime
     {
-        if (!$this->isBurningEnabled()) return null;
+        if (!$this->isBurningEnabled()) {
+            return null;
+        }
 
         $period = $this->getSettings('period');
         $delay = $this->getSettings('delay');
 
-        if ($delay && $delay > date('Y-m-d')) $date = new DateTime($delay);
-        else {
-            if ($delay) self::getSettingsModel()->set($this->getSettingsKey(), 'delay', '');
+        if ($delay && $delay > date('Y-m-d')) {
+            $date = new DateTime($delay);
+        } else {
+            if ($delay) {
+                self::getSettingsModel()->set($this->getSettingsKey(), 'delay', '');
+            }
             $date = new DateTime('now');
         }
 
-        if ('weekly' === $period) return $date->modify('next monday');
+        if ('weekly' === $period) {
+            return $date->modify('next monday');
+        }
 
         return $date->modify('first day of next month');
     }
