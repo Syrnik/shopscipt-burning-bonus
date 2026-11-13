@@ -29,18 +29,6 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
     }
 
     /**
-     * @ControllerAction default
-     * @return void
-     * @throws SmartyException
-     * @throws waException
-     */
-    public function defaultAction(): void
-    {
-        $id = waRequest::get('id', null, waRequest::TYPE_INT);
-        $view = new waSmarty3View(wa());
-    }
-
-    /**
      * @ControllerAction save
      * @return void
      * @throws waException
@@ -48,21 +36,95 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
     public function saveAction(): void
     {
         $data = waRequest::post('data', '{}', waRequest::TYPE_STRING_TRIM);
-        $data = waUtils::jsonDecode($data, true);
+        try {
+            $data = waUtils::jsonDecode($data, true);
+        } catch (waException $e) {
+            $data = null;
+        }
+        if (!is_array($data)) {
+            $this->errors = ['Некорректные данные уведомления'];
+            return;
+        }
+
         $model = new shopBurningbonusNotificationsModel;
+        $id = (int)($data['id'] ?? 0);
+        $existing = $id ? $model->getById($id) : null;
+        if ($id && !$existing) {
+            $this->errors = ['Уведомление не найдено. Возможно, его уже удалили'];
+            return;
+        }
 
-        $data['name'] ??= '';
+        // транспорт у сохранённого уведомления не меняется
+        $transport = $existing ? $existing['transport'] : (string)($data['transport'] ?? 'email');
+        [$row, $errors] = $this->validateNotification($data, $transport);
+        if ($errors) {
+            $this->errors = $errors;
+            return;
+        }
 
-        if ($data['id'] ?? false) {
-            $id = $data['id'];
-            unset($data['id']);
-            $model->updateById($id, $data);
+        if ($existing) {
+            $model->updateById($id, $row);
         } else {
-            unset($data['id']); // из формы может передаться id=null, не все БД это поймут
-            $id = $model->insert($data);
+            $id = (int)$model->insert($row + ['transport' => $transport]);
         }
 
         $this->response = ['id' => $id];
+    }
+
+    /**
+     * В базу попадают только перечисленные здесь поля, а не всё, что пришло в запросе
+     *
+     * @param array $data
+     * @param string $transport
+     * @return array{0:array<string,mixed>, 1:string[]} данные для записи и список ошибок
+     */
+    protected function validateNotification(array $data, string $transport): array
+    {
+        $errors = [];
+        $string = fn(string $key): string => is_scalar($data[$key] ?? null) ? (string)$data[$key] : '';
+
+        if (!in_array($transport, ['email', 'sms'], true)) {
+            $errors[] = "Доставка $transport не поддерживается";
+        }
+
+        $row = [
+            'name'    => mb_substr(trim($string('name')), 0, 255),
+            'status'  => empty($data['status']) ? 0 : 1,
+            'subject' => trim($string('subject')),
+            'body'    => $string('body'),
+            'from'    => trim($string('from')),
+        ];
+
+        if ('' === trim($row['body'])) {
+            $errors[] = 'Не указан текст сообщения';
+        }
+        if ('email' === $transport) {
+            if ('' === $row['subject']) {
+                $errors[] = 'Не указана тема сообщения';
+            }
+            if ('' !== $row['from'] && !(new waEmailValidator())->isValid($row['from'])) {
+                $errors[] = 'Адрес отправителя указан неверно';
+            }
+        }
+        if (mb_strlen($row['from']) > 200) {
+            $errors[] = 'Слишком длинный отправитель';
+        }
+
+        $row['schedule_type'] = $string('schedule_type');
+        $row['schedule_day'] = (int)($data['schedule_day'] ?? 0);
+        if (!in_array($row['schedule_type'], ['monthly', 'weekly'], true)) {
+            $errors[] = 'Не указано, когда отправлять уведомление';
+        } elseif ($row['schedule_day'] < 1 || $row['schedule_day'] > ('monthly' === $row['schedule_type'] ? 31 : 7)) {
+            $errors[] = 'monthly' === $row['schedule_type'] ? 'День месяца должен быть от 1 до 31' : 'Неверный день недели';
+        }
+
+        $time = $string('scheduled_time');
+        if ('' !== $time && !preg_match('/^([01]\d|2[0-3]):[0-5]\d$/', $time)) {
+            $errors[] = 'Время отправки указано неверно';
+        }
+        $row['scheduled_time'] = '' === $time ? null : $time;
+
+        return [$row, $errors];
     }
 
     /**
@@ -81,8 +143,6 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
         if ($data) {
             $data['id'] = (int)$data['id'];
             $data['status'] = (bool)$data['status'];
-            $data['registered_only'] = (bool)$data['registered_only'];
-            $data['burned_only'] = (bool)$data['burned_only'];
             $data['schedule_day'] = (int)$data['schedule_day'];
             $data['scheduled_time'] = $data['scheduled_time'] ?: null;
         }

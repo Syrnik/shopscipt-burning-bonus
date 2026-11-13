@@ -1,29 +1,36 @@
 <template>
   <wa-field name="Когда отправлять">
-    <div class="value"><input type="radio" value="monthly" v-model="schedule_type"
-                              @change.prevent="emitUpdate">
-      Каждое <input type="number" min="1" max="31" step="1" class="short numerical"
+    <div class="value">
+    <div class="s-burningbonus-line"><label><wa-radio value="monthly" v-model="schedule_type" @update:modelValue="emitUpdate"/>
+      Каждое</label> <input type="number" min="1" max="31" step="1" class="numerical" :class="ui2 ? 'shortest' : 'short'"
                     v-model.number="month_day" @input="emitUpdate"
                     :disabled="schedule_type !== 'monthly'" required> число
       месяца
     </div>
-    <div class="value"><input type="radio" value="weekly" v-model="schedule_type"
-                              @change.prevent="emitUpdate"> По
-      <select v-model="week_day" @change="emitUpdate" :disabled="schedule_type !== 'weekly'" required>
-        <option v-for="d in dow" :value="d.day" :selected="d.day === week_day">{{ d.name }}</option>
-      </select></div>
+    <div class="s-burningbonus-line"><label class="s-burningbonus-weekly-label"><wa-radio value="weekly" v-model="schedule_type"
+                                                                          @update:modelValue="emitUpdate"/>
+      По</label>
+      <wa-select>
+        <select v-model="week_day" @change="emitUpdate" :disabled="schedule_type !== 'weekly'" required>
+          <option v-for="d in dow" :value="d.day">{{ d.name }}</option>
+        </select>
+      </wa-select></div>
+    </div>
   </wa-field>
 </template>
 
 <script setup>
 import WaField from "../components/wa-form/wa-field.vue";
-import {ref, watch} from "vue";
+import WaRadio from "../components/wa-form/wa-radio.vue";
+import WaSelect from "../components/wa-form/wa-select.vue";
+import {inject, ref, watch} from "vue";
 
 const props = defineProps({
   value: {type: Object, default: () => ({day: 1, type: 'monthly'})},
 });
 
 const emit = defineEmits(['update']);
+const ui2 = inject('ui2', false);
 
 const schedule_type = ref(props.value.type);
 

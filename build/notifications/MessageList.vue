@@ -1,12 +1,13 @@
 <template>
-  <ul class="menu-v stack with-icons">
-    <li :class="{selected: selectedId  === null}">
-      <a href="#" class="small" @click.prevent="emit('select', null)"><i class="icon10 add"></i>Новое уведомление</a>
+  <ul :class="ui2 ? 'menu large' : 'menu-v stack with-icons'">
+    <li :class="{selected: !selectedId, 'bottom-padded': ui2 && notifications.length}">
+      <a href="#" :class="{small: !ui2}" @click.prevent="emit('select', null)">
+        <wa-icon name="add"/><span>Новое уведомление</span></a>
     </li>
-    <li v-for="n in notifications" :class="{selected: n.id === selectedId}">
+    <li v-for="n in notifications" :key="n.id" :class="{selected: n.id === selectedId}">
       <a href="#" @click.prevent="emit('select', n.id)">
-        <transport-icon :value="n.transport"/>
-        {{ !!n.name ? n.name : '(без названия)' }}</a>
+        <wa-icon :name="n.transport"/>
+        <span>{{ !!n.name ? n.name : '(без названия)' }}</span></a>
     </li>
   </ul>
 </template>
@@ -18,13 +19,14 @@ export default {
 </script>
 
 <script setup>
-import TransportIcon from "./TransportIcon.vue";
+import {inject} from "vue";
+import WaIcon from "../components/wa-form/wa-icon.vue";
 
-const props = defineProps({
+defineProps({
   notifications: {type: Array, default: () => []},
   selectedId: {type: Number}
 });
 
 const emit = defineEmits(['select']);
-
+const ui2 = inject('ui2', false);
 </script>

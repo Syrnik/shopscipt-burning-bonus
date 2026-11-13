@@ -1,18 +1,37 @@
 <template>
-  <header class="s-burningbonus-notifications-page-header">
-    <h1 class="s-burningbonus-notifications-title">Уведомления о сгорании бонусов</h1>
-  </header>
-
-  <div class="s-burningbonus-notifications-body">
-    <aside class="s-burningbonus-notifications-sidebar">
+  <div v-if="ui2" class="flexbox s-burningbonus-ui2">
+    <aside class="sidebar blank width-23rem mobile-friendly">
       <message-list :notifications="notifications" :selected-id="selected" @select="selected=$event"/>
     </aside>
-    <main class="s-burningbonus-notifications-main">
-      <message-editor :notification-id="selected" :disable-preloader="deleting"
-                      @update:notification="updateNotification($event)" @delete="deleteNotification($event)"/>
+    <main class="content box contentbox">
+      <div class="article wider">
+        <div class="article-body s-burningbonus-notifications-content">
+          <header class="custom-mb-24">
+            <h1>Уведомления о сгорании бонусов</h1>
+          </header>
+          <message-editor :notification-id="selected" :disable-preloader="deleting"
+                          @update:notification="updateNotification($event)" @delete="deleteNotification($event)"/>
+          <preloader v-if="deleting"/>
+        </div>
+      </div>
     </main>
-    <preloader v-if="deleting"/>
   </div>
+  <template v-else>
+    <header class="s-burningbonus-notifications-page-header">
+      <h1 class="s-burningbonus-notifications-title">Уведомления о сгорании бонусов</h1>
+    </header>
+
+    <div class="s-burningbonus-notifications-body">
+      <aside class="s-burningbonus-notifications-sidebar">
+        <message-list :notifications="notifications" :selected-id="selected" @select="selected=$event"/>
+      </aside>
+      <main class="s-burningbonus-notifications-main">
+        <message-editor :notification-id="selected" :disable-preloader="deleting"
+                        @update:notification="updateNotification($event)" @delete="deleteNotification($event)"/>
+      </main>
+      <preloader v-if="deleting"/>
+    </div>
+  </template>
 </template>
 
 <script>
@@ -24,16 +43,16 @@ export default {
 <script setup>
 import MessageEditor from "./MessageEditor.vue";
 import MessageList from "./MessageList.vue";
-import {reactive, ref} from "vue";
+import {inject, reactive, ref} from "vue";
 import Preloader from "./Preloader.vue";
 
 const props = defineProps({notificationsList: {type: Array, default: () => []}});
+const ui2 = inject('ui2', false);
 
 /** @type Array */
 const notifications = reactive(props.notificationsList);
 const deleting = ref(false);
-const selected = ref(null);
-if (notifications.length) selected.value = notifications[0].id;
+const selected = ref(notifications.length ? notifications[0].id : null);
 
 function updateNotification(item) {
   let index = notifications.findIndex(n => n.id === item.id);
@@ -44,24 +63,37 @@ function updateNotification(item) {
   }
 }
 
+function confirmDelete() {
+  if (ui2 && $.waDialog && $.waDialog.confirm) {
+    return new Promise(resolve => $.waDialog.confirm({
+      title: 'Удалить уведомление?',
+      success_button_title: 'Удалить',
+      success_button_class: 'danger',
+      cancel_button_title: 'Отмена',
+      cancel_button_class: 'light-gray',
+      onSuccess: () => resolve(true),
+      onCancel: () => resolve(false)
+    }));
+  }
+  return Promise.resolve(window.confirm("Удалить уведомление?"));
+}
+
 function deleteNotification(id) {
-  if (id && window.confirm("Удалить уведомление?")) {
+  if (!id) return;
+  confirmDelete().then(confirmed => {
+    if (!confirmed) return;
     deleting.value = true;
     $.shop.jsonPost(
         '?plugin=burningbonus&module=notification&action=delete',
         {id: id},
-        r => {
-          if (r && r.status && r.status === 'ok') {
-            const index = notifications.findIndex(n => n.id === id);
-            notifications.splice(index, 1);
-            if (!notifications.length) selected.value = null;
-            else if (index) {
-              if (index + 1 > notifications.length) selected.value = notifications[notifications.length - 1].id;
-              else selected.value = notifications[index].id;
-            } else selected.value = 0;
-          }
+        () => {
+          const index = notifications.findIndex(n => n.id === id);
+          if (index < 0) return;
+          notifications.splice(index, 1);
+          // выбираем соседнее уведомление, а если их не осталось — форму нового
+          selected.value = notifications[Math.min(index, notifications.length - 1)]?.id ?? null;
         }
     ).always(() => deleting.value = false);
-  }
+  });
 }
 </script>

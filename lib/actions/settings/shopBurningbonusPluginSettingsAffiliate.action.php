@@ -19,8 +19,9 @@ class shopBurningbonusPluginSettingsAffiliateAction extends waViewAction
      */
     public function execute()
     {
-        if (!$this->getUser()->getRights('shop', 'settings'))
-            throw new waRightsException(_w('Access denied'));
+        // то же право, что у самой «Программы лояльности» и у сохранения этих настроек
+        if (!$this->getUser()->getRights('shop', 'setup_marketing'))
+            throw new waRightsException(_ws('Access denied'));
 
         $settings = wa('shop')->getPlugin('burningbonus')->getSettings();
         $info = [

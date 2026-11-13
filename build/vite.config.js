@@ -2,9 +2,10 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
-export default defineConfig({
+export default defineConfig(({mode}) => ({
+  // В lib-режиме Vite сам не подставляет NODE_ENV, а без него в бандл попадает dev-сборка Vue
   define: {
-    'process.env': {}
+    'process.env.NODE_ENV': JSON.stringify(mode === 'development' ? 'development' : 'production')
   },
   plugins: [vue()],
   resolve: {
@@ -40,4 +41,4 @@ export default defineConfig({
       }
     }
   }
-})
+}))

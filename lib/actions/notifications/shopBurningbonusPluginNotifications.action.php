@@ -32,7 +32,11 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
 
         $notifications_list = $this->getList();
 
-        $this->view->assign(compact(['references', 'notifications_list']));
+        // debug-режим: не кэшируем бандл, пока его пересобирают
+        $plugin_version = wa('shop')->getPlugin('burningbonus')->getVersion() . (waSystemConfig::isDebug() ? '.' . time() : '');
+        $ui = wa()->whichUI('shop');
+
+        $this->view->assign(compact(['references', 'notifications_list', 'plugin_version', 'ui']));
     }
 
     /**
@@ -61,7 +65,7 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
     {
         $template = $this->getModel()->getEmptyRow();
         $template['id'] = $template['scheduled_time'] = $template['body'] = null;
-        $template['status'] = $template['registered_only'] = $template['burned_only'] = true;
+        $template['status'] = true;
         $template['schedule_day'] = 1;
         $template['subject'] = '{$customer->get(\'firstname\')}, ваши бонусы скоро сгорят!';
 

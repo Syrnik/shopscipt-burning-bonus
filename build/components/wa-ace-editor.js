@@ -48,12 +48,14 @@ export default {
 
         watch(()=>props.content, ()=>{
             if(props.content !== _editor.getValue()) {
-                _editor.setValue(props.content);
+                _editor.setValue(props.content ?? '');
                 _editor.resize();
                 // noinspection JSIgnoredPromiseFromCall
                 nextTick(()=>_editor.navigateFileEnd());
             }
         })
+
+        watch(()=>props.theme, theme=>_editor.setTheme(`ace/theme/${theme}`));
 
         return ()=>h('div', {id: componentId, style: {width: props.width, height: props.height}});
     }

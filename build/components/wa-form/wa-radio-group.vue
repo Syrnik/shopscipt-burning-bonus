@@ -1,31 +1,25 @@
 <template>
-  <slot name="header"/>
-  <div class="value" v-for="(opt,idx) in options" :class="{'no-shift': !idx && !$slots.header}"><label
-      :class="{'disabled':!!opt.disabled}"><input
-      type="radio" :value="opt.value" v-model="selection" :disabled="!!opt.disabled"><template v-if="opt.iconClass"><i :class="opt.iconClass"></i></template>{{
-      opt.title
-    }} <span class="hint" v-if="!!opt.description" v-html="' &mdash; ' + opt.description"></span></label>
+  <div class="value no-shift">
+    <slot name="header"/>
+    <div class="s-burningbonus-line" v-for="opt in options"><label
+        :class="{'disabled':!!opt.disabled}"><wa-radio :value="opt.value" :model-value="modelValue"
+                                                       :disabled="!!opt.disabled"
+                                                       @update:modelValue="emit('update:modelValue', $event)"/>
+      <wa-icon v-if="opt.icon" :name="opt.icon" class="s-burningbonus-option-icon"/>
+      {{ opt.title }} <span class="hint" v-if="!!opt.description" v-html="' &mdash; ' + opt.description"></span></label>
+    </div>
+    <slot/>
   </div>
-  <slot/>
 </template>
 
 <script setup>
-import {computed} from "vue";
+import WaRadio from "./wa-radio.vue";
+import WaIcon from "./wa-icon.vue";
 
-const props = defineProps({
+defineProps({
   options: {type: Array, default: () => []},
   modelValue: {}
 });
 
 const emit = defineEmits(['update:modelValue']);
-
-const selection = computed({
-  get() {
-    return props.modelValue;
-  },
-  set(v) {
-    emit('update:modelValue', v);
-  }
-});
-
 </script>

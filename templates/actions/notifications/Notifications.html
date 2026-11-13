@@ -1,23 +1,36 @@
-<div class="wid">
-    <div class="flexbox">
-        <aside class="sidebar blank width-23rem">
-            <ul class="menu large">
-                <li class="bottom-padded">
-                    <a href="#">
-                        <i class="fas fa-plus-circle text-green"></i>
-                        <span>{_wp('Новое уведомление')}</span>
-                    </a>
-                </li>
-            </ul>
-        </aside>
-        <main class="content">
-            <div class="article wider">
-                <div class="article-body">
-                    <header>
-                        <h1>Уведомления о сгорании бонусов</h1>
-                    </header>
-                </div>
-            </div>
-        </main>
-    </div>
-</div>
+{* Один шаблон для UI 1.3 и 2.0: разметку под нужный интерфейс строит Vue-приложение *}
+<div id="s-burningbonus-notifications-container"
+     class="s-burningbonus-notifications-page{if $ui !== '2.0'} double-padded block{/if}"></div>
+<script>
+    (function ($) {
+        const sources = [
+            {
+                id: "wa-content-ace-js",
+                type: "js",
+                uri: "{$wa_url}wa-content/js/ace/ace.js?v={$wa->version(true)}"
+            },
+            {
+                id: 's-plugin-burningbonus-notifications-js',
+                type: 'js',
+                uri: '{$wa_app_static_url}plugins/burningbonus/js/notifications-settings.js?v={$plugin_version|escape:'url'}'
+            },
+            {
+                id: 's-plugin-burningbonus-notifications-css',
+                type: 'css',
+                uri: '{$wa_app_static_url}plugins/burningbonus/css/notifications-settings.css?v={$plugin_version|escape:'url'}'
+            }
+        ];
+        {$references['wa_app_static_url'] = $wa_app_static_url|cat:''}
+        $.shop.marketing.setTitle("Уведомления о сгорании бонусов");
+        $.shop.marketing.load(sources).then(
+            () => BurningbonusNotificationsSettings({
+                ui: {$ui|json_encode},
+                references: {$references|json_encode:256},
+                props: {
+                    notificationsList: {$notifications_list|json_encode:256}
+                }
+            }).mount('#s-burningbonus-notifications-container'),
+            r => console.error(r)
+        );
+    })(jQuery);
+</script>

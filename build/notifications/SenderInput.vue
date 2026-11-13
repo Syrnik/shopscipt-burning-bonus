@@ -1,12 +1,13 @@
 <template>
   <wa-field name="Отправитель">
     <div class="value">
-      <select v-model="senders[transport].type" @change="EmitChanges">
-        <option v-for="opt in options[transport]" :value="opt.value">{{ opt.title }}</option>
-      </select>
-      <input v-if="senders[transport].type === 'custom'" :type="transport==='email' ? 'email' :'text'" class="long"
-             v-model.trim="senders[transport].value"
-             @input="EmitChanges">
+      <wa-select>
+        <select v-model="type">
+          <option v-for="opt in options[transport]" :value="opt.value">{{ opt.title }}</option>
+        </select>
+      </wa-select>
+      <input v-if="custom" :type="transport==='email' ? 'email' :'text'" class="long s-burningbonus-sender"
+             v-model.trim="sender" required>
     </div>
   </wa-field>
 </template>
@@ -19,27 +20,36 @@ export default {
 
 <script setup>
 import WaField from '../components/wa-form/wa-field.vue';
-import {inject, reactive, watch} from "vue";
+import WaSelect from '../components/wa-form/wa-select.vue';
+import {computed, inject, ref, watch} from "vue";
 
 const references = inject('references');
 
-const props = defineProps(['transport', 'modelValue']);
+const props = defineProps({transport: {type: String, default: 'email'}, modelValue: {}});
 const emits = defineEmits(['update:modelValue']);
 
-const senders = reactive({
-  email: {
-    value: props.transport === 'email' ? (props.modelValue ?? '') : '',
-    type: (props.transport === 'email') && !!props.modelValue ? 'custom' : 'default'
-  },
-  sms: {
-    value: props.transport === 'sms' ? (props.modelValue ?? '') : '',
-    type: (props.transport === 'sms') && !!props.modelValue ? 'custom' : 'default'
+/**
+ * «Другой отправитель» может быть выбран, но ещё не заполнен, поэтому отдельный флаг.
+ * При загрузке другого уведомления родитель пересоздаёт компонент через key.
+ */
+const custom = ref(!!props.modelValue);
+
+const type = computed({
+  get: () => custom.value ? 'custom' : 'default',
+  set(v) {
+    custom.value = v === 'custom';
+    if (!custom.value) emits('update:modelValue', '');
   }
+});
+
+const sender = computed({
+  get: () => props.modelValue ?? '',
+  set: v => emits('update:modelValue', v)
 });
 
 const options = {
   email: [
-    {value: 'default', title: references.default_email_address ?? 'Адрес по-умолчанию'},
+    {value: 'default', title: references.default_email_address || 'Адрес по-умолчанию'},
     {value: 'custom', title: 'Другой email…'}
   ],
   sms: [
@@ -48,13 +58,10 @@ const options = {
   ],
 };
 
-function EmitChanges() {
-  emits('update:modelValue', senders[props.transport].type === 'default' ? '' : senders[props.transport].value);
-}
-
-watch(() => props.transport, () => {
-  EmitChanges();
+watch(() => props.modelValue, v => {
+  if (v) custom.value = true;
 });
 
-if (typeof props.modelValue === 'undefined') EmitChanges();
+// email-адрес не годится как ID отправителя SMS и наоборот
+watch(() => props.transport, () => type.value = 'default');
 </script>

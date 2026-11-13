@@ -2,7 +2,10 @@
   <Form.Field name="Транспорт">
     <Form.RadioGroup v-if="allowChange" :options="options" :model-value="modelValue"
                      @update:modelValue="emits('update:modelValue', $event)"/>
-    <div class="value" v-else><template v-if="transport.iconClass"><i :class="transport.iconClass"></i></template>{{ transport.title }}</div>
+    <div class="value" v-else>
+      <Form.Icon v-if="transport.icon" :name="transport.icon" class="s-burningbonus-option-icon"/>
+      {{ transport.title }}
+    </div>
   </Form.Field>
 </template>
 
@@ -21,10 +24,10 @@ const props = defineProps(['allowChange', 'modelValue']);
 const emits = defineEmits(['update:modelValue']);
 
 const options = [
-  {value: 'email', title: 'E-mail', iconClass: ['icon16', 'email']},
-  {value: 'sms', title: 'SMS', iconClass: ['icon16', 'mobile']}
+  {value: 'email', title: 'E-mail', icon: 'email'},
+  {value: 'sms', title: 'SMS', icon: 'sms'}
 ];
 
-const transport = computed(() => props.modelValue ? options.find(o => o.value === props.modelValue) : {});
+const transport = computed(() => options.find(o => o.value === props.modelValue) ?? {});
 
 </script>

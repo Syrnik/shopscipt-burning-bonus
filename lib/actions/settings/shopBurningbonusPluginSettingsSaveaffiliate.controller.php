@@ -18,15 +18,35 @@ class shopBurningbonusPluginSettingsSaveaffiliateController extends shopMarketin
     public function execute(): void
     {
         $settings = waRequest::post('setting', [], waRequest::TYPE_ARRAY);
-        $asm = new waAppSettingsModel();
+        if (!$settings || !is_array($settings)) {
+            return;
+        }
 
-        if ($settings && is_array($settings)) {
-            if (!($settings['lifetime'] = intval($settings['lifetime'] ?? 0))) $settings['lifetime'] = 365;
-            $settings['delay'] = trim($settings['delay'] ?? '');
+        // сохраняем только известные настройки (см. lib/config/settings.php)
+        $period = (string)($settings['period'] ?? '');
+        if (!in_array($period, ['never', 'weekly', 'monthly'], true)) {
+            $this->errors = ['Неизвестная периодичность сгорания'];
+            return;
+        }
 
-            foreach ($settings as $key => $setting) {
-                $asm->set('shop.burningbonus', $key, $setting);
+        $delay = trim((string)($settings['delay'] ?? ''));
+        if ('' !== $delay) {
+            $date = DateTime::createFromFormat('!Y-m-d', $delay);
+            if (!$date || $date->format('Y-m-d') !== $delay) {
+                $this->errors = ['Дата начала списания указана неверно'];
+                return;
             }
+        }
+
+        $values = [
+            'lifetime' => max(0, (int)($settings['lifetime'] ?? 0)) ?: 365,
+            'period'   => $period,
+            'delay'    => $delay,
+        ];
+
+        $asm = new waAppSettingsModel();
+        foreach ($values as $key => $value) {
+            $asm->set('shop.burningbonus', $key, $value);
         }
     }
 }

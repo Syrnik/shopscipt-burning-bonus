@@ -1,40 +1,56 @@
 <template>
     <form action="?plugin=burningbonus&module=notification&action=save" ref="form" @submit.prevent="saveNotification">
-        <header>
-            <div class="s-burningbonus-notifications-message-editor-title">
-                <h2>{{ notificationName }}</h2>
+        <header :class="{'flexbox middle space-12 custom-mb-16': ui2}">
+            <div class="s-burningbonus-notifications-message-editor-title" :class="{wide: ui2}">
+                <h3 v-if="ui2" class="gray custom-m-0">{{ notificationName }}</h3>
+                <h2 v-else>{{ notificationName }}</h2>
             </div>
             <div v-if="notificationId" class="s-burningbonus-notifications-message-editor-delete-wrapper">
-                <a href="#" @click.prevent="emit('delete', notification.id)"><i class="icon16 no"></i>Удалить</a>
+                <button v-if="ui2" type="button" class="button light-gray small" :disabled="submitting"
+                        @click.prevent="emit('delete', notification.id)">
+                    <Form.Icon name="delete"/>
+                    Удалить
+                </button>
+                <a v-else href="#" @click.prevent="emit('delete', notification.id)"><Form.Icon name="delete"/>Удалить</a>
             </div>
         </header>
-        <Form.Field name="Название уведомления">
-            <div class="value"><input type="text" class="long" v-model.trim="notification.name"></div>
-        </Form.Field>
-        <status-switch v-model="notification.status"/>
-        <transport-selector :allow-change="!notification.id" v-model="notification.transport"/>
-        <sender-input v-model="notification.from" :transport="notification.transport ?? 'email'"/>
-        <div class="field-group">
-            <scheduled-days :value="{day:notification.schedule_day, type:notification.schedule_type}"
-                            @update="setSchedule($event)"/>
-            <Form.SimpleField name="Время отправки">
-                после
-                <time-picker v-model="notification.scheduled_time"/>
+        <Form.Wrap ui2="fields">
+            <Form.Wrap ui2="fields-group">
+                <Form.SimpleField name="Название уведомления">
+                    <input type="text" class="long" v-model.trim="notification.name">
+                </Form.SimpleField>
+                <status-switch v-model="notification.status"/>
+                <transport-selector :allow-change="!notification.id" v-model="notification.transport"/>
+                <sender-input :key="formKey" v-model="notification.from" :transport="notification.transport ?? 'email'"/>
+            </Form.Wrap>
+            <Form.Wrap ui2="fields-group" legacy="field-group">
+                <scheduled-days :value="{day:notification.schedule_day, type:notification.schedule_type}"
+                                @update="setSchedule($event)"/>
+                <Form.SimpleField name="Время отправки">
+                    после
+                    <time-picker v-model="notification.scheduled_time"/>
+                </Form.SimpleField>
+            </Form.Wrap>
+            <Form.Wrap ui2="fields-group">
+                <Form.SimpleField name="Тема сообщения" v-if="notification.transport === 'email'">
+                    <input type="text" class="long" :class="{'s-burningbonus-wide-input': ui2}" v-model="notification.subject" required>
+                </Form.SimpleField>
+                <content-editor v-model="notification.body"/>
+            </Form.Wrap>
+            <Form.SimpleField>
+                <button class="button green" :class="{submit: !ui2}" type="submit" :disabled="submitting">Сохранить
+                </button>
+                <button v-if="notificationId" class="button" :class="{'light-gray': ui2}" type="button"
+                        :disabled="submitting" @click.prevent="dialog_open=true">Проверить отправку
+                </button>
+                <Form.Icon name="loading" v-if="submitting" class="s-burningbonus-after-button"/>
+                <span v-else-if="saved" class="s-burningbonus-after-button"><Form.Icon name="yes"/> Сохранено</span>
+                <span v-else-if="saveError" class="s-burningbonus-after-button"
+                      :class="ui2 ? 'state-error' : 'red error'">{{ saveError }}</span>
             </Form.SimpleField>
-        </div>
-        <Form.SimpleField name="Тема сообщения" v-if="notification.transport === 'email'">
-            <input type="text" class="long" v-model="notification.subject" required>
-        </Form.SimpleField>
-        <content-editor v-model="notification.body" :transport="notification.transport"/>
-        <Form.SimpleField>
-            <button class="green submit button" type="submit" :disabled="submitting">Сохранить</button>
-            <button v-if="notificationId" class="button" type="button" :disabled="submitting"
-                    @click.prevent="dialog_open=true">Проверить отправку
-            </button>
-            <i class="icon16 loading" v-if="submitting"></i>
-        </Form.SimpleField>
+        </Form.Wrap>
     </form>
-    <preloader v-if="!disablePreloader && (loading || submitting)"/>
+    <preloader v-if="!disablePreloader && loading"/>
     <Teleport to="body">
         <send-test-message-dialog :notification="notification" v-if="dialog_open" @close="dialog_open=false"/>
     </Teleport>
@@ -51,6 +67,7 @@ import Preloader from "./Preloader.vue";
 import ScheduledDays from "./ScheduledDays.vue";
 import TimePicker from "./TimePicker.vue";
 import SendTestMessageDialog from "./SendTestMessageDialog.vue";
+import ErrorParser from "../components/webasyst-error-parser";
 
 const props = defineProps({
     notificationId: {type: Number},
@@ -58,28 +75,30 @@ const props = defineProps({
 })
 
 const references = inject('references');
+const ui2 = inject('ui2', false);
 
 const submitting = ref(false);
 const loading = ref(false);
+const saved = ref(false);
+const saveError = ref('');
 const dialog_open = ref(false);
+/** Меняется при загрузке другого уведомления, чтобы сбросить локальное состояние дочерних полей */
+const formKey = ref(0);
+let savedTimer = null;
 
 const emit = defineEmits(['update:notification', 'delete']);
 
 const form = ref(null);
 
-const notification = reactive(Object.assign({}, references.notification_template));
+const emptyNotification = () => Object.assign({}, references.notification_template, {body: references.body_templates.email});
+
+const notification = reactive(emptyNotification());
 
 const notificationName = computed(() => {
     if (!!notification.name) return notification.name;
     if ((typeof notification.name === 'string') && props.notificationId) return "<без названия>";
     return "Новое уведомление"
 });
-
-const message_bodies = reactive({
-    email: references.body_templates.email,
-    sms: references.body_templates.sms
-});
-
 
 if (props.notificationId) loadNotification(props.notificationId);
 
@@ -88,40 +107,62 @@ function setSchedule(e) {
     notification.schedule_type = e.type;
 }
 
-watch(() => props.notificationId, (newId, oldId) => {
-    if ((newId === oldId) && (newId !== notification.id)) return;
+watch(() => props.notificationId, newId => {
+    // после сохранения нового уведомления его id уже есть в форме, перезагружать нечего
+    if (newId && newId === notification.id) return;
     loadNotification(newId);
 });
 
+// У нового уведомления текст по умолчанию зависит от транспорта. Не трогаем текст, который уже редактировали
+watch(() => notification.transport, (transport, old) => {
+    if (notification.id) return;
+    if (!notification.body || notification.body === references.body_templates[old]) {
+        notification.body = references.body_templates[transport] ?? '';
+    }
+});
+
 function saveNotification() {
+    submitting.value = true;
+    saved.value = false;
+    saveError.value = '';
     $.shop.jsonPost(
         form.value.getAttribute('action'),
         {data: JSON.stringify(notification)},
         r => {
-            if (r && r.status && r.status === 'ok') {
-                if (!notification.id) notification.id = r.data.id;
-                if (typeof notification.name !== 'string') notification.name = '';
-                emit('update:notification', {
-                    id: notification.id,
-                    transport: notification.transport,
-                    name: notification.name
-                });
-            }
+            if (!notification.id) notification.id = r.data.id;
+            if (typeof notification.name !== 'string') notification.name = '';
+            emit('update:notification', {
+                id: notification.id,
+                transport: notification.transport,
+                name: notification.name
+            });
+            saved.value = true;
+            clearTimeout(savedTimer);
+            savedTimer = setTimeout(() => saved.value = false, 3000);
+        },
+        r => {
+            saveError.value = ErrorParser.parse(r).join('; ');
+            return false;
         }
-    );
+    ).always(() => submitting.value = false);
 }
 
 function loadNotification(id) {
+    saved.value = false;
+    saveError.value = '';
     if (id) {
         loading.value = true;
-        $.shop.getJSON(
-            `?plugin=burningbonus&module=notification&action=get&id=${id}`,
-            r => {
-                if (r.status && r.status === 'ok' && r.data) Object.assign(notification, r.data);
-            }
-        ).always(() => loading.value = false);
+        $.getJSON(`?plugin=burningbonus&module=notification&action=get&id=${id}`)
+            .done(r => {
+                if (r && r.status === 'ok' && r.data) {
+                    Object.assign(notification, r.data);
+                    formKey.value++;
+                }
+            })
+            .always(() => loading.value = false);
     } else {
-        Object.assign(notification, references.notification_template, {body: references.body_templates.email});
+        Object.assign(notification, emptyNotification());
+        formKey.value++;
     }
 }
 

@@ -95,3 +95,85 @@
 
 
 
+
+/* Общее для обоих интерфейсов */
+/* у ace свои z-index (до 6 у полос прокрутки), прелоадер должен быть выше редактора */
+.s-burningbonus-notifications-preloader {
+  z-index: 10;
+}
+
+.s-burningbonus-after-button {
+  margin-left: 0.75em;
+}
+
+.s-burningbonus-sender {
+  display: block;
+  margin-top: 0.4em;
+}
+
+.s-burningbonus-weekly-label {
+  margin-right: 0.35em;
+}
+
+.s-burningbonus-line + .s-burningbonus-line {
+  margin-top: 0.5em;
+}
+
+/* UI 2.0 */
+.s-burningbonus-ui2 .s-burningbonus-notifications-content {
+  position: relative;
+}
+
+.s-burningbonus-ui2 .s-burningbonus-notifications-preloader {
+  background-color: transparent;
+  backdrop-filter: blur(2px);
+  align-items: flex-start;
+  padding-top: 6rem;
+  box-sizing: border-box;
+}
+
+.s-burningbonus-ui2 .s-burningbonus-option-icon {
+  margin: 0 0.25em;
+  color: var(--text-color-hint);
+}
+
+.s-burningbonus-ui2 .s-burningbonus-block-hint {
+  display: block;
+  margin-top: 0.5em;
+}
+
+.s-burningbonus-ui2 .s-burningbonus-wide-input {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Диалог рисует Vue, а не $.waDialog, поэтому центрируем сами */
+.dialog.s-burningbonus-dialog .dialog-body {
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-50%, -50%);
+}
+
+.dialog.s-burningbonus-dialog .dialog-content {
+  position: relative;
+}
+
+.dialog.s-burningbonus-dialog .s-burningbonus-notifications-preloader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+}
+
+@media screen and (max-width: 760px) {
+  .dialog.s-burningbonus-dialog .dialog-body {
+    transform: none;
+    max-height: none;
+  }
+}

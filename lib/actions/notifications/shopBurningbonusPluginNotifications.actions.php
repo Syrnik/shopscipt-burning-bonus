@@ -46,6 +46,7 @@ class shopBurningbonusPluginNotificationsActions extends waJsonActions
 
             if (!in_array($period, ['weekly', 'monthly'], true)) {
                 $this->errors = ['Списание бонусов выключено в настройках'];
+                return;
             }
 
             if (!$lifetime) {
