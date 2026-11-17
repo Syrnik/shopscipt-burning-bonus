@@ -163,9 +163,6 @@ msgstr ""
 msgid "Template error: %s"
 msgstr ""
 
-msgid "%s, your bonuses will expire soon!"
-msgstr ""
-
 msgid "Bonus write-off is disabled in the settings"
 msgstr ""
 
@@ -349,4 +346,43 @@ msgid "Controller execution error"
 msgstr ""
 
 msgid "Unknown error"
+msgstr ""
+
+msgid "Default message text is required"
+msgstr ""
+
+msgid "Unknown language: %s"
+msgstr ""
+
+msgid "Language %s is added twice"
+msgstr ""
+
+msgid "Message text is required (%s)"
+msgstr ""
+
+msgid "Message subject is required (%s)"
+msgstr ""
+
+msgid "Notification has no message text"
+msgstr ""
+
+msgid "Message language"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "+ Add language"
+msgstr ""
+
+msgid "Delete version"
+msgstr ""
+
+msgid "Delete the %s version?"
+msgstr ""
+
+msgid "Customers whose language has no version of its own receive this text."
+msgstr ""
+
+msgid "Text version"
 msgstr ""

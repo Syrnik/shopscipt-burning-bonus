@@ -75,7 +75,8 @@ class shopBurningbonusPluginNotificationsActions extends waJsonActions
                 $row['actual_balance'] = (float)$customer->affiliateBonus();
                 $row['to_burn'] = shopBurningbonusPlugin::calcBurnAmount($row['to_burn'], $row['actual_balance']);
                 if (0 >= $row['to_burn']) continue;
-                $this->response[] = $row + ['customer_name' => $customer->getName()];
+                // по локали покупателя диалог показывает, какая языковая версия ему уйдёт
+                $this->response[] = $row + ['customer_name' => $customer->getName(), 'locale' => (string)$customer->getLocale()];
                 $count++;
             }
         } catch (Exception $exception) {

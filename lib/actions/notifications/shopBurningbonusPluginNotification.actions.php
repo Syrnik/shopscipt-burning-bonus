@@ -57,7 +57,8 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
         // транспорт у сохранённого уведомления не меняется
         $transport = $existing ? $existing['transport'] : (string)($data['transport'] ?? 'email');
         [$row, $errors] = $this->validateNotification($data, $transport);
-        if ($errors) {
+        [$versions, $version_errors] = $this->validateVersions($data['versions'] ?? null, $transport);
+        if ($errors = array_merge($errors, $version_errors)) {
             $this->errors = $errors;
             return;
         }
@@ -67,6 +68,7 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
         } else {
             $id = (int)$model->insert($row + ['transport' => $transport]);
         }
+        (new shopBurningbonusNotificationTextsModel())->saveVersions($id, $versions);
 
         $this->response = ['id' => $id];
     }
@@ -90,21 +92,11 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
         $row = [
             'name'    => mb_substr(trim($string('name')), 0, 255),
             'status'  => empty($data['status']) ? 0 : 1,
-            'subject' => trim($string('subject')),
-            'body'    => $string('body'),
             'from'    => trim($string('from')),
         ];
 
-        if ('' === trim($row['body'])) {
-            $errors[] = _wp('Message text is required');
-        }
-        if ('email' === $transport) {
-            if ('' === $row['subject']) {
-                $errors[] = _wp('Message subject is required');
-            }
-            if ('' !== $row['from'] && !(new waEmailValidator())->isValid($row['from'])) {
-                $errors[] = _wp('Invalid sender address');
-            }
+        if ('email' === $transport && '' !== $row['from'] && !(new waEmailValidator())->isValid($row['from'])) {
+            $errors[] = _wp('Invalid sender address');
         }
         if (mb_strlen($row['from']) > 200) {
             $errors[] = _wp('Sender is too long');
@@ -128,6 +120,69 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
     }
 
     /**
+     * Языковые версии из запроса: версия по умолчанию обязательна, у каждой версии нужен текст, у email — ещё и тема
+     *
+     * @param mixed $data
+     * @param string $transport
+     * @return array{0:list<array{locale:string, subject:string, body:string}>, 1:string[]} версии для записи и список ошибок
+     */
+    protected function validateVersions($data, string $transport): array
+    {
+        if (!is_array($data)) return [[], [_wp('Message text is required')]];
+
+        $versions = [];
+        $errors = [];
+        foreach ($data as $version) {
+            if (!is_array($version)) continue;
+            $locale = is_scalar($version['locale'] ?? null) ? (string)$version['locale'] : '';
+            $subject = is_scalar($version['subject'] ?? null) ? trim((string)$version['subject']) : '';
+            $body = is_scalar($version['body'] ?? null) ? (string)$version['body'] : '';
+
+            if ('' !== $locale && !waLocale::getInfo($locale)) {
+                $errors[] = sprintf_wp('Unknown language: %s', $locale);
+                continue;
+            }
+            if (isset($versions[$locale])) {
+                $errors[] = sprintf_wp('Language %s is added twice', self::versionName($locale));
+                continue;
+            }
+
+            if ('' === trim($body)) {
+                $errors[] = '' === $locale
+                    ? _wp('Message text is required')
+                    : sprintf_wp('Message text is required (%s)', self::versionName($locale));
+            }
+            if ('email' === $transport && '' === $subject) {
+                $errors[] = '' === $locale
+                    ? _wp('Message subject is required')
+                    : sprintf_wp('Message subject is required (%s)', self::versionName($locale));
+            }
+
+            $versions[$locale] = ['locale' => $locale, 'subject' => 'email' === $transport ? $subject : '', 'body' => $body];
+        }
+
+        if (!isset($versions[''])) {
+            $errors[] = _wp('Default message text is required');
+        }
+
+        ksort($versions, SORT_STRING);
+
+        return [array_values($versions), $errors];
+    }
+
+    /**
+     * Название языковой версии для сообщений об ошибках
+     *
+     * @param string $locale
+     * @return string
+     */
+    protected static function versionName(string $locale): string
+    {
+        $info = waLocale::getInfo($locale);
+        return (string)($info['name'] ?? $locale);
+    }
+
+    /**
      * @ControllerAction get
      * @return void
      */
@@ -145,6 +200,8 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
             $data['status'] = (bool)$data['status'];
             $data['schedule_day'] = (int)$data['schedule_day'];
             $data['scheduled_time'] = $data['scheduled_time'] ?: null;
+            $data['versions'] = (new shopBurningbonusNotificationTextsModel())->getByNotification($data['id'])[$data['id']]
+                ?? [['locale' => '', 'subject' => '', 'body' => '']];
         }
 
         $this->response = $data ?: [];
@@ -163,6 +220,7 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
 
         $model = new shopBurningbonusNotificationsModel;
         $model->deleteById($id);
+        (new shopBurningbonusNotificationTextsModel())->deleteByField('notification_id', $id);
 
         $this->response = ['id' => $id];
     }
@@ -175,12 +233,13 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
     {
         $contact_id = (int)waRequest::post('contact_id', 0, waRequest::TYPE_INT);
         $recipient = waRequest::post('recipient', '', waRequest::TYPE_STRING_TRIM);
-        $notification_data = waRequest::post('notification', '', waRequest::TYPE_ARRAY);
+        $notification_data = waRequest::post('notification', '', waRequest::TYPE_STRING);
 
         try {
-//            $notification_data = waUtils::jsonDecode($notification_data, true);
-//            if (!is_array($notification_data) || !$notification_data)
-//                throw new waException("Не передано данные уведомления");
+            // JSON, как при сохранении: так версии приходят в том же виде, что в форме
+            $notification_data = waUtils::jsonDecode($notification_data, true);
+            if (!is_array($notification_data) || !$notification_data)
+                throw new waException(_wp('Invalid notification data'));
 
             $schedule_type = $notification_data['schedule_type'] ?? '';
             if (!in_array($schedule_type, ['monthly', 'weekly']))

@@ -28,6 +28,11 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
     protected ?shopBurningbonusAffiliateModel $affiliateModel = null;
 
     /**
+     * @var shopBurningbonusNotificationTextsModel|null
+     */
+    protected ?shopBurningbonusNotificationTextsModel $textsModel = null;
+
+    /**
      * @var DateTimeInterface|DateTime
      */
     protected DateTimeInterface $today;
@@ -180,6 +185,14 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
             $to_send[] = $notification;
         }
 
+        if ($to_send) {
+            $versions = $this->getTextsModel()->getByNotification(array_column($to_send, 'id'));
+            foreach ($to_send as &$notification) {
+                $notification['versions'] = $versions[(int)$notification['id']] ?? [];
+            }
+            unset($notification);
+        }
+
         return $to_send;
     }
 
@@ -203,6 +216,14 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
     protected function getNotificationModel(): shopBurningbonusNotificationsModel
     {
         return $this->notificationsModel ?? $this->notificationsModel = new shopBurningbonusNotificationsModel();
+    }
+
+    /**
+     * @return shopBurningbonusNotificationTextsModel
+     */
+    protected function getTextsModel(): shopBurningbonusNotificationTextsModel
+    {
+        return $this->textsModel ?? $this->textsModel = new shopBurningbonusNotificationTextsModel();
     }
 
     /**

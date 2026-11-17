@@ -49,6 +49,8 @@ export default {
         watch(()=>props.content, ()=>{
             if(props.content !== _editor.getValue()) {
                 _editor.setValue(props.content ?? '');
+                // текст заменили снаружи (другое уведомление или языковая версия) — отмена не должна возвращать прежний
+                _editor.session.getUndoManager().reset();
                 _editor.resize();
                 // noinspection JSIgnoredPromiseFromCall
                 nextTick(()=>_editor.navigateFileEnd());

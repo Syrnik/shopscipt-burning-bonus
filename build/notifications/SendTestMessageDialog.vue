@@ -25,6 +25,7 @@
                   <th style="text-align: center">{{ t('burningbonus.Current balance') }}</th>
                   <th style="text-align: center">{{ t('burningbonus.Will expire') }}</th>
                   <th style="text-align: center">{{ t('burningbonus.Will remain') }}</th>
+                  <th v-if="multilingual">{{ t('burningbonus.Text version') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,7 @@
                   <td style="text-align: center">{{ numFormat('0.####', r.actual_balance) }}</td>
                   <td style="text-align: center">{{ numFormat('0.####', r.to_burn) }}</td>
                   <td style="text-align: center">{{ numFormat('0.####', r.actual_balance - r.to_burn) }}</td>
+                  <td v-if="multilingual">{{ versionFor(r.locale) }}</td>
                 </tr>
                 </tbody>
               </table>
@@ -81,6 +83,7 @@ import {t} from "../components/i18n";
 import numFormat from 'number-formatter';
 import Preloader from "./Preloader.vue";
 import ErrorParser from "../components/webasyst-error-parser";
+import {localeName} from "./locales";
 
 const emit = defineEmits(['close']);
 const props = defineProps({notification: {type: Object}});
@@ -97,6 +100,15 @@ const sent = ref(false);
 const recipient_address = ref(props.notification.transport === 'email' ? references.default_email_address : "");
 const form_valid = computed(() => selected_contact.value && !!recipient_address.value);
 const errors = reactive([]);
+
+/** Колонку с версией показываем, только если у уведомления есть языковые версии */
+const multilingual = computed(() => (props.notification.versions ?? []).some(v => !!v.locale));
+
+/** Какую версию получит покупатель — тот же выбор, что при отправке: версия для его локали или по умолчанию */
+function versionFor(locale) {
+  const has = !!locale && (props.notification.versions ?? []).some(v => v.locale === locale);
+  return has ? localeName(references, locale) : t('burningbonus.Default');
+}
 
 function loadContactsForTest() {
   loading_data.value = true;
@@ -118,7 +130,7 @@ function sendMessage() {
       {
         contact_id: selected_contact.value,
         recipient: recipient_address.value,
-        notification: props.notification
+        notification: JSON.stringify(props.notification)
       },
       r => true,
       r => {

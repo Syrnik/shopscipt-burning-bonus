@@ -92,6 +92,30 @@
   margin-top: 0.5em;
 }
 
+/* языковые версии: выбор версии, «+ Добавить язык», удаление в одну строку */
+.s-burningbonus-version-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em 0.75em;
+}
+
+.s-burningbonus-delete-version {
+  white-space: nowrap;
+}
+
+.s-burningbonus-version-line + .s-burningbonus-block-hint {
+  display: block;
+  margin-top: 0.5em;
+}
+
+/* значки языков версий в списке уведомлений */
+.s-burningbonus-locale-codes {
+  margin-left: 0.4em;
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
 /* UI 2.0 */
 .s-burningbonus-ui2 .s-burningbonus-notifications-content {
   position: relative;

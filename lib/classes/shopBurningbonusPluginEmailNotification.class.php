@@ -23,7 +23,7 @@ class shopBurningbonusPluginEmailNotification extends shopBurningbonusPluginAbst
     protected string $default_from;
 
     /**
-     * @param array{subject:string,body:string,from:string} $notification_data
+     * @param array{versions:list<array{locale:string, subject:string, body:string}>, from:string} $notification_data
      * @throws waException
      * @noinspection PhpPossiblePolymorphicInvocationInspection
      */

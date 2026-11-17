@@ -30,11 +30,13 @@
                     <time-picker v-model="notification.scheduled_time"/>
                 </Form.SimpleField>
             </Form.Wrap>
-            <Form.Wrap ui2="fields-group">
+            <Form.Wrap ui2="fields-group" legacy="field-group">
+                <version-selector :versions="notification.versions" v-model="currentLocale"
+                                  @add="addVersion($event)" @remove="removeVersion($event)"/>
                 <Form.SimpleField :name="t('burningbonus.Message subject')" v-if="notification.transport === 'email'">
-                    <input type="text" class="long" :class="{'s-burningbonus-wide-input': ui2}" v-model="notification.subject" required>
+                    <input type="text" class="long" :class="{'s-burningbonus-wide-input': ui2}" v-model="currentVersion.subject" required>
                 </Form.SimpleField>
-                <content-editor v-model="notification.body"/>
+                <content-editor v-model="currentVersion.body"/>
             </Form.Wrap>
             <Form.SimpleField>
                 <button class="button green" :class="{submit: !ui2}" type="submit" :disabled="submitting">{{ t('burningbonus.Save') }}
@@ -66,6 +68,7 @@ import Preloader from "./Preloader.vue";
 import ScheduledDays from "./ScheduledDays.vue";
 import TimePicker from "./TimePicker.vue";
 import SendTestMessageDialog from "./SendTestMessageDialog.vue";
+import VersionSelector from "./VersionSelector.vue";
 import ErrorParser from "../components/webasyst-error-parser";
 import {t} from "../components/i18n";
 
@@ -90,9 +93,37 @@ const emit = defineEmits(['update:notification', 'delete']);
 
 const form = ref(null);
 
-const emptyNotification = () => Object.assign({}, references.notification_template, {body: references.body_templates.email});
+/** Тексты по умолчанию: под '' — для версии по умолчанию, под кодом локали — для языков, у которых есть шаблоны */
+const textTemplates = references.text_templates ?? {};
+
+const emptyNotification = () => Object.assign({}, references.notification_template, {
+    versions: [{locale: '', subject: textTemplates['']?.subject ?? '', body: textTemplates['']?.email ?? ''}]
+});
 
 const notification = reactive(emptyNotification());
+
+/** Локаль редактируемой версии, '' — версия по умолчанию. Правки всех версий хранятся в форме до сохранения */
+const currentLocale = ref('');
+const currentVersion = computed(() => notification.versions.find(v => v.locale === currentLocale.value)
+    ?? notification.versions.find(v => !v.locale));
+
+/** Новая версия: шаблон языка, если он есть, иначе копия версии по умолчанию */
+function addVersion(locale) {
+    if (notification.versions.some(v => v.locale === locale)) return;
+    const template = textTemplates[locale];
+    const base = notification.versions.find(v => !v.locale) ?? {subject: '', body: ''};
+    notification.versions.push(template
+        ? {locale, subject: template.subject ?? '', body: template[notification.transport ?? 'email'] ?? ''}
+        : {locale, subject: base.subject, body: base.body});
+    currentLocale.value = locale;
+}
+
+function removeVersion(locale) {
+    if (!locale) return;
+    const index = notification.versions.findIndex(v => v.locale === locale);
+    if (index >= 0) notification.versions.splice(index, 1);
+    currentLocale.value = '';
+}
 
 const notificationName = computed(() => {
     if (!!notification.name) return notification.name;
@@ -113,11 +144,14 @@ watch(() => props.notificationId, newId => {
     loadNotification(newId);
 });
 
-// У нового уведомления текст по умолчанию зависит от транспорта. Не трогаем текст, который уже редактировали
+// У нового уведомления текст по умолчанию зависит от транспорта. Не трогаем текст, который уже редактировали,
+// и версии-копии языков без своих шаблонов
 watch(() => notification.transport, (transport, old) => {
     if (notification.id) return;
-    if (!notification.body || notification.body === references.body_templates[old]) {
-        notification.body = references.body_templates[transport] ?? '';
+    for (const version of notification.versions) {
+        const template = textTemplates[version.locale];
+        if (!template) continue;
+        if (!version.body || version.body === template[old]) version.body = template[transport] ?? '';
     }
 });
 
@@ -134,7 +168,8 @@ function saveNotification() {
             emit('update:notification', {
                 id: notification.id,
                 transport: notification.transport,
-                name: notification.name
+                name: notification.name,
+                locales: notification.versions.map(v => v.locale).filter(l => !!l)
             });
             saved.value = true;
             clearTimeout(savedTimer);
@@ -150,6 +185,7 @@ function saveNotification() {
 function loadNotification(id) {
     saved.value = false;
     saveError.value = '';
+    currentLocale.value = '';
     if (id) {
         loading.value = true;
         $.getJSON(`?plugin=burningbonus&module=notification&action=get&id=${id}`)

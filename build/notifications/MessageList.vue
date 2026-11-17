@@ -7,7 +7,8 @@
     <li v-for="n in notifications" :key="n.id" :class="{selected: n.id === selectedId}">
       <a href="#" @click.prevent="emit('select', n.id)">
         <wa-icon :name="n.transport"/>
-        <span>{{ !!n.name ? n.name : t('burningbonus.(untitled)') }}</span></a>
+        <span>{{ !!n.name ? n.name : t('burningbonus.(untitled)') }}</span>
+        <span v-if="n.locales?.length" class="hint s-burningbonus-locale-codes">{{ codes(n.locales) }}</span></a>
     </li>
   </ul>
 </template>
@@ -22,6 +23,7 @@ export default {
 import {inject} from "vue";
 import WaIcon from "../components/wa-form/wa-icon.vue";
 import {t} from "../components/i18n";
+import {localeCode} from "./locales";
 
 defineProps({
   notifications: {type: Array, default: () => []},
@@ -30,4 +32,8 @@ defineProps({
 
 const emit = defineEmits(['select']);
 const ui2 = inject('ui2', false);
+const references = inject('references');
+
+/** Значки языковых версий: «EN RU» */
+const codes = locales => locales.map(l => localeCode(references, l)).join(' ');
 </script>

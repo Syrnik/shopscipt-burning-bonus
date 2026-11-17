@@ -163,9 +163,6 @@ msgstr "Нет бонусов для списания у покупателя с
 msgid "Template error: %s"
 msgstr "Ошибка шаблона: %s"
 
-msgid "%s, your bonuses will expire soon!"
-msgstr "%s, ваши бонусы скоро сгорят!"
-
 msgid "Bonus write-off is disabled in the settings"
 msgstr "Списание бонусов выключено в настройках"
 
@@ -351,3 +348,42 @@ msgstr "Ошибка исполнения контроллера или экше
 
 msgid "Unknown error"
 msgstr "Неизвестная ошибка"
+
+msgid "Default message text is required"
+msgstr "Не указан текст версии по умолчанию"
+
+msgid "Unknown language: %s"
+msgstr "Неизвестный язык: %s"
+
+msgid "Language %s is added twice"
+msgstr "Язык %s добавлен дважды"
+
+msgid "Message text is required (%s)"
+msgstr "Не указан текст сообщения (%s)"
+
+msgid "Message subject is required (%s)"
+msgstr "Не указана тема сообщения (%s)"
+
+msgid "Notification has no message text"
+msgstr "У уведомления нет текста сообщения"
+
+msgid "Message language"
+msgstr "Язык текста"
+
+msgid "Default"
+msgstr "По умолчанию"
+
+msgid "+ Add language"
+msgstr "+ Добавить язык"
+
+msgid "Delete version"
+msgstr "Удалить версию"
+
+msgid "Delete the %s version?"
+msgstr "Удалить версию «%s»?"
+
+msgid "Customers whose language has no version of its own receive this text."
+msgstr "Этот текст получат покупатели, для языка которых нет своей версии."
+
+msgid "Text version"
+msgstr "Версия текста"
