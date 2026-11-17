@@ -91,13 +91,11 @@ class shopBurningbonusPluginBurnTask implements shopBurningbonusPluginTaskInterf
             try {
                 $customer = new shopCustomer($row['contact_id']);
                 if (!$customer->exists()) continue;
-                $balance = (float)$customer->affiliateBonus();
-                if (0 >= $balance) continue;
+                $to_burn = shopBurningbonusPlugin::calcBurnAmount($row['to_burn'], (float)$customer->affiliateBonus());
+                if (0 >= $to_burn) continue;
             } catch (waException $e) {
                 continue;
             }
-            // Журнал транзакций может расходиться с реальным балансом покупателя. Больше, чем есть на счёте, не списываем
-            $to_burn = min($row['to_burn'], $balance);
             $affiliateModel->applyBonus($row['contact_id'], 0.0 - $to_burn, null, 'Списание неиспользованных просроченных бонусных баллов', 'burn_bonus');
         }
 

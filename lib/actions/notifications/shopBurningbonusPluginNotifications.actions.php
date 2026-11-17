@@ -69,6 +69,12 @@ class shopBurningbonusPluginNotificationsActions extends waJsonActions
                 $row = $burningbonusAffiliateModel->typecastBurningRow($row);
                 $customer = new shopCustomer($row['contact_id']);
                 if (!$customer->exists()) continue;
+
+                // Как при рассылке по расписанию: реальный баланс покупателя, а не по журналу транзакций,
+                // и сумма к сгоранию не больше него. Покупателей, которым рассылка ничего не отправит, не показываем
+                $row['actual_balance'] = (float)$customer->affiliateBonus();
+                $row['to_burn'] = shopBurningbonusPlugin::calcBurnAmount($row['to_burn'], $row['actual_balance']);
+                if (0 >= $row['to_burn']) continue;
                 $this->response[] = $row + ['customer_name' => $customer->getName()];
                 $count++;
             }

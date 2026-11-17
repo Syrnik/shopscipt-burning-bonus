@@ -125,6 +125,26 @@ class shopBurningbonusPlugin extends shopPlugin
     }
 
     /**
+     * Сколько баллов действительно сгорит у покупателя.
+     *
+     * Сумма к сгоранию считается по журналу бонусных транзакций, а он может расходиться
+     * с реальным балансом покупателя (shopCustomer::affiliateBonus()). Больше, чем есть на счёте,
+     * не списываем и не обещаем. Правило общее для списания, рассылки и пробной отправки.
+     *
+     * @param float $to_burn сумма к сгоранию по журналу транзакций
+     * @param float $balance реальный баланс покупателя
+     * @return float 0, если сгорать нечему
+     */
+    public static function calcBurnAmount(float $to_burn, float $balance): float
+    {
+        if (0 >= $to_burn || 0 >= $balance) {
+            return 0.0;
+        }
+
+        return min($to_burn, $balance);
+    }
+
+    /**
      * Ближайший день списания строго после $today, но не раньше $delay (включительно).
      *
      * Правило совпадает с shopBurningbonusPluginBurnTask::isBurningDelayed(): до даты $delay

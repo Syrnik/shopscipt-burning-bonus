@@ -193,7 +193,13 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
 
             $burning_data = (new shopBurningbonusAffiliateModel)->getBurningById($contact_id, $date);
 
-            if (empty($burning_data['to_burn']))
+            $customer = new shopCustomer($contact_id);
+            if (!$customer->exists())
+                throw new waException("Покупатель с ID=$contact_id не существует");
+
+            // Как при рассылке по расписанию: не больше реального баланса покупателя
+            $to_burn = shopBurningbonusPlugin::calcBurnAmount((float)($burning_data['to_burn'] ?? 0), (float)$customer->affiliateBonus());
+            if (0 >= $to_burn)
                 throw new waException("Нет бонусов для списания у покупателя с ID=$contact_id");
         } catch (waException|Exception $e) {
             $this->errors[] = $e->getMessage();
@@ -220,7 +226,7 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
         }
 
         try {
-            if ($notification->send($contact_id, $burning_data['to_burn'], $recipient))
+            if ($notification->send($contact_id, $to_burn, $recipient))
                 $this->response = "Уведомление успешно отправлено";
             else $this->errors[] = "Не удалось отправить уведомление";
         } catch (SmartyException|SmartyCompilerException $e) {

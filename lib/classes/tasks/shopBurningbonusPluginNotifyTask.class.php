@@ -91,11 +91,9 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
             $shopCustomer = new shopCustomer((int)$customer['contact_id']);
             if (!$shopCustomer->exists()) continue;
 
-            // Журнал транзакций может расходиться с реальным балансом покупателя.
-            // Если на счёте ничего нет — сгорать нечему и уведомлять не о чем
-            $balance = (float)$shopCustomer->affiliateBonus();
-            if (0 >= $balance) continue;
-            $to_burn = min((float)$customer['to_burn'], $balance);
+            // Если сгорать нечему — уведомлять не о чем
+            $to_burn = shopBurningbonusPlugin::calcBurnAmount((float)$customer['to_burn'], (float)$shopCustomer->affiliateBonus());
+            if (0 >= $to_burn) continue;
 
             foreach ($notifications as $index => $notification) {
                 if (!($notificationMessage = $notification['_message'] ?? null)) {
