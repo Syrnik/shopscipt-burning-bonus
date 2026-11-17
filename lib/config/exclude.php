@@ -10,6 +10,7 @@ return array(
     'README.en.md',
     'AGENTS.md',
     'compress-app-plugin.php',
+    '.editorconfig',
     'LICENSE.txt',
     'CHANGELOG.md',
     'CONTRIBUTING.md',
