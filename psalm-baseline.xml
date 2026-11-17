@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="6.16.1@f1f5de594dc76faf8784e02d3dc4716c91c6f6ac">
+  <file src="../../../../wa-system/database/waModel.class.php">
+    <InvalidPropertyAssignmentValue>
+      <code><![CDATA[$this->type]]></code>
+      <code><![CDATA[waDbConnector::getConnection($this->type, $this->writable)]]></code>
+    </InvalidPropertyAssignmentValue>
+  </file>
+  <file src="lib/actions/notifications/shopBurningbonusPluginNotification.actions.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function preExecute(): void]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[shopBurningbonusPluginNotificationActions]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/actions/notifications/shopBurningbonusPluginNotifications.action.php">
+    <InvalidReturnStatement>
+      <code><![CDATA[$result]]></code>
+      <code><![CDATA[array_values(array_map(fn($row) => [
+            'id'        => (int)$row['id'],
+            'name'      => (string)$row['name'],
+            'transport' => (string)$row['transport']
+        ], (array)$data))]]></code>
+    </InvalidReturnStatement>
+    <InvalidReturnType>
+      <code><![CDATA[array{id:int, name:string, type:string}[]]]></code>
+      <code><![CDATA[string[]]]></code>
+    </InvalidReturnType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function execute()]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[shopBurningbonusPluginNotificationsAction]]></code>
+    </UnusedClass>
+    <UnusedVariable>
+      <code><![CDATA[$notifications_list]]></code>
+      <code><![CDATA[$plugin_version]]></code>
+      <code><![CDATA[$references]]></code>
+      <code><![CDATA[$ui]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="lib/actions/notifications/shopBurningbonusPluginNotifications.actions.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function preExecute(): void]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[shopBurningbonusPluginNotificationsActions]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/actions/settings/shopBurningbonusPluginSettings.action.php">
+    <UnusedClass>
+      <code><![CDATA[shopBurningbonusPluginSettingsAction]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/actions/settings/shopBurningbonusPluginSettingsAffiliate.action.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function execute()]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[shopBurningbonusPluginSettingsAffiliateAction]]></code>
+    </UnusedClass>
+    <UnusedVariable>
+      <code><![CDATA[$info]]></code>
+      <code><![CDATA[$settings]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="lib/actions/settings/shopBurningbonusPluginSettingsSaveaffiliate.controller.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function execute(): void]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[shopBurningbonusPluginSettingsSaveaffiliateController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/classes/shopBurningbonusPluginEmailNotification.class.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function getDefaultAddress(shopCustomer $customer): string]]></code>
+      <code><![CDATA[public function send(int $customer_id, float $burning_amount, ?string $address = null): bool]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$contact_id]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="lib/classes/shopBurningbonusPluginSmsNotification.class.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function getDefaultAddress(shopCustomer $customer): string]]></code>
+      <code><![CDATA[public function send(int $customer_id, float $burning_amount, ?string $address = null): bool]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="lib/classes/shopBurningbonusPluginViewHelper.class.php">
+    <UnusedClass>
+      <code><![CDATA[shopBurningbonusPluginViewHelper]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/classes/tasks/shopBurningbonusPluginBurnTask.class.php">
+    <InvalidOperand>
+      <code><![CDATA[0 - $to_burn]]></code>
+    </InvalidOperand>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getDescription(): string]]></code>
+      <code><![CDATA[public function run(): bool]]></code>
+    </MissingOverrideAttribute>
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[modify]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="lib/classes/tasks/shopBurningbonusPluginNotifyTask.class.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getDescription(): string]]></code>
+      <code><![CDATA[public function run(): bool]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="lib/classes/tasks/shopBurningbonusPluginTask.interface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[getDescription]]></code>
+      <code><![CDATA[run]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="lib/cli/shopBurningbonus.cli.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function preExecute()]]></code>
+      <code><![CDATA[public function execute()]]></code>
+    </MissingOverrideAttribute>
+    <UndefinedMagicMethod>
+      <code><![CDATA[fetchField]]></code>
+    </UndefinedMagicMethod>
+    <UnusedClass>
+      <code><![CDATA[shopBurningbonusCli]]></code>
+    </UnusedClass>
+  </file>
+  <file src="lib/models/shopBurningbonusAffiliate.model.php">
+    <InvalidReturnStatement>
+      <code><![CDATA[$data ? self::typecastBurningRow($data[0]) : []]]></code>
+      <code><![CDATA[$this->query($query, $q_params)]]></code>
+    </InvalidReturnStatement>
+    <InvalidReturnType>
+      <code><![CDATA[array{contact_id:int, balance:float, decrision:float, to_burn:float}]]></code>
+      <code><![CDATA[waDbResultSelect]]></code>
+    </InvalidReturnType>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getBurning]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="lib/shopBurningbonusPlugin.class.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getSettings($name = null)]]></code>
+    </MissingOverrideAttribute>
+    <NullArrayAccess>
+      <code><![CDATA[$this->settings['lifetime']]]></code>
+    </NullArrayAccess>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[backendExtendedMenuHandler]]></code>
+      <code><![CDATA[backendMarketingSidebarHandler]]></code>
+      <code><![CDATA[backendSettingsAffiliateHandler]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+</files>

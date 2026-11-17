@@ -50,7 +50,7 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
         if (!$this->plugin->getSettings('delay')) return true;
         $period = $this->plugin->getSettings('period');
 
-        $compare_date = clone $this->today;
+        $compare_date = new DateTime($this->today->format('Y-m-d'));
         if ('weekly' === $period) $compare_date->modify('next monday');
         else $compare_date->modify('first day of next month');
 
