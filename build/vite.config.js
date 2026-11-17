@@ -17,7 +17,7 @@ export default defineConfig(({mode}) => ({
     lib: {
       entry: './notifications/main.js',
       name: 'BurningbonusNotificationsSettings',
-      fileName: (format) => `notifications-settings.${format === 'umd' ? 'js' : format}.js`,
+      fileName: () => 'notifications-settings.min.js',
       formats: ['umd']
     },
     outDir: '../js',
@@ -26,7 +26,7 @@ export default defineConfig(({mode}) => ({
       external: [],
       output: {
         dir: '../js',
-        entryFileNames: 'notifications-settings.js',
+        entryFileNames: 'notifications-settings.min.js',
         format: 'umd',
         name: 'BurningbonusNotificationsSettings',
         globals: {}
