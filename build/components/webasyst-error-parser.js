@@ -7,13 +7,15 @@ export default class WebasystErrorParser {
         if (Array.isArray(data)) {
             if (!data.length) return this.parse(t('burningbonus.Empty error list'));
             if (data.length === 1) return this.parse(data[0]);
-            if (data.length === 2 && (typeof data[0] === 'string')) {
+            // Пара «сообщение + код» — только [строка, число] (например [$e->getMessage(), $e->getCode()])
+            // или [строка, массив]. Две строки — это две ошибки, а не сообщение с уточнением
+            if (data.length === 2 && (typeof data[0] === 'string') && (typeof data[1] !== 'string')) {
                 if (Array.isArray(data[1])) {
                     if (!data[1].length) return this.parse([data[0]])
                     if (typeof data[1][0] === 'string') return this.parse(`${data[0]} (${data[1][0]})`);
                 }
                 if (!data[1]) return this.parse([data[0]]);
-                if ((typeof data[1] === "string") || (typeof data[1] === 'number')) return this.parse(`${data[0]} (${data[1]})`);
+                if (typeof data[1] === 'number') return this.parse(`${data[0]} (${data[1]})`);
                 return this.parse(data[0]);
             }
 
