@@ -59,6 +59,15 @@ class shopBurningbonusPluginEmailNotification extends shopBurningbonusPluginAbst
     }
 
     /**
+     * @param shopCustomer $customer
+     * @return string
+     */
+    protected function getDefaultAddress(shopCustomer $customer): string
+    {
+        return trim((string)($customer->get('email', 'default') ?? ''));
+    }
+
+    /**
      * @return string
      */
     protected function getFrom(): string

@@ -43,6 +43,14 @@ abstract class shopBurningbonusPluginAbstractNotification
     abstract public function send(int $customer_id, float $burning_amount, ?string $address = null): bool;
 
     /**
+     * Адрес покупателя для транспорта уведомления, если он не передан явно
+     *
+     * @param shopCustomer $customer
+     * @return string пустая строка, если адреса нет
+     */
+    abstract protected function getDefaultAddress(shopCustomer $customer): string;
+
+    /**
      * @param int $customer_id
      * @param string|null $address
      * @param float $burning_amount
@@ -58,7 +66,7 @@ abstract class shopBurningbonusPluginAbstractNotification
         $customer = new shopCustomer($customer_id);
         if (!$customer->exists()) throw new waException("Покупатель с ID=$customer_id не существует");
 
-        if (!$address && !($address = trim($customer->get('email')[0]['value'] ?? '')))
+        if (!$address && !($address = $this->getDefaultAddress($customer)))
             throw new waException("Не указан адрес для отправки", self::EXCEPTION_NO_ADDRESS);
 
         $this->view->assign(['customer' => $customer, 'burning_amount' => $burning_amount]);

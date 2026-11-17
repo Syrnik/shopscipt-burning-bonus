@@ -36,4 +36,13 @@ class shopBurningbonusPluginSmsNotification extends shopBurningbonusPluginAbstra
 
         return (bool)$sms->send($address, trim($body), trim($this->notification_data['from'] ?? '') ?: null);
     }
+
+    /**
+     * @param shopCustomer $customer
+     * @return string
+     */
+    protected function getDefaultAddress(shopCustomer $customer): string
+    {
+        return trim((string)($customer->get('phone', 'default') ?? ''));
+    }
 }
