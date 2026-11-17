@@ -15,7 +15,7 @@ if (!is_array($schema) || empty($schema['shop_burningbonus_notification_texts'])
 
 $model->createSchema(['shop_burningbonus_notification_texts' => $schema['shop_burningbonus_notification_texts']]);
 
-$columns = (array)$model->describe('shop_burningbonus_notifications');
+$columns = $model->describe('shop_burningbonus_notifications');
 $has_subject = isset($columns['subject']);
 $has_body = isset($columns['body']);
 
@@ -33,3 +33,8 @@ if ($has_body) $drop[] = 'DROP COLUMN body';
 if ($drop) {
     $model->exec('ALTER TABLE shop_burningbonus_notifications ' . implode(', ', $drop));
 }
+
+// Кэш метаданных у waModel свой для каждой таблицы, поэтому сбрасываем через модели обеих таблиц,
+// иначе модели продолжат видеть удалённые subject/body и не увидят новую таблицу
+(new shopBurningbonusNotificationsModel())->clearMetadataCache();
+(new shopBurningbonusNotificationTextsModel())->clearMetadataCache();
