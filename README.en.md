@@ -99,8 +99,9 @@ points will expire on the next expiry day. Email goes to the customer's
 primary email address, SMS to the primary phone number; customers without one
 are skipped.
 
-For monthly notifications, choose a day no later than the 28th: in a month
-without the 29th, 30th or 31st, a notification set to that day is not sent.
+If a monthly notification is set to the 29th, 30th or 31st, then in months
+without that day it is sent on the last day of the month. To remind customers
+"on the last day of the month", choose the 31st.
 
 Texts support HTML and Smarty. The main variables:
 

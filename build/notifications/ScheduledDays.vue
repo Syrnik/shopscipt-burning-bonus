@@ -7,6 +7,9 @@
                     :disabled="schedule_type !== 'monthly'" required> число
       месяца
     </div>
+    <div v-if="schedule_type === 'monthly' && month_day > 28" class="s-burningbonus-line hint">
+      В месяцах, где нет {{ month_day }}-го числа, уведомление уйдёт в последний день месяца
+    </div>
     <div class="s-burningbonus-line"><label class="s-burningbonus-weekly-label"><wa-radio value="weekly" v-model="schedule_type"
                                                                           @update:modelValue="emitUpdate"/>
       По</label>

@@ -189,7 +189,7 @@ html[data-theme='dark'] .srnk{--srnk-accent:#a8d46e;--srnk-accent-strong:#c5e49c
     <h3><span class="srnk-ico"><i class="fas fa-bell"></i></span>Expiry reminders</h3>
     <p>You can create as many notifications as you need, each one an email or SMS with its own text and schedule. For each notification you choose the sending day:</p>
     <ul>
-        <li><b>A day of the month</b>, for example the 25th</li>
+        <li><b>A day of the month</b>, for example the 25th. If you choose the 29th, 30th or 31st, then in months without that day the notification is sent on the last day of the month</li>
         <li><b>A day of the week</b>, for example Thursday</li>
     </ul>
     <p>You can also set a time: the notification is then sent on the chosen day no earlier than that hour. Each notification is sent once on its day.</p>
@@ -197,11 +197,7 @@ html[data-theme='dark'] .srnk{--srnk-accent:#a8d46e;--srnk-accent-strong:#c5e49c
     <p>Before turning a notification on, you can test it: pick a customer whose points are about to expire and send a test message to any address. The test dialog shows how many points the customer has now, how many will expire and how many will remain.</p>
     <div class="srnk-note srnk-tip">
         <i class="fas fa-lightbulb"></i>
-        <p><b>Reminder strategies.</b> With monthly expiry, two emails work well: a week before the month ends (say, on the 22nd) and a couple of days before (on the 27th). With weekly expiry, one reminder on Thursday or Friday gives the customer the weekend to order. The amount in a reminder is calculated when it is sent: if the customer spends some points, the next reminder shows a smaller amount.</p>
-    </div>
-    <div class="srnk-note">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p>For monthly reminders, choose a day no later than the 28th: in a month without the 29th, 30th or 31st, a notification set to that day is not sent.</p>
+        <p><b>Reminder strategies.</b> With monthly expiry, two emails work well: a week before the month ends (say, on the 22nd) and on the last day of the month (the 31st). With weekly expiry, one reminder on Thursday or Friday gives the customer the weekend to order. The amount in a reminder is calculated when it is sent: if the customer spends some points, the next reminder shows a smaller amount.</p>
     </div>
 </div>
 

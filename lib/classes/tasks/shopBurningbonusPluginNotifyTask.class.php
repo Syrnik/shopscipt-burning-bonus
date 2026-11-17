@@ -150,7 +150,7 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
 
         foreach ($enabled as $notification) {
             // ежемесячное и день отправки не сегодняшний
-            if ('monthly' === $notification['schedule_type'] && $day !== intval($notification['schedule_day']))
+            if ('monthly' === $notification['schedule_type'] && !self::isMonthlySendDay(intval($notification['schedule_day']), $this->today))
                 continue;
 
             // еженедельное и день недели отправки не сегодняшний
@@ -181,6 +181,20 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
         }
 
         return $to_send;
+    }
+
+    /**
+     * Сегодня день отправки ежемесячного уведомления?
+     *
+     * Если в месяце нет выбранного числа (29–31), уведомление уходит в последний день месяца
+     *
+     * @param int $schedule_day число месяца из настроек уведомления, 1–31
+     * @param DateTimeInterface $today
+     * @return bool
+     */
+    public static function isMonthlySendDay(int $schedule_day, DateTimeInterface $today): bool
+    {
+        return (int)$today->format('j') === min($schedule_day, (int)$today->format('t'));
     }
 
     /**
