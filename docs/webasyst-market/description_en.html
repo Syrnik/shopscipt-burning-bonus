@@ -1,0 +1,240 @@
+<div class="srnk">
+<style>
+.srnk{--srnk-accent:#7da747;--srnk-accent-strong:#466b25;--srnk-accent-soft:rgba(125,167,71,.10);--srnk-accent-line:rgba(125,167,71,.28);--srnk-on-accent:#1c2b0c}
+html[data-theme='dark'] .srnk{--srnk-accent:#a8d46e;--srnk-accent-strong:#c5e49c;--srnk-accent-soft:rgba(168,212,110,.10);--srnk-accent-line:rgba(168,212,110,.28);--srnk-on-accent:#1a260d;--srnk-warn:#f0c454;--srnk-warn-soft:rgba(240,196,84,.10);--srnk-warn-line:rgba(240,196,84,.32)}
+
+.srnk{--srnk-warn:#9a6a00;--srnk-warn-soft:rgba(214,158,0,.10);--srnk-warn-line:rgba(214,158,0,.35);--srnk-text:var(--text-color,#1f2430);--srnk-hint:var(--text-color-hint,#667085);--srnk-bg:var(--background-color-blank,#fff);--srnk-line:var(--border-color-soft,#e4e7ec);color:var(--srnk-text);line-height:1.6;container-type:inline-size}
+.srnk *,.srnk *::before,.srnk *::after{box-sizing:border-box}
+.srnk h3{margin:40px 0 14px;color:var(--srnk-text)}
+.srnk p{margin:0 0 14px}
+
+/* Hero */
+.srnk-hero{background:linear-gradient(160deg,var(--srnk-accent-soft) 0%,transparent 70%),var(--srnk-bg);border:1px solid var(--srnk-accent-line);border-radius:16px;padding:28px;margin-bottom:8px}
+.srnk-lead{font-size:1.2em;font-weight:600;line-height:1.45;margin:0 0 12px}
+.srnk-sub{color:var(--srnk-hint);margin:0 0 22px}
+.srnk-sub b{color:var(--srnk-text)}
+.srnk-hero .srnk-note{margin-bottom:0}
+
+/* Key feature tiles */
+.srnk-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.srnk-tile{display:flex;gap:12px;align-items:flex-start;background:var(--srnk-bg);border:1px solid var(--srnk-line);border-radius:12px;padding:14px;font-size:.95em;line-height:1.45}
+.srnk-tile b{color:var(--srnk-accent-strong)}
+
+/* Round icon */
+.srnk-ico{flex:0 0 36px;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--srnk-accent-soft);color:var(--srnk-accent);font-size:15px}
+
+/* 2×2 cards */
+.srnk-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.srnk-card{background:var(--srnk-bg);border:1px solid var(--srnk-line);border-radius:14px;padding:20px}
+.srnk-card h4{display:flex;align-items:center;gap:12px;margin:0 0 10px;font-size:1.05em}
+.srnk-card p{margin:0}
+
+/* Section card with h3 */
+.srnk-feature{background:var(--srnk-bg);border:1px solid var(--srnk-line);border-radius:14px;padding:22px;margin-top:16px}
+.srnk-feature h3{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:1.15em}
+.srnk-feature p:last-child,.srnk-feature .srnk-note:last-child{margin-bottom:0}
+.srnk-feature ul{margin:0 0 14px;padding-left:20px}
+.srnk-feature li{margin-bottom:6px}
+
+/* Worked example */
+.srnk-calc{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--srnk-line);border-radius:12px;overflow:hidden;background:var(--srnk-bg);font-size:.95em;line-height:1.45;margin:4px 0 14px}
+.srnk-calc th,.srnk-calc td{padding:10px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--srnk-line)}
+.srnk-calc tr:last-child td{border-bottom:0}
+.srnk-calc thead th{font-weight:700;color:var(--srnk-text);background:var(--srnk-accent-soft)}
+.srnk-calc td:first-child,.srnk-calc .srnk-amt{white-space:nowrap}.srnk-calc .srnk-amt{text-align:right}
+.srnk-calc .srnk-total td{font-weight:700;color:var(--srnk-accent-strong);background:var(--srnk-accent-soft)}
+
+/* Screenshots */
+.srnk .srnk-shot{display:block;margin:18px 0 26px}
+.srnk-shot img{display:block;width:100%;height:auto;border:1px solid var(--srnk-line);border-radius:12px}
+.srnk-shot .wi-caption{margin:8px 0 0;font-size:.9em;color:var(--srnk-hint);text-align:center}
+.srnk .srnk-shot.srnk-shot-narrow img{max-width:360px;margin:0 auto}
+
+/* Notes: warning and tip */
+.srnk-note{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--srnk-warn-line);background:var(--srnk-warn-soft);border-radius:12px;padding:14px 16px;margin:16px 0;font-size:.95em}
+.srnk-note i{color:var(--srnk-warn);margin-top:4px}
+.srnk-note p{margin:0}
+.srnk-tip{border-color:var(--srnk-accent-line);background:var(--srnk-accent-soft)}
+.srnk-tip i{color:var(--srnk-accent)}
+
+/* Numbered steps */
+.srnk-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;counter-reset:srnk}
+.srnk-steps li{counter-increment:srnk;background:var(--srnk-bg);border:1px solid var(--srnk-line);border-radius:12px;padding:16px;font-size:.95em;line-height:1.45}
+.srnk-steps li::before{content:counter(srnk);display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--srnk-accent);color:var(--srnk-on-accent);font-weight:700;margin-bottom:10px}
+
+/* Responsive by description width */
+@container (max-width:520px){.srnk-steps,.srnk-cards{grid-template-columns:1fr}.srnk-hero,.srnk-feature{padding:18px}.srnk-lead{font-size:1.1em}.srnk-calc{font-size:.9em}.srnk-calc th,.srnk-calc td{padding:8px}}
+</style>
+
+<div class="srnk-hero">
+    <p class="srnk-lead">Give bonus points an expiry date: unused points expire, and customers get a reminder in advance and come back to shop.</p>
+    <p class="srnk-sub">Some customers forget about the points they have collected, others save them “for later”. <b>An expiry date and a reminder</b> give them a reason to order now rather than someday.</p>
+    <div class="srnk-tiles">
+        <div class="srnk-tile">
+            <span class="srnk-ico"><i class="fas fa-hourglass-half"></i></span>
+            <div><b>Lifetime in days</b>, counted from the date the points were credited</div>
+        </div>
+        <div class="srnk-tile">
+            <span class="srnk-ico"><i class="fas fa-fire"></i></span>
+            <div><b>Weekly or monthly expiry</b>: every Monday or on the 1st of the month</div>
+        </div>
+        <div class="srnk-tile">
+            <span class="srnk-ico"><i class="fas fa-bell"></i></span>
+            <div><b>Any number of reminders</b> by email and SMS, showing the amount about to expire</div>
+        </div>
+        <div class="srnk-tile">
+            <span class="srnk-ico"><i class="fas fa-shield-alt"></i></span>
+            <div><b>Fair calculation</b>: only old points the customer never spent expire</div>
+        </div>
+    </div>
+    <div class="srnk-note">
+        <i class="fas fa-language"></i>
+        <p>The plugin's backend screens and the default notification texts are in Russian. Notification texts are fully editable, so you can write them in any language.</p>
+    </div>
+</div>
+
+<h3>What the plugin does</h3>
+
+<div class="srnk-cards">
+    <div class="srnk-card">
+        <h4><span class="srnk-ico"><i class="fas fa-calendar-alt"></i></span>Limits point lifetime</h4>
+        <p>You set how many days the bonus points of the Shop-Script affiliate (bonus) program stay valid. Points not spent within that time expire.</p>
+    </div>
+    <div class="srnk-card">
+        <h4><span class="srnk-ico"><i class="fas fa-fire-alt"></i></span>Writes off expired points</h4>
+        <p>Expired points are written off automatically on schedule: every Monday or on the 1st of every month. The write-off appears as a separate entry in the customer's bonus history.</p>
+    </div>
+    <div class="srnk-card">
+        <h4><span class="srnk-ico"><i class="fas fa-envelope-open-text"></i></span>Warns customers</h4>
+        <p>Before the write-off, customers get an email or SMS saying how many points will expire and when. You choose the texts and the sending days.</p>
+    </div>
+    <div class="srnk-card">
+        <h4><span class="srnk-ico"><i class="fas fa-redo-alt"></i></span>Brings customers back</h4>
+        <p>A reminder about points that are about to disappear is a good reason to visit the store and place an order with a discount.</p>
+    </div>
+</div>
+
+<div class="srnk-feature">
+    <h3><span class="srnk-ico"><i class="fas fa-fire"></i></span>When and which points expire</h3>
+    <p>In the plugin settings you set the points' <b>lifetime</b> in days and the <b>expiry schedule</b>:</p>
+    <ul>
+        <li><b>Weekly</b>: points expire every Monday</li>
+        <li><b>Monthly</b>: points expire on the 1st of every month</li>
+        <li><b>Never</b>: the plugin neither writes off points nor sends reminders</li>
+    </ul>
+    <p>On the expiry day, the plugin checks how many points the customer had exactly “lifetime” days ago. Everything the customer has spent since then is subtracted from that amount. What is left are old points that were never used, and those expire. Points credited later are not touched.</p>
+    <p>In other words, a customer always spends the oldest points first. If they order regularly and pay with points, nothing expires.</p>
+    <p><b>Example.</b> Lifetime is 90 days, expiry is monthly. On March 1, the plugin looks at the balance as of December 1:</p>
+    <table class="srnk-calc">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Event</th>
+                <th class="srnk-amt">Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>November 15</td>
+                <td>500 points credited for an order</td>
+                <td class="srnk-amt">500</td>
+            </tr>
+            <tr>
+                <td>January 10</td>
+                <td>300 points credited for a new order</td>
+                <td class="srnk-amt">800</td>
+            </tr>
+            <tr>
+                <td>February 5</td>
+                <td>200 points spent on an order</td>
+                <td class="srnk-amt">600</td>
+            </tr>
+            <tr class="srnk-total">
+                <td>March 1</td>
+                <td>500 − 200 = 300 points expire: the unspent November points</td>
+                <td class="srnk-amt">300</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>The 300 points from January stay with the customer and expire only if they are not spent before their own expiry day.</p>
+    <div class="srnk-note srnk-tip">
+        <i class="fas fa-lightbulb"></i>
+        <p>Points do not expire on the very day their lifetime ends, but on the next expiry day after it. So in practice points live a bit longer than the set lifetime: up to a week longer with weekly expiry and up to a month longer with monthly expiry. A round number works well, for example 365 days: “points are valid for a year”.</p>
+    </div>
+</div>
+
+<div class="wi-image-section srnk-shot">
+    <img class="wi-image" src="https://www.webasyst.ru/wa-data/public/updates/img/67/6367/19934/19934.970.png" width="" height="" alt="Expired points write-off in the customer's bonus history">
+    <p class="wi-caption">Expired points in the customer's bonus history: old points are written off, recently credited points stay on the balance</p>
+</div>
+
+<div class="srnk-feature">
+    <h3><span class="srnk-ico"><i class="fas fa-calendar-check"></i></span>A soft start for points already collected</h3>
+    <p>If your bonus program has been running for a while, many customers already have points older than the chosen lifetime. To keep them from expiring without warning on the very first run, you can postpone the start of expiry to a date of your choice.</p>
+    <p>Points do not expire before that date. Send reminders and give customers time to spend what they have collected.</p>
+</div>
+
+<div class="wi-image-section srnk-shot">
+    <img class="wi-image" src="https://www.webasyst.ru/wa-data/public/updates/img/67/6367/19935/19935.970.png" width="" height="" alt="Point expiry settings">
+    <p class="wi-caption">Settings: point lifetime, expiry schedule and postponed start (the interface is in Russian)</p>
+</div>
+<!-- Screenshot for UI 2.0: Marketing → Affiliate program → “Сгорание бонусов” tab in the new interface (lifetime 365 days, “Ежемесячно”, a date in “Отложить начало списания”). Replace the screenshot above or put it next to it.
+<div class="wi-image-section srnk-shot">
+    <img class="wi-image" src="" width="" height="" alt="Point expiry settings in the new interface">
+    <p class="wi-caption">Point expiry settings in the new Webasyst interface</p>
+</div>
+-->
+
+<div class="srnk-feature">
+    <h3><span class="srnk-ico"><i class="fas fa-bell"></i></span>Expiry reminders</h3>
+    <p>You can create as many notifications as you need, each one an email or SMS with its own text and schedule. For each notification you choose the sending day:</p>
+    <ul>
+        <li><b>A day of the month</b>, for example the 25th</li>
+        <li><b>A day of the week</b>, for example Thursday</li>
+    </ul>
+    <p>You can also set a time: the notification is then sent on the chosen day no earlier than that hour. Each notification is sent once on its day.</p>
+    <p>Only customers whose points will expire on the <b>next expiry day</b> receive it. The text can show how many points will expire, the customer's name, the current balance, the points' lifetime and the next expiry date. Texts support HTML and Smarty; a new notification starts from a ready-made email or SMS template.</p>
+    <p>Before turning a notification on, you can test it: pick a customer whose points are about to expire and send a test message to any address. The test dialog shows how many points the customer has now, how many will expire and how many will remain.</p>
+    <div class="srnk-note srnk-tip">
+        <i class="fas fa-lightbulb"></i>
+        <p><b>Reminder strategies.</b> With monthly expiry, two emails work well: a week before the month ends (say, on the 22nd) and a couple of days before (on the 27th). With weekly expiry, one reminder on Thursday or Friday gives the customer the weekend to order. The amount in a reminder is calculated when it is sent: if the customer spends some points, the next reminder shows a smaller amount.</p>
+    </div>
+    <div class="srnk-note">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>For monthly reminders, choose a day no later than the 28th: in a month without the 29th, 30th or 31st, a notification set to that day is not sent.</p>
+    </div>
+</div>
+
+<div class="wi-image-section srnk-shot">
+    <img class="wi-image" src="https://www.webasyst.ru/wa-data/public/updates/img/67/6367/19936/19936.970.png" width="" height="" alt="Expiry notification editor">
+    <p class="wi-caption">Notification editor: channel, day and time, subject and text with the expiring amount (the interface is in Russian)</p>
+</div>
+<!-- Screenshot for UI 2.0: Marketing → “Уведомления о сгорании бонусов”, an email notification open in the new interface (day “Каждое 25 число месяца”, time, subject and text with {$burning_amount}).
+<div class="wi-image-section srnk-shot">
+    <img class="wi-image" src="" width="" height="" alt="Notification editor in the new interface">
+    <p class="wi-caption">Notification editor in the new Webasyst interface</p>
+</div>
+-->
+<!-- Screenshot: “Пробное сообщение” dialog — a customer selected, columns “Всего бонусов сейчас”, “Сгорит”, “Останется” and the “Кому” field visible. If the dialog is narrower than ~500 px, add the srnk-shot-narrow modifier.
+<div class="wi-image-section srnk-shot">
+    <img class="wi-image" src="" width="" height="" alt="Test notification">
+    <p class="wi-caption">Test sending: how many points the customer has now, how many will expire and how many will remain</p>
+</div>
+-->
+
+<h3>Getting started</h3>
+
+<ol class="srnk-steps">
+    <li>In your hosting control panel, schedule the plugin's command with cron, preferably once an hour. The exact command is shown in the plugin settings</li>
+    <li>In Marketing → Affiliate program → the plugin's tab, set the points' lifetime and the expiry schedule</li>
+    <li>If customers already have old points, postpone the start of expiry to give them time</li>
+    <li>In Marketing → expiry notifications, create reminders and check them with a test message</li>
+</ol>
+
+<div class="srnk-note">
+    <i class="fas fa-exclamation-triangle"></i>
+    <p>Write-offs and reminders are run by a script on a schedule. If the script does not run even once on an expiry day or on a notification's sending day, that write-off or mailing is skipped. That is why we recommend running it once an hour rather than once a day.</p>
+</div>
+
+<p>If you have ideas or requests for the plugin, <a href="https://www.syrnik.com/support/" target="_blank">contact our support</a>. We read every message carefully and implement suggestions whenever we can.</p>
+</div>

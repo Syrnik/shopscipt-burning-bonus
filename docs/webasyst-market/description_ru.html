@@ -1,11 +1,236 @@
-<h3>Стимулируйте ваших покупателей делать повторные заказы, используя бонусные баллы!</h3>
+<div class="srnk">
+<style>
+.srnk{--srnk-accent:#7da747;--srnk-accent-strong:#466b25;--srnk-accent-soft:rgba(125,167,71,.10);--srnk-accent-line:rgba(125,167,71,.28);--srnk-on-accent:#1c2b0c}
+html[data-theme='dark'] .srnk{--srnk-accent:#a8d46e;--srnk-accent-strong:#c5e49c;--srnk-accent-soft:rgba(168,212,110,.10);--srnk-accent-line:rgba(168,212,110,.28);--srnk-on-accent:#1a260d;--srnk-warn:#f0c454;--srnk-warn-soft:rgba(240,196,84,.10);--srnk-warn-line:rgba(240,196,84,.32)}
 
-<p>Многие покупатели либо забыли, что у них есть накопленные баллы в вашем магазине, либо кропотливо копят эти баллы. Напомните первым о том, что они могут что-то у вас заказать со скидкой за бонусы и заставьте вторых поскорее баллы потратить. Бонусные баллы, у которых есть срок действия, помогают стимулировать пользователей делать периодические заказы.</p>
+.srnk{--srnk-warn:#9a6a00;--srnk-warn-soft:rgba(214,158,0,.10);--srnk-warn-line:rgba(214,158,0,.35);--srnk-text:var(--text-color,#1f2430);--srnk-hint:var(--text-color-hint,#667085);--srnk-bg:var(--background-color-blank,#fff);--srnk-line:var(--border-color-soft,#e4e7ec);color:var(--srnk-text);line-height:1.6;container-type:inline-size}
+.srnk *,.srnk *::before,.srnk *::after{box-sizing:border-box}
+.srnk h3{margin:40px 0 14px;color:var(--srnk-text)}
+.srnk p{margin:0 0 14px}
 
-<p class="wi-intro">Плагин позволяет установить срок действия бонусных баллов, уведомлять покупателей об устаревающих бонусных баллах и списывать просроченные бонусы.</p>
+/* Hero */
+.srnk-hero{background:linear-gradient(160deg,var(--srnk-accent-soft) 0%,transparent 70%),var(--srnk-bg);border:1px solid var(--srnk-accent-line);border-radius:16px;padding:28px;margin-bottom:8px}
+.srnk-lead{font-size:1.2em;font-weight:600;line-height:1.45;margin:0 0 12px}
+.srnk-sub{color:var(--srnk-hint);margin:0 0 22px}
+.srnk-sub b{color:var(--srnk-text)}
+.srnk-hero .srnk-note{margin-bottom:0}
 
-<p>В настройках плагина можно указать, как долго действуют бонусные баллы, которые вы начисляете за сделанные заказы, и выбрать стратегию списания бонусов — раз в месяц или раз в неделю. В зависимости от выбранной стратегии списание будет происходить либо по первым числа месяца, либо каждый понедельник.</p>
+/* Плитки ключевых возможностей */
+.srnk-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.srnk-tile{display:flex;gap:12px;align-items:flex-start;background:var(--srnk-bg);border:1px solid var(--srnk-line);border-radius:12px;padding:14px;font-size:.95em;line-height:1.45}
+.srnk-tile b{color:var(--srnk-accent-strong)}
 
-<p>Вы можете настроить любое количество уведомлений по e-mail и/или sms об устаревающих бонусах. В зависимости от стратегии списания выбрать режим отправки — какой-то определённый день месяца или день недели.</p>
+/* Иконка в кружке */
+.srnk-ico{flex:0 0 36px;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--srnk-accent-soft);color:var(--srnk-accent);font-size:15px}
 
-<p>Если у вас есть предложения или пожелания по доработке плагина, не стесняйтесь <a href="https://www.syrnik.com/support/" target="_blank">написать нам в поддержку</a>. Мы все обращения внимательно читаем (хоть и не всегда быстро отвечаем) и, при возможности, пытаемся реализовать.</p>
+/* Карточки 2×2 */
+.srnk-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.srnk-card{background:var(--srnk-bg);border:1px solid var(--srnk-line);border-radius:14px;padding:20px}
+.srnk-card h4{display:flex;align-items:center;gap:12px;margin:0 0 10px;font-size:1.05em}
+.srnk-card p{margin:0}
+
+/* Карточка-раздел с заголовком h3 */
+.srnk-feature{background:var(--srnk-bg);border:1px solid var(--srnk-line);border-radius:14px;padding:22px;margin-top:16px}
+.srnk-feature h3{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:1.15em}
+.srnk-feature p:last-child,.srnk-feature .srnk-note:last-child{margin-bottom:0}
+.srnk-feature ul{margin:0 0 14px;padding-left:20px}
+.srnk-feature li{margin-bottom:6px}
+
+/* Пример расчёта */
+.srnk-calc{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--srnk-line);border-radius:12px;overflow:hidden;background:var(--srnk-bg);font-size:.95em;line-height:1.45;margin:4px 0 14px}
+.srnk-calc th,.srnk-calc td{padding:10px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--srnk-line)}
+.srnk-calc tr:last-child td{border-bottom:0}
+.srnk-calc thead th{font-weight:700;color:var(--srnk-text);background:var(--srnk-accent-soft)}
+.srnk-calc td:first-child,.srnk-calc .srnk-amt{white-space:nowrap}.srnk-calc .srnk-amt{text-align:right}
+.srnk-calc .srnk-total td{font-weight:700;color:var(--srnk-accent-strong);background:var(--srnk-accent-soft)}
+
+/* Скриншоты */
+.srnk .srnk-shot{display:block;margin:18px 0 26px}
+.srnk-shot img{display:block;width:100%;height:auto;border:1px solid var(--srnk-line);border-radius:12px}
+.srnk-shot .wi-caption{margin:8px 0 0;font-size:.9em;color:var(--srnk-hint);text-align:center}
+.srnk .srnk-shot.srnk-shot-narrow img{max-width:360px;margin:0 auto}
+
+/* Плашки: предупреждение и совет */
+.srnk-note{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--srnk-warn-line);background:var(--srnk-warn-soft);border-radius:12px;padding:14px 16px;margin:16px 0;font-size:.95em}
+.srnk-note i{color:var(--srnk-warn);margin-top:4px}
+.srnk-note p{margin:0}
+.srnk-tip{border-color:var(--srnk-accent-line);background:var(--srnk-accent-soft)}
+.srnk-tip i{color:var(--srnk-accent)}
+
+/* Нумерованные шаги */
+.srnk-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;counter-reset:srnk}
+.srnk-steps li{counter-increment:srnk;background:var(--srnk-bg);border:1px solid var(--srnk-line);border-radius:12px;padding:16px;font-size:.95em;line-height:1.45}
+.srnk-steps li::before{content:counter(srnk);display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--srnk-accent);color:var(--srnk-on-accent);font-weight:700;margin-bottom:10px}
+
+/* Адаптив по ширине описания */
+@container (max-width:520px){.srnk-steps,.srnk-cards{grid-template-columns:1fr}.srnk-hero,.srnk-feature{padding:18px}.srnk-lead{font-size:1.1em}.srnk-calc{font-size:.9em}.srnk-calc th,.srnk-calc td{padding:8px}}
+</style>
+
+<div class="srnk-hero">
+    <p class="srnk-lead">Бонусные баллы со сроком действия: неиспользованные баллы сгорают, а покупатели заранее получают напоминание и возвращаются за покупками.</p>
+    <p class="srnk-sub">Одни покупатели забыли о накопленных баллах, другие копят их «на потом». <b>Срок действия и напоминание о сгорании</b> — повод сделать заказ сейчас, а не когда-нибудь.</p>
+    <div class="srnk-tiles">
+        <div class="srnk-tile">
+            <span class="srnk-ico"><i class="fas fa-hourglass-half"></i></span>
+            <div><b>Срок действия в днях</b> — считается от даты начисления баллов</div>
+        </div>
+        <div class="srnk-tile">
+            <span class="srnk-ico"><i class="fas fa-fire"></i></span>
+            <div><b>Списание раз в неделю или раз в месяц</b> — по понедельникам или 1-го числа</div>
+        </div>
+        <div class="srnk-tile">
+            <span class="srnk-ico"><i class="fas fa-bell"></i></span>
+            <div><b>Сколько угодно напоминаний</b> по e-mail и SMS — с суммой, которая сгорит</div>
+        </div>
+        <div class="srnk-tile">
+            <span class="srnk-ico"><i class="fas fa-shield-alt"></i></span>
+            <div><b>Честный расчёт</b> — сгорают только старые баллы, которые покупатель так и не потратил</div>
+        </div>
+    </div>
+</div>
+
+<h3>Что делает плагин</h3>
+
+<div class="srnk-cards">
+    <div class="srnk-card">
+        <h4><span class="srnk-ico"><i class="fas fa-calendar-alt"></i></span>Ограничивает срок действия</h4>
+        <p>Вы указываете, сколько дней действуют бонусные баллы бонусной (партнёрской) программы Shop-Script. Баллы, которые за это время не потрачены, сгорают.</p>
+    </div>
+    <div class="srnk-card">
+        <h4><span class="srnk-ico"><i class="fas fa-fire-alt"></i></span>Списывает просроченные баллы</h4>
+        <p>Списание проходит автоматически, по расписанию: каждый понедельник или 1-го числа каждого месяца. В истории бонусов покупателя видна отдельная запись о списании.</p>
+    </div>
+    <div class="srnk-card">
+        <h4><span class="srnk-ico"><i class="fas fa-envelope-open-text"></i></span>Предупреждает покупателей</h4>
+        <p>Перед списанием покупатели получают письмо или SMS: сколько баллов сгорит и когда. Тексты и дни отправки настраиваете вы.</p>
+    </div>
+    <div class="srnk-card">
+        <h4><span class="srnk-ico"><i class="fas fa-redo-alt"></i></span>Возвращает покупателей</h4>
+        <p>Напоминание о баллах, которые вот-вот пропадут, — хороший повод зайти в магазин и сделать заказ со скидкой.</p>
+    </div>
+</div>
+
+<div class="srnk-feature">
+    <h3><span class="srnk-ico"><i class="fas fa-fire"></i></span>Когда и какие баллы сгорают</h3>
+    <p>В настройках плагина задаются <b>срок действия</b> баллов в днях и <b>периодичность списания</b>:</p>
+    <ul>
+        <li><b>Еженедельно</b> — списание каждый понедельник</li>
+        <li><b>Ежемесячно</b> — списание 1-го числа каждого месяца</li>
+        <li><b>Никогда</b> — плагин ничего не списывает и не рассылает</li>
+    </ul>
+    <p>В день списания плагин смотрит, сколько баллов было у покупателя на счёте ровно «срок действия» дней назад. Из этой суммы вычитается всё, что покупатель потратил с тех пор. Остаток — это старые баллы, которые так и не пригодились, они и сгорают. Баллы, начисленные позже, не трогаются.</p>
+    <p>Проще говоря, покупатель всегда тратит в первую очередь самые старые баллы. Если он регулярно делает заказы и расплачивается бонусами, сгорать ему нечему.</p>
+    <p><b>Пример.</b> Срок действия — 90 дней, списание ежемесячное. 1 марта плагин смотрит на баланс на 1 декабря:</p>
+    <table class="srnk-calc">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Событие</th>
+                <th class="srnk-amt">Баланс</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>15 ноября</td>
+                <td>Начислено 500 баллов за заказ</td>
+                <td class="srnk-amt">500</td>
+            </tr>
+            <tr>
+                <td>10 января</td>
+                <td>Начислено 300 баллов за новый заказ</td>
+                <td class="srnk-amt">800</td>
+            </tr>
+            <tr>
+                <td>5 февраля</td>
+                <td>Оплачено бонусами 200 баллов</td>
+                <td class="srnk-amt">600</td>
+            </tr>
+            <tr class="srnk-total">
+                <td>1 марта</td>
+                <td>Сгорает 500 − 200 = 300 баллов: ноябрьские, которые не потрачены</td>
+                <td class="srnk-amt">300</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Январские 300 баллов остаются у покупателя и сгорят, только если он не потратит их до своего дня списания.</p>
+    <div class="srnk-note srnk-tip">
+        <i class="fas fa-lightbulb"></i>
+        <p>Баллы сгорают не в тот же день, когда истёк срок, а в ближайший день списания после него. Поэтому на деле баллы живут чуть дольше заданного срока: до недели при еженедельном списании и до месяца при ежемесячном. Удобно указывать срок с запасом, например 365 дней — «баллы действуют год».</p>
+    </div>
+</div>
+
+<div class="wi-image-section srnk-shot">
+    <img class="wi-image" src="https://www.webasyst.ru/wa-data/public/updates/img/67/6367/19934/19934.970.png" width="" height="" alt="Списание просроченных баллов в истории бонусов покупателя">
+    <p class="wi-caption">Списание сгоревших баллов в истории бонусов покупателя: старые баллы списаны, недавно начисленные остались на счёте</p>
+</div>
+
+<div class="srnk-feature">
+    <h3><span class="srnk-ico"><i class="fas fa-calendar-check"></i></span>Мягкий старт для уже накопленных баллов</h3>
+    <p>Если бонусная программа работает давно, у многих покупателей уже лежат баллы старше выбранного срока. Чтобы при первом же списании они не сгорели без предупреждения, начало списания можно отложить до нужной даты.</p>
+    <p>До этой даты баллы не сгорают. Разошлите покупателям напоминания и дайте им время потратить накопленное.</p>
+</div>
+
+<div class="wi-image-section srnk-shot">
+    <img class="wi-image" src="https://www.webasyst.ru/wa-data/public/updates/img/67/6367/19935/19935.970.png" width="" height="" alt="Настройки сгорания бонусов">
+    <p class="wi-caption">Настройки: срок действия баллов, периодичность списания и отложенный старт</p>
+</div>
+<!-- Скриншот для UI 2.0: Маркетинг → Партнёрская программа → вкладка «Сгорание бонусов» в новом интерфейсе (срок действия 365 дней, «Ежемесячно», дата в «Отложить начало списания»). Заменить им скриншот выше или поставить рядом.
+<div class="wi-image-section srnk-shot">
+    <img class="wi-image" src="" width="" height="" alt="Настройки сгорания бонусов в новом интерфейсе">
+    <p class="wi-caption">Настройки сгорания бонусов в новом интерфейсе Webasyst</p>
+</div>
+-->
+
+<div class="srnk-feature">
+    <h3><span class="srnk-ico"><i class="fas fa-bell"></i></span>Напоминания о сгорании</h3>
+    <p>Уведомлений может быть сколько угодно, каждое — e-mail или SMS со своим текстом и расписанием. Для каждого уведомления выбирается день отправки:</p>
+    <ul>
+        <li><b>Определённое число месяца</b>, например 25-е</li>
+        <li><b>Определённый день недели</b>, например четверг</li>
+    </ul>
+    <p>Можно указать и время: тогда уведомление уйдёт в выбранный день не раньше этого часа. Каждое уведомление отправляется один раз в свой день.</p>
+    <p>Письмо получают только те покупатели, у которых в <b>ближайший день списания</b> сгорят баллы. В тексте можно вывести, сколько именно баллов сгорит, имя покупателя, текущий баланс, срок действия баллов и дату ближайшего списания. Текст поддерживает HTML и Smarty, для нового уведомления плагин подставляет готовый шаблон письма или SMS.</p>
+    <p>Перед включением уведомление можно проверить: выберите покупателя, у которого скоро сгорят баллы, и отправьте пробное сообщение на любой адрес. В окне пробной отправки видно, сколько баллов у покупателя сейчас, сколько сгорит и сколько останется.</p>
+    <div class="srnk-note srnk-tip">
+        <i class="fas fa-lightbulb"></i>
+        <p><b>Стратегии напоминаний.</b> При ежемесячном списании хорошо работают два письма: за неделю до конца месяца (например, 22-го) и за пару дней (27-го). При еженедельном — одно напоминание в четверг или пятницу, чтобы покупатель успел сделать заказ на выходных. Сумма в напоминании считается на момент отправки: если покупатель потратит часть баллов, в следующем письме сумма будет меньше.</p>
+    </div>
+    <div class="srnk-note">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>Для ежемесячных напоминаний выбирайте число не позже 28-го: в месяце, где нет 29-го, 30-го или 31-го числа, уведомление на этот день не отправится.</p>
+    </div>
+</div>
+
+<div class="wi-image-section srnk-shot">
+    <img class="wi-image" src="https://www.webasyst.ru/wa-data/public/updates/img/67/6367/19936/19936.970.png" width="" height="" alt="Редактор уведомления о сгорании бонусов">
+    <p class="wi-caption">Редактор уведомления: канал отправки, день и время, тема и текст письма с подстановкой суммы</p>
+</div>
+<!-- Скриншот для UI 2.0: Маркетинг → «Уведомления о сгорании бонусов», открытое e-mail-уведомление в новом интерфейсе (день «Каждое 25 число месяца», время, тема и текст с {$burning_amount}).
+<div class="wi-image-section srnk-shot">
+    <img class="wi-image" src="" width="" height="" alt="Редактор уведомления в новом интерфейсе">
+    <p class="wi-caption">Редактор уведомления в новом интерфейсе Webasyst</p>
+</div>
+-->
+<!-- Скриншот: окно «Пробное сообщение» — выбран покупатель, видны колонки «Всего бонусов сейчас», «Сгорит», «Останется», поле «Кому». Узкий фрагмент — с модификатором srnk-shot-narrow, если окно меньше ~500 px.
+<div class="wi-image-section srnk-shot">
+    <img class="wi-image" src="" width="" height="" alt="Пробная отправка уведомления">
+    <p class="wi-caption">Пробная отправка: сколько баллов у покупателя сейчас, сколько сгорит и сколько останется</p>
+</div>
+-->
+
+<h3>Как начать</h3>
+
+<ol class="srnk-steps">
+    <li>Настройте в панели хостинга запуск команды плагина по расписанию (cron), лучше раз в час. Точная команда показана в настройках плагина</li>
+    <li>В разделе «Маркетинг → Партнёрская программа → Сгорание бонусов» укажите срок действия баллов и периодичность списания</li>
+    <li>Если у покупателей уже есть старые баллы, отложите начало списания и дайте им время</li>
+    <li>В разделе «Маркетинг → Уведомления о сгорании бонусов» создайте напоминания и проверьте их пробной отправкой</li>
+</ol>
+
+<div class="srnk-note">
+    <i class="fas fa-exclamation-triangle"></i>
+    <p>Списание и рассылку выполняет скрипт, который запускается по расписанию. Если в день списания или в день отправки уведомления скрипт ни разу не запустился, списание или рассылка в этот раз пропускаются. Поэтому рекомендуем запуск раз в час, а не раз в сутки.</p>
+</div>
+
+<p>Если у вас есть предложения или пожелания по доработке плагина, <a href="https://www.syrnik.com/support/" target="_blank">напишите нам в поддержку</a>. Мы внимательно читаем все обращения и, если получается, реализуем.</p>
+</div>
