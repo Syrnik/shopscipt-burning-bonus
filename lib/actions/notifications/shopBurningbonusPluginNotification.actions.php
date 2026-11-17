@@ -193,7 +193,7 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
 
             $burning_data = (new shopBurningbonusAffiliateModel)->getBurningById($contact_id, $date->format('Y-m-d'));
 
-            if (!($burning_data['to_burn']))
+            if (empty($burning_data['to_burn']))
                 throw new waException("Нет бонусов для списания у покупателя с ID=$contact_id");
         } catch (waException|Exception $e) {
             $this->errors[] = $e->getMessage();

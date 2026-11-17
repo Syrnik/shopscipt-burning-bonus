@@ -105,9 +105,9 @@ class shopBurningbonusCli extends waCliController
      */
     protected function acquireLock(): bool
     {
-        $result = (new shopBurningbonusNotificationsModel())
-            ->query("SELECT GET_LOCK('shop_burningbonus_cli', 0)")
-            ->fetchField();
+        /** @var waDbResultSelect $select */
+        $select = (new shopBurningbonusNotificationsModel())->query("SELECT GET_LOCK('shop_burningbonus_cli', 0)");
+        $result = $select->fetchField();
 
         if ($result === '1') {
             return true;

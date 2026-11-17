@@ -13,11 +13,6 @@ declare(strict_types=1);
 class shopBurningbonusPluginEmailNotification extends shopBurningbonusPluginAbstractNotification
 {
     /**
-     * @var int|null
-     */
-    protected ?int $contact_id = null;
-
-    /**
      * @var string|null
      */
     protected ?string $from_name;

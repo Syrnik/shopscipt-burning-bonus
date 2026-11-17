@@ -28,6 +28,6 @@ class shopBurningbonusPluginSettingsAffiliateAction extends waViewAction
             'root_path' => wa()->getConfig()->getRootPath()
         ];
 
-        $this->view->assign(compact(['settings', 'info']));
+        $this->view->assign(['settings' => $settings, 'info' => $info]);
     }
 }

@@ -73,7 +73,7 @@ class shopBurningbonusPluginBurnTask implements shopBurningbonusPluginTaskInterf
     {
         if (!$this->plugin->isBurningEnabled() || $this->isLaunchedToday() || $this->isBurningDelayed() || !$this->isBurnDay()) return true;
 
-        $control_date = clone $this->today;
+        $control_date = new DateTime($this->today->format('Y-m-d'));
         $lifetime = (int)$this->plugin->getSettings('lifetime');
         $control_date->modify("-$lifetime days");
 
@@ -98,7 +98,7 @@ class shopBurningbonusPluginBurnTask implements shopBurningbonusPluginTaskInterf
             }
             // Журнал транзакций может расходиться с реальным балансом покупателя. Больше, чем есть на счёте, не списываем
             $to_burn = min($row['to_burn'], $balance);
-            $affiliateModel->applyBonus($row['contact_id'], 0 - $to_burn, null, 'Списание неиспользованных просроченных бонусных баллов', 'burn_bonus');
+            $affiliateModel->applyBonus($row['contact_id'], 0.0 - $to_burn, null, 'Списание неиспользованных просроченных бонусных баллов', 'burn_bonus');
         }
 
         $this->getAppSettingsModel()->set(['shop', $this->plugin->getId()], self::LAST_BURN_KEY, date('Y-m-d H:i:s'));

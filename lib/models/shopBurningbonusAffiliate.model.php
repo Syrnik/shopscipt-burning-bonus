@@ -87,12 +87,15 @@ SQL;
 
         if ($limit = $params['limit'] ?? null) $query .= " LIMIT $limit";
 
-        return $this->query($query, $q_params);
+        /** @var waDbResultSelect $result SELECT-запрос */
+        $result = $this->query($query, $q_params);
+
+        return $result;
     }
 
     /**
      * @param array $row
-     * @return array{contact_id:int, balance:float, decrision:float, to_burn:float}
+     * @return array{contact_id:int, balance:float, actual_balance:float, decrision:float, to_burn:float}
      */
     public function typecastBurningRow(array $row): array
     {
@@ -107,7 +110,7 @@ SQL;
     /**
      * @param int $contact_id
      * @param string $date
-     * @return array{contact_id:int, balance:float, decrision:float, to_burn:float}
+     * @return array{contact_id:int, balance:float, actual_balance:float, decrision:float, to_burn:float}|array{} пустой массив, если сгорать нечему
      * @throws waDbException
      * @throws waException
      */

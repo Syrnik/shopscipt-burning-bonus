@@ -36,11 +36,16 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
         $plugin_version = wa('shop')->getPlugin('burningbonus')->getVersion() . (waSystemConfig::isDebug() ? '.' . time() : '');
         $ui = wa()->whichUI('shop');
 
-        $this->view->assign(compact(['references', 'notifications_list', 'plugin_version', 'ui']));
+        $this->view->assign([
+            'references'         => $references,
+            'notifications_list' => $notifications_list,
+            'plugin_version'     => $plugin_version,
+            'ui'                 => $ui,
+        ]);
     }
 
     /**
-     * @return array{id:int, name:string, type:string}[]
+     * @return list<array{id:int, name:string, transport:string}>
      */
     protected function getList(): array
     {
@@ -73,7 +78,7 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
     }
 
     /**
-     * @return string[]
+     * @return array{email:string, sms:string}
      */
     protected function getBodyTemplates(): array
     {
@@ -91,7 +96,7 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
         foreach (['email', 'sms'] as $transport) {
             $file = "$dir$transport-$period.html";
             if (file_exists($file) && is_readable($file) && is_file($file))
-                $result[$transport] = file_get_contents($file);
+                $result[$transport] = (string)file_get_contents($file);
         }
 
         return $result;

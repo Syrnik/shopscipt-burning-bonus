@@ -21,8 +21,9 @@ class shopBurningbonusPlugin extends shopPlugin
     public function getSettings($name = null)
     {
         if (null === $this->settings) {
-            parent::getSettings();
-            $this->settings['lifetime'] = max(0, intval($this->settings['lifetime']));
+            $settings = (array)parent::getSettings();
+            $settings['lifetime'] = max(0, intval($settings['lifetime'] ?? 0));
+            $this->settings = $settings;
         }
 
         return parent::getSettings($name);
