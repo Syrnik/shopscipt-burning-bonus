@@ -1,5 +1,5 @@
 <template>
-  <Form.Field name="Транспорт">
+  <Form.Field :name="t('burningbonus.Delivery method')">
     <Form.RadioGroup v-if="allowChange" :options="options" :model-value="modelValue"
                      @update:modelValue="emits('update:modelValue', $event)"/>
     <div class="value" v-else>
@@ -19,6 +19,7 @@ export default {
 
 import * as Form from '../components/wa-form';
 import {computed} from "vue";
+import {t} from "../components/i18n";
 
 const props = defineProps(['allowChange', 'modelValue']);
 const emits = defineEmits(['update:modelValue']);

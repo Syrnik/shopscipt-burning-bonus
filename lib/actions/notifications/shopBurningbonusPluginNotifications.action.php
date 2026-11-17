@@ -38,6 +38,7 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
 
         $this->view->assign([
             'references'         => $references,
+            'js_locale'          => shopBurningbonusPluginJsLocale::getStrings(),
             'notifications_list' => $notifications_list,
             'plugin_version'     => $plugin_version,
             'ui'                 => $ui,

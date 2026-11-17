@@ -2,13 +2,13 @@
   <div class="dialog" :class="{'dialog-opened s-burningbonus-dialog': ui2}" :style="ui2 ? null : {display: 'block'}">
     <div class="dialog-background" @click="emitClose"></div>
     <div :class="ui2 ? 'dialog-body' : 'dialog-window'">
-      <header v-if="ui2" class="dialog-header"><h1>Пробное сообщение</h1></header>
+      <header v-if="ui2" class="dialog-header"><h1>{{ t('burningbonus.Test message') }}</h1></header>
       <div class="dialog-content">
         <div :class="{'dialog-content-indent': !ui2}">
-          <h1 v-if="!ui2">Пробное сообщение</h1>
+          <h1 v-if="!ui2">{{ t('burningbonus.Test message') }}</h1>
           <div class="fields form">
             <div class="field">
-              <div class="name">Кому</div>
+              <div class="name">{{ t('burningbonus.To') }}</div>
               <div class="value"><input v-model.trim="recipient_address"
                                         :type="notification.transport === 'email' ? 'email' : 'tel'" class="long">
               </div>
@@ -16,16 +16,15 @@
           </div>
           <div style="position: relative; min-height: 4em">
             <template v-if="test_data.length">
-              <p class="clear-left message" style="margin: 1.5em 0 0.5em">Выберите контакт для получения тестовых
-                данных</p>
+              <p class="clear-left message" style="margin: 1.5em 0 0.5em">{{ t('burningbonus.Select a contact to get test data from') }}</p>
               <table :class="ui2 ? 'small' : 'zebra'">
                 <thead>
                 <tr>
                   <th></th>
-                  <th>Имя</th>
-                  <th style="text-align: center">Всего бонусов сейчас</th>
-                  <th style="text-align: center">Сгорит</th>
-                  <th style="text-align: center">Останется</th>
+                  <th>{{ t('burningbonus.Name') }}</th>
+                  <th style="text-align: center">{{ t('burningbonus.Current balance') }}</th>
+                  <th style="text-align: center">{{ t('burningbonus.Will expire') }}</th>
+                  <th style="text-align: center">{{ t('burningbonus.Will remain') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,7 +40,7 @@
               </table>
             </template>
             <p v-else-if="!loading_data" class="clear-left" style="margin: 1.5em 0 0">
-              {{ load_error || 'Для пробной отправки нужен хотя бы один покупатель, у которого в ближайшее списание сгорят бонусы. Сейчас таких нет.' }}
+              {{ load_error || t('burningbonus.Test sending requires at least one customer whose bonuses expire at the next write-off. There are none at the moment.') }}
             </p>
             <preloader v-if="loading_data"/>
           </div>
@@ -52,24 +51,24 @@
         <div :class="{'dialog-buttons-gradient': !ui2}">
           <template v-if="ui2">
             <button v-if="!sent" class="button" type="button" :disabled="!form_valid || sending_message"
-                    @click.prevent="sendMessage">Проверить отправку
+                    @click.prevent="sendMessage">{{ t('burningbonus.Test sending') }}
             </button>
-            <button v-else class="button" type="button" @click.prevent="clearSent">Попробовать ещё раз</button>
-            <button class="button light-gray" type="button" @click.prevent="emitClose">Закрыть</button>
+            <button v-else class="button" type="button" @click.prevent="clearSent">{{ t('burningbonus.Try again') }}</button>
+            <button class="button light-gray" type="button" @click.prevent="emitClose">{{ t('burningbonus.Close') }}</button>
           </template>
           <template v-else>
             <button v-if="!sent" class="button blue" type="button" :disabled="!form_valid || sending_message"
                     @click.prevent="sendMessage">
-              Проверить отправку
+              {{ t('burningbonus.Test sending') }}
             </button>
-            <a v-else href="#" @click.prevent="clearSent">попробовать ещё раз</a>
-            или
-            <a href="#" @click.prevent="emitClose">отмена</a>
+            <a v-else href="#" @click.prevent="clearSent">{{ t('burningbonus.try again') }}</a>
+            {{ t('burningbonus.or') }}
+            <a href="#" @click.prevent="emitClose">{{ t('burningbonus.cancel') }}</a>
           </template>
           <span :class="ui2 ? 'state-error' : 'red error'" v-if="errors.length"
-                style="display: inline-block;margin-left: 1em"><b>Ошибка:</b> {{ errors[0] }}</span>
+                style="display: inline-block;margin-left: 1em"><b>{{ t('burningbonus.Error:') }}</b> {{ errors[0] }}</span>
           <span :class="ui2 ? 'state-success' : 'green'" v-else-if="sent"
-                style="display: inline-block;margin-left: 1em">Уведомление отправлено</span>
+                style="display: inline-block;margin-left: 1em">{{ t('burningbonus.Notification sent') }}</span>
         </div>
       </div>
     </div>
@@ -78,6 +77,7 @@
 
 <script setup>
 import {computed, inject, reactive, ref} from "vue";
+import {t} from "../components/i18n";
 import numFormat from 'number-formatter';
 import Preloader from "./Preloader.vue";
 import ErrorParser from "../components/webasyst-error-parser";

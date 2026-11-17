@@ -1,5 +1,5 @@
 <template>
-  <wa-field name="Отправитель">
+  <wa-field :name="t('burningbonus.Sender')">
     <div class="value">
       <wa-select>
         <select v-model="type">
@@ -22,6 +22,7 @@ export default {
 import WaField from '../components/wa-form/wa-field.vue';
 import WaSelect from '../components/wa-form/wa-select.vue';
 import {computed, inject, ref, watch} from "vue";
+import {t} from "../components/i18n";
 
 const references = inject('references');
 
@@ -49,12 +50,12 @@ const sender = computed({
 
 const options = {
   email: [
-    {value: 'default', title: references.default_email_address || 'Адрес по-умолчанию'},
-    {value: 'custom', title: 'Другой email…'}
+    {value: 'default', title: references.default_email_address || t('burningbonus.Default address')},
+    {value: 'custom', title: t('burningbonus.Other email…')}
   ],
   sms: [
-    {value: 'default', title: 'По умолчанию (назначается SMS-шлюзом)'},
-    {value: 'custom', title: 'Другой ID…'}
+    {value: 'default', title: t('burningbonus.Default (set by the SMS gateway)')},
+    {value: 'custom', title: t('burningbonus.Other ID…')}
   ],
 };
 

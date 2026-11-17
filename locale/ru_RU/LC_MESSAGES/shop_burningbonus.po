@@ -192,3 +192,162 @@ msgstr "Списание неиспользованных просроченны
 
 msgid "Sends notifications"
 msgstr "Отправка уведомлений"
+
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Delete notification?"
+msgstr "Удалить уведомление?"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "New notification"
+msgstr "Новое уведомление"
+
+msgid "<untitled>"
+msgstr "<без названия>"
+
+msgid "(untitled)"
+msgstr "(без названия)"
+
+msgid "Notification name"
+msgstr "Название уведомления"
+
+msgid "Enabled"
+msgstr "Включено"
+
+msgid "Delivery method"
+msgstr "Транспорт"
+
+msgid "Sender"
+msgstr "Отправитель"
+
+msgid "Default address"
+msgstr "Адрес по умолчанию"
+
+msgid "Other email…"
+msgstr "Другой email…"
+
+msgid "Default (set by the SMS gateway)"
+msgstr "По умолчанию (назначается SMS-шлюзом)"
+
+msgid "Other ID…"
+msgstr "Другой ID…"
+
+msgid "When to send"
+msgstr "Когда отправлять"
+
+msgid "On day {input} of each month"
+msgstr "Каждое {input} число месяца"
+
+msgid "In months without day %d, the notification is sent on the last day of the month"
+msgstr "В месяцах, где нет %d-го числа, уведомление уйдёт в последний день месяца"
+
+msgid "Every Monday"
+msgstr "По понедельникам"
+
+msgid "Every Tuesday"
+msgstr "По вторникам"
+
+msgid "Every Wednesday"
+msgstr "По средам"
+
+msgid "Every Thursday"
+msgstr "По четвергам"
+
+msgid "Every Friday"
+msgstr "По пятницам"
+
+msgid "Every Saturday"
+msgstr "По субботам"
+
+msgid "Every Sunday"
+msgstr "По воскресеньям"
+
+msgid "Sending time"
+msgstr "Время отправки"
+
+msgid "after {time}"
+msgstr "после {time}"
+
+msgid "any time"
+msgstr "не важно"
+
+msgid "Notifications are sent as soon as the script runs on the specified day."
+msgstr "Как только скрипт в указанный день запустится, так уведомления и отправятся."
+
+msgid "Notifications are sent as soon as the script runs on the specified day after {time}."
+msgstr "Как только скрипт в указанный день запустится после {time}, так уведомления и отправятся."
+
+msgid "If the script does not run on that day, the notifications will not be sent."
+msgstr "Если в указанный день скрипт не отработает, то и уведомления уже не отправятся."
+
+msgid "Message subject"
+msgstr "Тема сообщения"
+
+msgid "Message text"
+msgstr "Текст сообщения"
+
+msgid "Test sending"
+msgstr "Проверить отправку"
+
+msgid "Test message"
+msgstr "Пробное сообщение"
+
+msgid "To"
+msgstr "Кому"
+
+msgid "Select a contact to get test data from"
+msgstr "Выберите контакт для получения тестовых данных"
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "Current balance"
+msgstr "Всего бонусов сейчас"
+
+msgid "Will expire"
+msgstr "Сгорит"
+
+msgid "Will remain"
+msgstr "Останется"
+
+msgid "Test sending requires at least one customer whose bonuses expire at the next write-off. There are none at the moment."
+msgstr "Для пробной отправки нужен хотя бы один покупатель, у которого в ближайшее списание сгорят бонусы. Сейчас таких нет."
+
+msgid "Try again"
+msgstr "Попробовать ещё раз"
+
+msgid "try again"
+msgstr "попробовать ещё раз"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "or"
+msgstr "или"
+
+msgid "cancel"
+msgstr "отмена"
+
+msgid "Error:"
+msgstr "Ошибка:"
+
+msgid "Notification sent"
+msgstr "Уведомление отправлено"
+
+msgid "Empty error list"
+msgstr "Пустой массив ошибок"
+
+msgid "Controller execution error"
+msgstr "Ошибка исполнения контроллера или экшена"
+
+msgid "Unknown error"
+msgstr "Неизвестная ошибка"

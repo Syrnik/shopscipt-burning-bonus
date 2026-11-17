@@ -3,6 +3,8 @@
      class="s-burningbonus-notifications-page{if $ui !== '2.0'} double-padded block{/if}"></div>
 <script>
     (function ($) {
+        {* переводы для Vue: см. shopBurningbonusPluginJsLocale *}
+        $.wa.locale = $.extend($.wa.locale || {}, {$js_locale|json_encode:256});
         const sources = [
             {
                 id: "wa-content-ace-js",

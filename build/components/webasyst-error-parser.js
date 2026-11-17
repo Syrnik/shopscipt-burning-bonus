@@ -1,9 +1,11 @@
+import {t} from './i18n';
+
 export default class WebasystErrorParser {
     static parse(data) {
         if (typeof data === 'string') return [data];
 
         if (Array.isArray(data)) {
-            if (!data.length) return this.parse("Пустой массив ошибок");
+            if (!data.length) return this.parse(t('burningbonus.Empty error list'));
             if (data.length === 1) return this.parse(data[0]);
             if (data.length === 2 && (typeof data[0] === 'string')) {
                 if (Array.isArray(data[1])) {
@@ -23,15 +25,15 @@ export default class WebasystErrorParser {
             if (data.status && data.status === 'fail') {
                 if (data.error) return this.parse(data.error);
                 if (data.errors) return this.parse(data.errors);
-                return this.parse("Ошибка исполнения контроллера или экшена");
+                return this.parse(t('burningbonus.Controller execution error'));
             }
             if (data.status && data.statusText) return this.parse([data.statusText, data.status]);
             console.error(data);
-            return ["Объект"];
+            return [t('burningbonus.Unknown error')];
         }
 
         console.error(data);
-        return this.parse("Неизвестная ошибка")
+        return this.parse(t('burningbonus.Unknown error'))
     }
 }
 

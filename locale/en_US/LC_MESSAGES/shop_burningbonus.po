@@ -192,3 +192,161 @@ msgstr ""
 
 msgid "Sends notifications"
 msgstr ""
+
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Delete notification?"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "New notification"
+msgstr ""
+
+msgid "<untitled>"
+msgstr ""
+
+msgid "(untitled)"
+msgstr ""
+
+msgid "Notification name"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "Delivery method"
+msgstr ""
+
+msgid "Sender"
+msgstr ""
+
+msgid "Default address"
+msgstr ""
+
+msgid "Other email…"
+msgstr ""
+
+msgid "Default (set by the SMS gateway)"
+msgstr ""
+
+msgid "Other ID…"
+msgstr ""
+
+msgid "When to send"
+msgstr ""
+
+msgid "On day {input} of each month"
+msgstr ""
+
+msgid "In months without day %d, the notification is sent on the last day of the month"
+msgstr ""
+
+msgid "Every Monday"
+msgstr ""
+
+msgid "Every Tuesday"
+msgstr ""
+
+msgid "Every Wednesday"
+msgstr ""
+
+msgid "Every Thursday"
+msgstr ""
+
+msgid "Every Friday"
+msgstr ""
+
+msgid "Every Saturday"
+msgstr ""
+
+msgid "Every Sunday"
+msgstr ""
+
+msgid "Sending time"
+msgstr ""
+
+msgid "after {time}"
+msgstr ""
+
+msgid "any time"
+msgstr ""
+
+msgid "Notifications are sent as soon as the script runs on the specified day."
+msgstr ""
+
+msgid "Notifications are sent as soon as the script runs on the specified day after {time}."
+msgstr ""
+
+msgid "If the script does not run on that day, the notifications will not be sent."
+msgstr ""
+
+msgid "Message subject"
+msgstr ""
+
+msgid "Message text"
+msgstr ""
+
+msgid "Test sending"
+msgstr ""
+
+msgid "Test message"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "Select a contact to get test data from"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Current balance"
+msgstr ""
+
+msgid "Will expire"
+msgstr ""
+
+msgid "Will remain"
+msgstr ""
+
+msgid "Test sending requires at least one customer whose bonuses expire at the next write-off. There are none at the moment."
+msgstr ""
+
+msgid "Try again"
+msgstr ""
+
+msgid "try again"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
+msgid "cancel"
+msgstr ""
+
+msgid "Error:"
+msgstr ""
+
+msgid "Notification sent"
+msgstr ""
+
+msgid "Empty error list"
+msgstr ""
+
+msgid "Controller execution error"
+msgstr ""
+
+msgid "Unknown error"
+msgstr ""

@@ -9,14 +9,14 @@
                 <button v-if="ui2" type="button" class="button light-gray small" :disabled="submitting"
                         @click.prevent="emit('delete', notification.id)">
                     <Form.Icon name="delete"/>
-                    Удалить
+                    {{ t('burningbonus.Delete') }}
                 </button>
-                <a v-else href="#" @click.prevent="emit('delete', notification.id)"><Form.Icon name="delete"/>Удалить</a>
+                <a v-else href="#" @click.prevent="emit('delete', notification.id)"><Form.Icon name="delete"/>{{ t('burningbonus.Delete') }}</a>
             </div>
         </header>
         <Form.Wrap ui2="fields">
             <Form.Wrap ui2="fields-group">
-                <Form.SimpleField name="Название уведомления">
+                <Form.SimpleField :name="t('burningbonus.Notification name')">
                     <input type="text" class="long" v-model.trim="notification.name">
                 </Form.SimpleField>
                 <status-switch v-model="notification.status"/>
@@ -26,25 +26,24 @@
             <Form.Wrap ui2="fields-group" legacy="field-group">
                 <scheduled-days :value="{day:notification.schedule_day, type:notification.schedule_type}"
                                 @update="setSchedule($event)"/>
-                <Form.SimpleField name="Время отправки">
-                    после
+                <Form.SimpleField :name="t('burningbonus.Sending time')">
                     <time-picker v-model="notification.scheduled_time"/>
                 </Form.SimpleField>
             </Form.Wrap>
             <Form.Wrap ui2="fields-group">
-                <Form.SimpleField name="Тема сообщения" v-if="notification.transport === 'email'">
+                <Form.SimpleField :name="t('burningbonus.Message subject')" v-if="notification.transport === 'email'">
                     <input type="text" class="long" :class="{'s-burningbonus-wide-input': ui2}" v-model="notification.subject" required>
                 </Form.SimpleField>
                 <content-editor v-model="notification.body"/>
             </Form.Wrap>
             <Form.SimpleField>
-                <button class="button green" :class="{submit: !ui2}" type="submit" :disabled="submitting">Сохранить
+                <button class="button green" :class="{submit: !ui2}" type="submit" :disabled="submitting">{{ t('burningbonus.Save') }}
                 </button>
                 <button v-if="notificationId" class="button" :class="{'light-gray': ui2}" type="button"
-                        :disabled="submitting" @click.prevent="dialog_open=true">Проверить отправку
+                        :disabled="submitting" @click.prevent="dialog_open=true">{{ t('burningbonus.Test sending') }}
                 </button>
                 <Form.Icon name="loading" v-if="submitting" class="s-burningbonus-after-button"/>
-                <span v-else-if="saved" class="s-burningbonus-after-button"><Form.Icon name="yes"/> Сохранено</span>
+                <span v-else-if="saved" class="s-burningbonus-after-button"><Form.Icon name="yes"/> {{ t('burningbonus.Saved') }}</span>
                 <span v-else-if="saveError" class="s-burningbonus-after-button"
                       :class="ui2 ? 'state-error' : 'red error'">{{ saveError }}</span>
             </Form.SimpleField>
@@ -68,6 +67,7 @@ import ScheduledDays from "./ScheduledDays.vue";
 import TimePicker from "./TimePicker.vue";
 import SendTestMessageDialog from "./SendTestMessageDialog.vue";
 import ErrorParser from "../components/webasyst-error-parser";
+import {t} from "../components/i18n";
 
 const props = defineProps({
     notificationId: {type: Number},
@@ -96,8 +96,8 @@ const notification = reactive(emptyNotification());
 
 const notificationName = computed(() => {
     if (!!notification.name) return notification.name;
-    if ((typeof notification.name === 'string') && props.notificationId) return "<без названия>";
-    return "Новое уведомление"
+    if ((typeof notification.name === 'string') && props.notificationId) return t('burningbonus.<untitled>');
+    return t('burningbonus.New notification');
 });
 
 if (props.notificationId) loadNotification(props.notificationId);

@@ -1,5 +1,5 @@
 <template>
-  <wa-field html-name="Текст сообщения<br><span class='hint'>HTML+Smarty</span>">
+  <wa-field :html-name="t('burningbonus.Message text') + '<br><span class=\'hint\'>HTML+Smarty</span>'">
     <div class="value ace-fix">
       <div class="ace bordered">
         <WaAceEditor :lang="['css','smarty']" :content="modelValue ?? ''"
@@ -18,6 +18,7 @@ export default {
 
 <script setup>
 import WaField from "../components/wa-form/wa-field.vue";
+import {t} from "../components/i18n";
 import WaAceEditor from "../components/wa-ace-editor.js";
 import {inject, onBeforeUnmount, ref} from "vue";
 
