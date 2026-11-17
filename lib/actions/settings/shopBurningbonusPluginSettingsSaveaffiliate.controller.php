@@ -25,7 +25,7 @@ class shopBurningbonusPluginSettingsSaveaffiliateController extends shopMarketin
         // сохраняем только известные настройки (см. lib/config/settings.php)
         $period = (string)($settings['period'] ?? '');
         if (!in_array($period, ['never', 'weekly', 'monthly'], true)) {
-            $this->errors = ['Неизвестная периодичность сгорания'];
+            $this->errors = [_wp('Unknown expiry schedule')];
             return;
         }
 
@@ -33,7 +33,7 @@ class shopBurningbonusPluginSettingsSaveaffiliateController extends shopMarketin
         if ('' !== $delay) {
             $date = DateTime::createFromFormat('!Y-m-d', $delay);
             if (!$date || $date->format('Y-m-d') !== $delay) {
-                $this->errors = ['Дата начала списания указана неверно'];
+                $this->errors = [_wp('Invalid write-off start date')];
                 return;
             }
         }

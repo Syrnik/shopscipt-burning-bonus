@@ -63,7 +63,7 @@ class shopBurningbonusPluginBurnTask implements shopBurningbonusPluginTaskInterf
      */
     public function getDescription(): string
     {
-        return 'Выполняет списание бонусов';
+        return _wp('Writes off expired bonuses');
     }
 
     /**
@@ -96,7 +96,7 @@ class shopBurningbonusPluginBurnTask implements shopBurningbonusPluginTaskInterf
             } catch (waException $e) {
                 continue;
             }
-            $affiliateModel->applyBonus($row['contact_id'], 0.0 - $to_burn, null, 'Списание неиспользованных просроченных бонусных баллов', 'burn_bonus');
+            $affiliateModel->applyBonus($row['contact_id'], 0.0 - $to_burn, null, _wp('Write-off of unused expired bonus points'), 'burn_bonus');
         }
 
         $this->getAppSettingsModel()->set(['shop', $this->plugin->getId()], self::LAST_BURN_KEY, date('Y-m-d H:i:s'));

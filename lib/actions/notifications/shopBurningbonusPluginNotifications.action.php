@@ -72,7 +72,7 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
         $template['id'] = $template['scheduled_time'] = $template['body'] = null;
         $template['status'] = true;
         $template['schedule_day'] = 1;
-        $template['subject'] = '{$customer->get(\'firstname\')}, ваши бонусы скоро сгорят!';
+        $template['subject'] = sprintf_wp('%s, your bonuses will expire soon!', '{$customer->get(\'firstname\')}');
 
         return $template;
     }
@@ -93,10 +93,16 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
 
         $result = ['email' => '', 'sms' => ''];
 
+        // Тексты по умолчанию на языке пользователя: templates/notification-templates/<locale>/,
+        // если для локали своего каталога нет — английские из корня
+        $locale = wa()->getLocale();
         foreach (['email', 'sms'] as $transport) {
-            $file = "$dir$transport-$period.html";
-            if (file_exists($file) && is_readable($file) && is_file($file))
-                $result[$transport] = (string)file_get_contents($file);
+            foreach (["$dir$locale/$transport-$period.html", "$dir$transport-$period.html"] as $file) {
+                if (is_file($file) && is_readable($file)) {
+                    $result[$transport] = (string)file_get_contents($file);
+                    break;
+                }
+            }
         }
 
         return $result;

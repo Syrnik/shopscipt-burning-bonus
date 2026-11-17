@@ -45,18 +45,18 @@ class shopBurningbonusPluginNotificationsActions extends waJsonActions
             $period = $this->getPlugin()->getSettings('period');
 
             if (!in_array($period, ['weekly', 'monthly'], true)) {
-                $this->errors = ['Списание бонусов выключено в настройках'];
+                $this->errors = [_wp('Bonus write-off is disabled in the settings')];
                 return;
             }
 
             if (!$lifetime) {
-                $this->errors = ['Не указан срок действия бонусов в настройках'];
+                $this->errors = [_wp('Bonus lifetime is not set in the settings')];
                 return;
             }
 
             // Тот же расчёт, что у рассылки по расписанию: с учётом отложенного старта
             if (!($date = $this->getPlugin()->closestBurnControlDate())) {
-                $this->errors = ['Не удалось определить дату ближайшего списания'];
+                $this->errors = [_wp('Failed to determine the next write-off date')];
                 return;
             }
 

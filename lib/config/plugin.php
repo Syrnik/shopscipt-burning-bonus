@@ -6,7 +6,7 @@
  */
 
 return [
-    'name' => 'Сгорание бонусов',
+    'name' => /*_wp*/('Bonus Points Expiry'),
     'img' => 'img/icon16.png',
     'version' => '1.0.4',
     'vendor' => '670917',

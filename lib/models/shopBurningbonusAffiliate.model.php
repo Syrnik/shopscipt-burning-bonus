@@ -40,7 +40,7 @@ class shopBurningbonusAffiliateModel extends shopAffiliateTransactionModel
     public function queryBurning(string $date, array $params = []): waDbResultSelect
     {
         if (!preg_match('/^\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?$/', $date))
-            throw new waException('$date должна быть \'гггг-мм-дд\' или \'гггг-мм-дд чч:мм:сс\'');
+            throw new waException('$date must be \'yyyy-mm-dd\' or \'yyyy-mm-dd hh:mm:ss\'');
 
         if (strlen($date) < 19) $date .= ' 00:00:00';
 

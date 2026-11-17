@@ -1,14 +1,14 @@
-<p>Здравствуйте, <b>{$customer->get('firstname')}</b>!</p>
+<p>Hello, <b>{$customer->get('firstname')}</b>!</p>
 
-<p>На вашем бонусном счёте в нашем магазине сейчас {$customer->affiliateBonus()} бонусных баллов, которые вы можете
-  использовать при оплате заказа. Согласно правилам нашей бонусной программы, баллы действуют в
-  {$wa->shop->burningbonusPlugin->duration()} дней с момента начисления, а неиспользованные бонусные баллы
-  аннулируются в начале каждой недели.</p>
+<p>You have {$customer->affiliateBonus()} bonus points on your account in our store, which you can use to pay for
+    your orders. Under the rules of our bonus program, points are valid for
+    {$wa->shop->burningbonusPlugin->duration()} days from the date they were credited, and unused points are cancelled
+    at the beginning of each week.</p>
 
-<p>Если вы не используете на этой неделе <b>{$burning_amount}</b> бонусов, то они сгорят!</p>
+<p>If you don't use <b>{$burning_amount}</b> bonus points this week, they will expire!</p>
 
 <p>--<br>
-  {$wa->shop->settings("name")}<br>
-  <a href="mailto:{$wa->shop->settings("email")}">{$wa->shop->settings("email")}</a><br>
-  {$wa->shop->settings("phone")}<br>
+{$wa->shop->settings("name")}<br>
+<a href="mailto:{$wa->shop->settings("email")}">{$wa->shop->settings("email")}</a><br>
+{$wa->shop->settings("phone")}<br>
 </p>

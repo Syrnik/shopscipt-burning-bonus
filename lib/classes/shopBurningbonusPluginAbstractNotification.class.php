@@ -64,10 +64,10 @@ abstract class shopBurningbonusPluginAbstractNotification
         else $this->view = new waSmarty3View(wa());
 
         $customer = new shopCustomer($customer_id);
-        if (!$customer->exists()) throw new waException("Покупатель с ID=$customer_id не существует");
+        if (!$customer->exists()) throw new waException(sprintf_wp('Customer with ID=%d does not exist', $customer_id));
 
         if (!$address && !($address = $this->getDefaultAddress($customer)))
-            throw new waException("Не указан адрес для отправки", self::EXCEPTION_NO_ADDRESS);
+            throw new waException(_wp('Recipient address is not specified'), self::EXCEPTION_NO_ADDRESS);
 
         $this->view->assign(['customer' => $customer, 'burning_amount' => $burning_amount]);
 

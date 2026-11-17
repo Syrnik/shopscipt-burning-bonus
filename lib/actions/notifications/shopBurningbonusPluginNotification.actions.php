@@ -42,7 +42,7 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
             $data = null;
         }
         if (!is_array($data)) {
-            $this->errors = ['Некорректные данные уведомления'];
+            $this->errors = [_wp('Invalid notification data')];
             return;
         }
 
@@ -50,7 +50,7 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
         $id = (int)($data['id'] ?? 0);
         $existing = $id ? $model->getById($id) : null;
         if ($id && !$existing) {
-            $this->errors = ['Уведомление не найдено. Возможно, его уже удалили'];
+            $this->errors = [_wp('Notification not found. It may have been deleted already.')];
             return;
         }
 
@@ -84,7 +84,7 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
         $string = fn(string $key): string => is_scalar($data[$key] ?? null) ? (string)$data[$key] : '';
 
         if (!in_array($transport, ['email', 'sms'], true)) {
-            $errors[] = "Доставка $transport не поддерживается";
+            $errors[] = sprintf_wp('Delivery method %s is not supported', $transport);
         }
 
         $row = [
@@ -96,31 +96,31 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
         ];
 
         if ('' === trim($row['body'])) {
-            $errors[] = 'Не указан текст сообщения';
+            $errors[] = _wp('Message text is required');
         }
         if ('email' === $transport) {
             if ('' === $row['subject']) {
-                $errors[] = 'Не указана тема сообщения';
+                $errors[] = _wp('Message subject is required');
             }
             if ('' !== $row['from'] && !(new waEmailValidator())->isValid($row['from'])) {
-                $errors[] = 'Адрес отправителя указан неверно';
+                $errors[] = _wp('Invalid sender address');
             }
         }
         if (mb_strlen($row['from']) > 200) {
-            $errors[] = 'Слишком длинный отправитель';
+            $errors[] = _wp('Sender is too long');
         }
 
         $row['schedule_type'] = $string('schedule_type');
         $row['schedule_day'] = (int)($data['schedule_day'] ?? 0);
         if (!in_array($row['schedule_type'], ['monthly', 'weekly'], true)) {
-            $errors[] = 'Не указано, когда отправлять уведомление';
+            $errors[] = _wp('Notification schedule is not specified');
         } elseif ($row['schedule_day'] < 1 || $row['schedule_day'] > ('monthly' === $row['schedule_type'] ? 31 : 7)) {
-            $errors[] = 'monthly' === $row['schedule_type'] ? 'День месяца должен быть от 1 до 31' : 'Неверный день недели';
+            $errors[] = 'monthly' === $row['schedule_type'] ? _wp('Day of month must be between 1 and 31') : _wp('Invalid day of week');
         }
 
         $time = $string('scheduled_time');
         if ('' !== $time && !preg_match('/^([01]\d|2[0-3]):[0-5]\d$/', $time)) {
-            $errors[] = 'Время отправки указано неверно';
+            $errors[] = _wp('Invalid sending time');
         }
         $row['scheduled_time'] = '' === $time ? null : $time;
 
@@ -135,7 +135,7 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
     {
         $id = (int)waRequest::get('id', 0, waRequest::TYPE_INT);
         if (!$id) {
-            $this->errors = ['Не указан идентификатор'];
+            $this->errors = [_wp('ID is not specified')];
             return;
         }
 
@@ -157,7 +157,7 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
     public function deleteAction(): void
     {
         if (!($id = (int)waRequest::post('id', 0, waRequest::TYPE_INT))) {
-            $this->errors = ['Не указан идентификатор уведомления'];
+            $this->errors = [_wp('Notification ID is not specified')];
             return;
         }
 
@@ -184,23 +184,23 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
 
             $schedule_type = $notification_data['schedule_type'] ?? '';
             if (!in_array($schedule_type, ['monthly', 'weekly']))
-                throw new waException("Неизвестный тип списания '$schedule_type'");
+                throw new waException(sprintf_wp('Unknown write-off schedule: %s', $schedule_type));
 
             // Дата списания — по настройкам плагина и с учётом отложенного старта, как у рассылки
             // по расписанию. Расписание самого уведомления (schedule_type) на неё не влияет
             if (!($date = $this->getPlugin()->closestBurnControlDate()))
-                throw new waException('Списание бонусов выключено или не указан срок действия бонусов в настройках');
+                throw new waException(_wp('Bonus write-off is disabled or the bonus lifetime is not set in the settings'));
 
             $burning_data = (new shopBurningbonusAffiliateModel)->getBurningById($contact_id, $date);
 
             $customer = new shopCustomer($contact_id);
             if (!$customer->exists())
-                throw new waException("Покупатель с ID=$contact_id не существует");
+                throw new waException(sprintf_wp('Customer with ID=%d does not exist', $contact_id));
 
             // Как при рассылке по расписанию: не больше реального баланса покупателя
             $to_burn = shopBurningbonusPlugin::calcBurnAmount((float)($burning_data['to_burn'] ?? 0), (float)$customer->affiliateBonus());
             if (0 >= $to_burn)
-                throw new waException("Нет бонусов для списания у покупателя с ID=$contact_id");
+                throw new waException(sprintf_wp('Customer with ID=%d has no bonuses to write off', $contact_id));
         } catch (waException|Exception $e) {
             $this->errors[] = $e->getMessage();
             return;
@@ -217,7 +217,7 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
                     $notification = new shopBurningbonusPluginSmsNotification($notification_data);
                     break;
                 default:
-                    $this->errors[] = "Доставка $transport не поддерживается";
+                    $this->errors[] = sprintf_wp('Delivery method %s is not supported', $transport);
                     return;
             }
         } catch (waException $e) {
@@ -227,10 +227,10 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
 
         try {
             if ($notification->send($contact_id, $to_burn, $recipient))
-                $this->response = "Уведомление успешно отправлено";
-            else $this->errors[] = "Не удалось отправить уведомление";
+                $this->response = _wp('Notification sent successfully');
+            else $this->errors[] = _wp('Failed to send notification');
         } catch (SmartyException|SmartyCompilerException $e) {
-            $this->errors[] = "Ошибка шаблона: {$e->getMessage()}";
+            $this->errors[] = sprintf_wp('Template error: %s', $e->getMessage());
         } catch (waException $e) {
             $this->errors[] = $e->getMessage();
         }

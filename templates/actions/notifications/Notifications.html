@@ -21,7 +21,7 @@
             }
         ];
         {$references['wa_app_static_url'] = $wa_app_static_url|cat:''}
-        $.shop.marketing.setTitle("Уведомления о сгорании бонусов");
+        $.shop.marketing.setTitle({_wp('Bonus expiry notifications')|json_encode});
         $.shop.marketing.load(sources).then(
             () => BurningbonusNotificationsSettings({
                 ui: {$ui|json_encode},

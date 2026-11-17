@@ -218,6 +218,6 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
      */
     public function getDescription(): string
     {
-        return 'Отправка уведомлений';
+        return _wp('Sends notifications');
     }
 }

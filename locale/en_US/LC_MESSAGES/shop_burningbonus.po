@@ -1,0 +1,194 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/burningbonus\n"
+"POT-Creation-Date: 2026-11-17 16:02+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: shop/plugins/burningbonus\n"
+"Language-Team: shop/plugins/burningbonus\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: en_US\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+msgid "Bonus expiry notifications"
+msgstr ""
+
+msgid "The Bonus Points Expiry plugin is installed."
+msgstr ""
+
+msgid "Bonus expiry is configured in the “Marketing” section, in the <a href=\"%s\">affiliate program settings</a>."
+msgstr ""
+
+msgid "Bonus Points Expiry"
+msgstr ""
+
+msgid "Bonus points with an expiry date encourage customers to use them more often and thus place repeat orders."
+msgstr ""
+
+msgid "Bonus write-off and notifications are handled by a special script run on a schedule (cron). Set up the command"
+msgstr ""
+
+msgid "in your hosting control panel"
+msgstr ""
+
+msgid "https://developers.webasyst.com/docs/tips/cron/"
+msgstr ""
+
+msgid "setup guide"
+msgstr ""
+
+msgid "We recommend running it once an hour."
+msgstr ""
+
+msgid "Bonus lifetime"
+msgstr ""
+
+msgid "days"
+msgstr ""
+
+msgid "Expiry schedule"
+msgstr ""
+
+msgid "Never"
+msgstr ""
+
+msgid "— the plugin is disabled"
+msgstr ""
+
+msgid "Weekly"
+msgstr ""
+
+msgid "— at the beginning of each week, on Mondays"
+msgstr ""
+
+msgid "Monthly"
+msgstr ""
+
+msgid "— at the beginning of each month, on the 1st"
+msgstr ""
+
+msgid "Postpone write-off start"
+msgstr ""
+
+msgid "until"
+msgstr ""
+
+msgid "This setting is useful if customers already have accumulated bonuses and you want to give them some time to receive notifications and spend their bonuses."
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "[path to php interpreter]"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+msgid "Error saving settings"
+msgstr ""
+
+msgid "Also set up <a href=\"%s\">bonus expiry notifications</a> to remind customers about your store and encourage them to order again."
+msgstr ""
+
+msgid "<b>%s</b> depends on your hosting — ask your administrator or hosting provider how to specify the path to PHP 7.4 or later."
+msgstr ""
+
+msgid "Also set up bonus expiry notifications to remind customers about your store and encourage them to order again."
+msgstr ""
+
+msgid "Invalid notification data"
+msgstr ""
+
+msgid "Notification not found. It may have been deleted already."
+msgstr ""
+
+msgid "Message text is required"
+msgstr ""
+
+msgid "Message subject is required"
+msgstr ""
+
+msgid "Invalid sender address"
+msgstr ""
+
+msgid "Sender is too long"
+msgstr ""
+
+msgid "Notification schedule is not specified"
+msgstr ""
+
+msgid "Day of month must be between 1 and 31"
+msgstr ""
+
+msgid "Invalid day of week"
+msgstr ""
+
+msgid "Invalid sending time"
+msgstr ""
+
+msgid "ID is not specified"
+msgstr ""
+
+msgid "Notification ID is not specified"
+msgstr ""
+
+msgid "Bonus write-off is disabled or the bonus lifetime is not set in the settings"
+msgstr ""
+
+msgid "Notification sent successfully"
+msgstr ""
+
+msgid "Failed to send notification"
+msgstr ""
+
+msgid "Delivery method %s is not supported"
+msgstr ""
+
+msgid "Unknown write-off schedule: %s"
+msgstr ""
+
+msgid "Customer with ID=%d does not exist"
+msgstr ""
+
+msgid "Customer with ID=%d has no bonuses to write off"
+msgstr ""
+
+msgid "Template error: %s"
+msgstr ""
+
+msgid "%s, your bonuses will expire soon!"
+msgstr ""
+
+msgid "Bonus write-off is disabled in the settings"
+msgstr ""
+
+msgid "Bonus lifetime is not set in the settings"
+msgstr ""
+
+msgid "Failed to determine the next write-off date"
+msgstr ""
+
+msgid "Unknown expiry schedule"
+msgstr ""
+
+msgid "Invalid write-off start date"
+msgstr ""
+
+msgid "Recipient address is not specified"
+msgstr ""
+
+msgid "Writes off expired bonuses"
+msgstr ""
+
+msgid "Write-off of unused expired bonus points"
+msgstr ""
+
+msgid "Sends notifications"
+msgstr ""

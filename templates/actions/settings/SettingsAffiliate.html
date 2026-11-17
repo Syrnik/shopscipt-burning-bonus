@@ -1,21 +1,18 @@
-<h1 class="custom-mt-4-mobile" style="margin: 0 0 0.75em;">Сгорание бонусов</h1>
+{$php_path = _wp('[path to php interpreter]')}
+<h1 class="custom-mt-4-mobile" style="margin: 0 0 0.75em;">[`Bonus Points Expiry`]</h1>
 
-<p class="small">Бонусы, у которых есть срок действия, стимулируют покупателей чаще их использовать и, тем самым делать
-    повторные заказы. Настройте также
-    <a href="{$wa_app_url}?plugin=burningbonus&module=notifications">уведомления о сгорании бонусов</a>, чтобы напомнить
-    покупателям о магазине и стимулировать их сделать ещё заказ.</p>
+<p class="small">[`Bonus points with an expiry date encourage customers to use them more often and thus place repeat orders.`]
+    {sprintf_wp('Also set up <a href="%s">bonus expiry notifications</a> to remind customers about your store and encourage them to order again.', $wa_app_url|cat:'?plugin=burningbonus&module=notifications')}</p>
 
 <div class="alert info small">
-    <p>Списание бонусов и отправка уведомлений выполняются специальным скриптом, запускаемым по расписанию (cron).
-        Настройте выполнение команды</p>
-    <p><code class="bold">[путь к интерпретатору php] {$info['root_path']|escape}/cli.php shop burningbonus</code></p>
-    <p>в панели управления вашего хостинга
-        (<a href="https://developers.webasyst.ru/docs/tips/cron/" target="_blank">документация по настройке
+    <p>[`Bonus write-off and notifications are handled by a special script run on a schedule (cron). Set up the command`]</p>
+    <p><code class="bold">{$php_path|escape} {$info['root_path']|escape}/cli.php shop burningbonus</code></p>
+    <p>[`in your hosting control panel`]
+        (<a href="[`https://developers.webasyst.com/docs/tips/cron/`]" target="_blank">[`setup guide`]
             <i class="fas fa-external-link-alt smaller"></i></a>).</p>
     <p><i class="fas fa-exclamation-triangle text-orange"></i>
-        <b>[путь к интерпретатору php]</b> зависит от хостинга — узнайте у вашего администратора или хостера,
-        как правильно указать путь к php версии 7.4 или выше.</p>
-    <p>Рекомендуем поставить выполнение с периодичностью 1 раз в час.</p>
+        {sprintf_wp('<b>%s</b> depends on your hosting — ask your administrator or hosting provider how to specify the path to PHP 7.4 or later.', $php_path|escape)}</p>
+    <p>[`We recommend running it once an hour.`]</p>
 </div>
 
 <form action="?plugin=burningbonus&module=settings&action=saveaffiliate" id="s-settings-affiliate-burningbonus-form"
@@ -23,14 +20,14 @@
     <div class="fields">
         <div class="fields-group">
             <div class="field">
-                <div class="name">Срок действия бонусов</div>
+                <div class="name">[`Bonus lifetime`]</div>
                 <div class="value">
                     <input name="setting[lifetime]" type="number" min="0" step="1" value="{$settings.lifetime|escape}"
-                           class="shorter numerical" required> дней
+                           class="shorter numerical" required> [`days`]
                 </div>
             </div>
             <div class="field">
-                <div class="name">Периодичность сгорания</div>
+                <div class="name">[`Expiry schedule`]</div>
                 <div class="value">
                     <ul>
                         <li>
@@ -39,7 +36,7 @@
                                     <input type="radio" name="setting[period]" value="never"{if 'never'===$settings.period} checked{/if}>
                                     <span></span>
                                 </span>
-                                Никогда <span class="hint">— плагин выключен</span>
+                                [`Never`] <span class="hint">[`— the plugin is disabled`]</span>
                             </label>
                         </li>
                         <li>
@@ -48,7 +45,7 @@
                                     <input type="radio" name="setting[period]" value="weekly"{if 'weekly'===$settings.period} checked{/if}>
                                     <span></span>
                                 </span>
-                                Еженедельно <span class="hint">— в начале каждой недели, по понедельникам</span>
+                                [`Weekly`] <span class="hint">[`— at the beginning of each week, on Mondays`]</span>
                             </label>
                         </li>
                         <li>
@@ -57,25 +54,24 @@
                                     <input type="radio" name="setting[period]" value="monthly"{if 'monthly'===$settings.period} checked{/if}>
                                     <span></span>
                                 </span>
-                                Ежемесячно <span class="hint">— в начале каждого месяца, 1-го числа</span>
+                                [`Monthly`] <span class="hint">[`— at the beginning of each month, on the 1st`]</span>
                             </label>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="field">
-                <div class="name">Отложить начало списания</div>
+                <div class="name">[`Postpone write-off start`]</div>
                 <div class="value">
-                    до <input type="date" value="{$settings.delay|escape}" min="{date('Y-m-d')}" name="setting[delay]">
-                    <p class="hint">Эта настройка может пригодиться, если у покупателей уже есть накопленные бонусы и
-                        нужно дать им какое-то время, чтобы они получали уведомления и успели истратить бонусы.</p>
+                    [`until`] <input type="date" value="{$settings.delay|escape}" min="{date('Y-m-d')}" name="setting[delay]">
+                    <p class="hint">[`This setting is useful if customers already have accumulated bonuses and you want to give them some time to receive notifications and spend their bonuses.`]</p>
                 </div>
             </div>
         </div>
 
         <div class="field">
             <div class="value submit">
-                <button type="submit" class="button green js-submit-button">Сохранить</button>
+                <button type="submit" class="button green js-submit-button">[`Save`]</button>
                 <span class="js-status custom-ml-8"></span>
             </div>
         </div>
@@ -84,6 +80,10 @@
 
 <script>
     (function ($) {
+        const messages = {
+            saved: {_wp('Saved')|json_encode},
+            error: {_wp('Error saving settings')|json_encode}
+        };
         $('#s-settings-affiliate-burningbonus-form').off()
             .on('submit', function (event) {
                 event.preventDefault();
@@ -94,15 +94,16 @@
                     $status.html(html);
                     window.setTimeout(() => $status.empty(), timeout);
                 };
+                const failed = () => show('<span class="state-error"><i class="fas fa-times-circle"></i> ' + $.wa.encodeHTML(messages.error) + '</span>', 5000);
                 $.post($form.attr('action'), $form.serialize(), 'json')
                     .done(r => {
                         if (r && r.status === 'ok') {
-                            show('<span class="text-green"><i class="fas fa-check-circle"></i> Сохранено</span>', 3000);
+                            show('<span class="text-green"><i class="fas fa-check-circle"></i> ' + $.wa.encodeHTML(messages.saved) + '</span>', 3000);
                         } else {
-                            show('<span class="state-error"><i class="fas fa-times-circle"></i> Ошибка сохранения настроек</span>', 5000);
+                            failed();
                         }
                     })
-                    .fail(() => show('<span class="state-error"><i class="fas fa-times-circle"></i> Ошибка сохранения настроек</span>', 5000))
+                    .fail(failed)
                     .always(() => $button.prop('disabled', false));
             });
     })(jQuery);

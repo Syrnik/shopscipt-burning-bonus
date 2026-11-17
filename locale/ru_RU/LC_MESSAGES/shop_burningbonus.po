@@ -1,0 +1,194 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/burningbonus\n"
+"POT-Creation-Date: 2026-11-17 16:02+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: shop/plugins/burningbonus\n"
+"Language-Team: shop/plugins/burningbonus\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: ru_RU\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+msgid "Bonus expiry notifications"
+msgstr "Уведомления о сгорании бонусов"
+
+msgid "The Bonus Points Expiry plugin is installed."
+msgstr "Плагин «Сгорание бонусов» установлен."
+
+msgid "Bonus expiry is configured in the “Marketing” section, in the <a href=\"%s\">affiliate program settings</a>."
+msgstr "Настроить сгорание бонусов можно в разделе «Маркетинг», в <a href=\"%s\">настройках партнёрской программы</a>."
+
+msgid "Bonus Points Expiry"
+msgstr "Сгорание бонусов"
+
+msgid "Bonus points with an expiry date encourage customers to use them more often and thus place repeat orders."
+msgstr "Бонусы, у которых есть срок действия, стимулируют покупателей чаще их использовать и тем самым делать повторные заказы."
+
+msgid "Bonus write-off and notifications are handled by a special script run on a schedule (cron). Set up the command"
+msgstr "Списание бонусов и отправка уведомлений выполняются специальным скриптом, запускаемым по расписанию (cron). Настройте выполнение команды"
+
+msgid "in your hosting control panel"
+msgstr "в панели управления вашего хостинга"
+
+msgid "https://developers.webasyst.com/docs/tips/cron/"
+msgstr "https://developers.webasyst.ru/docs/tips/cron/"
+
+msgid "setup guide"
+msgstr "документация по настройке"
+
+msgid "We recommend running it once an hour."
+msgstr "Рекомендуем поставить выполнение с периодичностью 1 раз в час."
+
+msgid "Bonus lifetime"
+msgstr "Срок действия бонусов"
+
+msgid "days"
+msgstr "дней"
+
+msgid "Expiry schedule"
+msgstr "Периодичность сгорания"
+
+msgid "Never"
+msgstr "Никогда"
+
+msgid "— the plugin is disabled"
+msgstr "— плагин выключен"
+
+msgid "Weekly"
+msgstr "Еженедельно"
+
+msgid "— at the beginning of each week, on Mondays"
+msgstr "— в начале каждой недели, по понедельникам"
+
+msgid "Monthly"
+msgstr "Ежемесячно"
+
+msgid "— at the beginning of each month, on the 1st"
+msgstr "— в начале каждого месяца, 1-го числа"
+
+msgid "Postpone write-off start"
+msgstr "Отложить начало списания"
+
+msgid "until"
+msgstr "до"
+
+msgid "This setting is useful if customers already have accumulated bonuses and you want to give them some time to receive notifications and spend their bonuses."
+msgstr "Эта настройка может пригодиться, если у покупателей уже есть накопленные бонусы и нужно дать им какое-то время, чтобы они получали уведомления и успели истратить бонусы."
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "[path to php interpreter]"
+msgstr "[путь к интерпретатору php]"
+
+msgid "Saved"
+msgstr "Сохранено"
+
+msgid "Error saving settings"
+msgstr "Ошибка сохранения настроек"
+
+msgid "Also set up <a href=\"%s\">bonus expiry notifications</a> to remind customers about your store and encourage them to order again."
+msgstr "Настройте также <a href=\"%s\">уведомления о сгорании бонусов</a>, чтобы напомнить покупателям о магазине и стимулировать их сделать ещё заказ."
+
+msgid "<b>%s</b> depends on your hosting — ask your administrator or hosting provider how to specify the path to PHP 7.4 or later."
+msgstr "<b>%s</b> зависит от хостинга — узнайте у вашего администратора или хостера, как правильно указать путь к php версии 7.4 или выше."
+
+msgid "Also set up bonus expiry notifications to remind customers about your store and encourage them to order again."
+msgstr "Настройте также уведомления о сгорании бонусов, чтобы напомнить покупателям о магазине и стимулировать их сделать ещё заказ."
+
+msgid "Invalid notification data"
+msgstr "Некорректные данные уведомления"
+
+msgid "Notification not found. It may have been deleted already."
+msgstr "Уведомление не найдено. Возможно, его уже удалили"
+
+msgid "Message text is required"
+msgstr "Не указан текст сообщения"
+
+msgid "Message subject is required"
+msgstr "Не указана тема сообщения"
+
+msgid "Invalid sender address"
+msgstr "Адрес отправителя указан неверно"
+
+msgid "Sender is too long"
+msgstr "Слишком длинный отправитель"
+
+msgid "Notification schedule is not specified"
+msgstr "Не указано, когда отправлять уведомление"
+
+msgid "Day of month must be between 1 and 31"
+msgstr "День месяца должен быть от 1 до 31"
+
+msgid "Invalid day of week"
+msgstr "Неверный день недели"
+
+msgid "Invalid sending time"
+msgstr "Время отправки указано неверно"
+
+msgid "ID is not specified"
+msgstr "Не указан идентификатор"
+
+msgid "Notification ID is not specified"
+msgstr "Не указан идентификатор уведомления"
+
+msgid "Bonus write-off is disabled or the bonus lifetime is not set in the settings"
+msgstr "Списание бонусов выключено или не указан срок действия бонусов в настройках"
+
+msgid "Notification sent successfully"
+msgstr "Уведомление успешно отправлено"
+
+msgid "Failed to send notification"
+msgstr "Не удалось отправить уведомление"
+
+msgid "Delivery method %s is not supported"
+msgstr "Доставка %s не поддерживается"
+
+msgid "Unknown write-off schedule: %s"
+msgstr "Неизвестный тип списания: %s"
+
+msgid "Customer with ID=%d does not exist"
+msgstr "Покупатель с ID=%d не существует"
+
+msgid "Customer with ID=%d has no bonuses to write off"
+msgstr "Нет бонусов для списания у покупателя с ID=%d"
+
+msgid "Template error: %s"
+msgstr "Ошибка шаблона: %s"
+
+msgid "%s, your bonuses will expire soon!"
+msgstr "%s, ваши бонусы скоро сгорят!"
+
+msgid "Bonus write-off is disabled in the settings"
+msgstr "Списание бонусов выключено в настройках"
+
+msgid "Bonus lifetime is not set in the settings"
+msgstr "Не указан срок действия бонусов в настройках"
+
+msgid "Failed to determine the next write-off date"
+msgstr "Не удалось определить дату ближайшего списания"
+
+msgid "Unknown expiry schedule"
+msgstr "Неизвестная периодичность сгорания"
+
+msgid "Invalid write-off start date"
+msgstr "Дата начала списания указана неверно"
+
+msgid "Recipient address is not specified"
+msgstr "Не указан адрес для отправки"
+
+msgid "Writes off expired bonuses"
+msgstr "Выполняет списание бонусов"
+
+msgid "Write-off of unused expired bonus points"
+msgstr "Списание неиспользованных просроченных бонусных баллов"
+
+msgid "Sends notifications"
+msgstr "Отправка уведомлений"

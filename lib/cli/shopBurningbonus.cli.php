@@ -79,15 +79,15 @@ class shopBurningbonusCli extends waCliController
      */
     protected function showHelp()
     {
-        echo $str = trim("shopBurningbonus CLI script v" . $this->plugin->getVersion() . ", PHP версии " . PHP_VERSION) . "\n";
+        echo $str = trim("shopBurningbonus CLI script v" . $this->plugin->getVersion() . ", PHP " . PHP_VERSION) . "\n";
         echo str_repeat('=', mb_strlen($str, 'UTF-8') - 1) . "\n\n";
-        echo "Строка для запуска: 'php cli.php shop burningbonus <задание...> <-команда...>'\n\n";
-        echo "<команда> всегда начинается с тире, <задание> просто идентификатор задания. \n\n";
+        echo "Usage: 'php cli.php shop burningbonus <task...> <-command...>'\n\n";
+        echo "<command> always starts with a dash, <task> is a task ID.\n\n";
 
-        echo "Доступные команды:\n";
-        echo " -help -- Показывает эту справку\n";
+        echo "Available commands:\n";
+        echo " -help -- Shows this help\n";
 
-        echo "\n\nДоступные задания:\n\n";
+        echo "\n\nAvailable tasks:\n\n";
 
         foreach ($this->task_classmap as $key => $item) {
 
@@ -115,14 +115,14 @@ class shopBurningbonusCli extends waCliController
 
         if ($result === '0') {
             waLog::log(
-                'Блокировка занята другим процессом. Возможно, параллельно выполняется ещё одно задание плагина сгорающих бонусов.',
+                'The lock is held by another process. Another burningbonus task may be running in parallel.',
                 self::LOG_FILE
             );
             return false;
         }
 
-        waLog::log('Ошибка GET_LOCK при выполнении консольного задания.', self::LOG_FILE);
-        throw new waException('Ошибка GET_LOCK при выполнении консольного задания.');
+        waLog::log('GET_LOCK failed while running a CLI task.', self::LOG_FILE);
+        throw new waException('GET_LOCK failed while running a CLI task.');
     }
 
     /**
@@ -153,5 +153,7 @@ class shopBurningbonusCli extends waCliController
     {
         parent::preExecute();
         $this->plugin = wa('shop')->getPlugin('burningbonus');
+        // плагинный домен для _wp(): в CLI фреймворк его сам не включает
+        waSystem::pushActivePlugin('burningbonus', 'shop');
     }
 }

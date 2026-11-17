@@ -37,7 +37,7 @@ class shopBurningbonusPlugin extends shopPlugin
     {
         return [
             'id' => 'burningbonus',
-            'name' => 'Сгорание бонусов',
+            'name' => _wp('Bonus Points Expiry'),
             'url' => '?plugin=burningbonus&module=settings&action=affiliate',
         ];
     }
@@ -56,7 +56,7 @@ class shopBurningbonusPlugin extends shopPlugin
             'settings_li' => '<li><a href="' .
                 wa()->getAppUrl('shop') .
                 '?plugin=burningbonus&module=notifications"><i class="icon16 ss notification-bw"></i><span class="s-name">' .
-                _wp('Уведомления о сгорании бонусов') .
+                htmlspecialchars(_wp('Bonus expiry notifications')) .
                 '</span></a></li>'
         ];
     }
@@ -67,7 +67,7 @@ class shopBurningbonusPlugin extends shopPlugin
 
         if (isset($params['menu']['marketing']['submenu'])) {
             $menu_item = [
-                'name' => _wp('Уведомления о сгорании бонусов'),
+                'name' => _wp('Bonus expiry notifications'),
                 'url' => wa()->getAppUrl('shop') . '?plugin=burningbonus&module=notifications',
             ];
 
