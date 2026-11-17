@@ -54,10 +54,11 @@ class shopBurningbonusPluginNotificationsActions extends waJsonActions
                 return;
             }
 
-            $date = $period === 'weekly' ? new DateTime('next monday') : new DateTime('first day of next month');
-            $date->modify("-{$lifetime} days");
-
-            $date = $date->format('Y-m-d');
+            // Тот же расчёт, что у рассылки по расписанию: с учётом отложенного старта
+            if (!($date = $this->getPlugin()->closestBurnControlDate())) {
+                $this->errors = ['Не удалось определить дату ближайшего списания'];
+                return;
+            }
 
             $count = 0;
             $burningbonusAffiliateModel = new shopBurningbonusAffiliateModel;
@@ -71,7 +72,7 @@ class shopBurningbonusPluginNotificationsActions extends waJsonActions
                 $this->response[] = $row + ['customer_name' => $customer->getName()];
                 $count++;
             }
-        } catch (waException $exception) {
+        } catch (Exception $exception) {
             $this->errors = [$exception->getMessage(), $exception->getCode()];
         }
     }

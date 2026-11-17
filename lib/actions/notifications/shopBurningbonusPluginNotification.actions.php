@@ -186,12 +186,12 @@ class shopBurningbonusPluginNotificationActions extends waJsonActions
             if (!in_array($schedule_type, ['monthly', 'weekly']))
                 throw new waException("Неизвестный тип списания '$schedule_type'");
 
-            $date = (new DateTime($schedule_type === 'monthly' ? 'first day of next month' : 'next monday'));
+            // Дата списания — по настройкам плагина и с учётом отложенного старта, как у рассылки
+            // по расписанию. Расписание самого уведомления (schedule_type) на неё не влияет
+            if (!($date = $this->getPlugin()->closestBurnControlDate()))
+                throw new waException('Списание бонусов выключено или не указан срок действия бонусов в настройках');
 
-            $lifetime = (int)$this->getPlugin()->getSettings('lifetime');
-            $date->modify("-{$lifetime} days");
-
-            $burning_data = (new shopBurningbonusAffiliateModel)->getBurningById($contact_id, $date->format('Y-m-d'));
+            $burning_data = (new shopBurningbonusAffiliateModel)->getBurningById($contact_id, $date);
 
             if (empty($burning_data['to_burn']))
                 throw new waException("Нет бонусов для списания у покупателя с ID=$contact_id");

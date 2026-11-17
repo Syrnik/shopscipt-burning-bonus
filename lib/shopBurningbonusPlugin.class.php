@@ -108,6 +108,23 @@ class shopBurningbonusPlugin extends shopPlugin
     }
 
     /**
+     * Контрольная дата для ближайшего списания: баллы, начисленные до неё и не потраченные с тех пор,
+     * сгорят в ближайший день списания
+     *
+     * @return string|null дата Y-m-d или null, если списание выключено или не задан срок действия
+     * @throws Exception
+     */
+    public function closestBurnControlDate(): ?string
+    {
+        $lifetime = (int)$this->getSettings('lifetime');
+        if (!$lifetime || !($date = $this->closestBurnDate())) {
+            return null;
+        }
+
+        return $date->modify("-{$lifetime} days")->format('Y-m-d');
+    }
+
+    /**
      * Ближайший день списания строго после $today, но не раньше $delay (включительно).
      *
      * Правило совпадает с shopBurningbonusPluginBurnTask::isBurningDelayed(): до даты $delay
