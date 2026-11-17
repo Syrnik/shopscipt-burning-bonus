@@ -50,8 +50,9 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
         if (!$this->plugin->getSettings('delay')) return true;
         $period = $this->plugin->getSettings('period');
 
-        if ('weekly' === $period) $compare_date = new DateTime('next monday');
-        else$compare_date = new DateTime('first day of next month');
+        $compare_date = clone $this->today;
+        if ('weekly' === $period) $compare_date->modify('next monday');
+        else $compare_date->modify('first day of next month');
 
         return $burn_date->format('Y-m-d') === $compare_date->format('Y-m-d');
     }
@@ -70,7 +71,7 @@ class shopBurningbonusPluginNotifyTask implements shopBurningbonusPluginTaskInte
         if (!($lifetime = intval($this->plugin->getSettings('lifetime')))) return true;
 
         try {
-            $upcoming_burning = $this->plugin->closestBurnDate();
+            $upcoming_burning = $this->plugin->closestBurnDate($this->today);
             if (!$this->isDateInPeriod($upcoming_burning)) return true;
 
             $upcoming_burning = $upcoming_burning->modify("-{$lifetime} days")->format('Y-m-d');

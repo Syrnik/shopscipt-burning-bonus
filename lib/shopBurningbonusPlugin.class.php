@@ -83,31 +83,58 @@ class shopBurningbonusPlugin extends shopPlugin
     }
 
     /**
+     * Ближайший день списания после сегодняшнего с учётом отложенного старта
+     *
+     * @param DateTimeInterface|null $today по умолчанию — текущая дата
      * @return DateTime|null
      * @throws Exception
      */
-    public function closestBurnDate(): ?DateTime
+    public function closestBurnDate(?DateTimeInterface $today = null): ?DateTime
     {
         if (!$this->isBurningEnabled()) {
             return null;
         }
 
-        $period = $this->getSettings('period');
-        $delay = $this->getSettings('delay');
+        $delay = trim((string)$this->getSettings('delay'));
 
-        if ($delay && $delay > date('Y-m-d')) {
-            $date = new DateTime($delay);
-        } else {
-            if ($delay) {
-                self::getSettingsModel()->set($this->getSettingsKey(), 'delay', '');
-            }
-            $date = new DateTime('now');
+        // Отложенный старт прошёл — настройка больше не нужна. Сверяемся с реальной датой,
+        // а не с $today: отладочный запуск с подменённой датой не должен стирать настройку
+        if ($delay && $delay <= date('Y-m-d')) {
+            self::getSettingsModel()->set($this->getSettingsKey(), 'delay', '');
+        }
+
+        return self::calcClosestBurnDate((string)$this->getSettings('period'), $delay, $today ?? new DateTime());
+    }
+
+    /**
+     * Ближайший день списания строго после $today, но не раньше $delay (включительно).
+     *
+     * Правило совпадает с shopBurningbonusPluginBurnTask::isBurningDelayed(): до даты $delay
+     * баллы не сгорают, а в сам день $delay списание выполняется, если это день списания.
+     *
+     * @param string $period 'weekly' — по понедельникам, 'monthly' — 1-го числа
+     * @param string $delay дата отложенного старта Y-m-d или пустая строка
+     * @param DateTimeInterface $today
+     * @return DateTime|null null, если периодичность списания не задана
+     * @throws Exception
+     */
+    public static function calcClosestBurnDate(string $period, string $delay, DateTimeInterface $today): ?DateTime
+    {
+        if (!in_array($period, ['weekly', 'monthly'], true)) {
+            return null;
+        }
+
+        $start = new DateTime($today->format('Y-m-d'));
+        $start->modify('+1 day');
+
+        if ($delay && $delay > $start->format('Y-m-d')) {
+            $start = new DateTime($delay);
         }
 
         if ('weekly' === $period) {
-            return $date->modify('next monday');
+            return 1 === (int)$start->format('N') ? $start : $start->modify('next monday');
         }
 
-        return $date->modify('first day of next month');
+        return 1 === (int)$start->format('j') ? $start : $start->modify('first day of next month');
     }
 }
