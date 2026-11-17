@@ -30,6 +30,7 @@ return array(
     'dist/*',
     'build',
     'build/*',
+    'docs/*',
     '.git',
     '*/composer.lock',
     '*/composer.json',
