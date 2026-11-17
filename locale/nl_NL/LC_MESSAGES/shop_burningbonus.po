@@ -1,0 +1,388 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/burningbonus\n"
+"POT-Creation-Date: 2026-11-17 18:22+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: shop/plugins/burningbonus\n"
+"Language-Team: shop/plugins/burningbonus\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: nl_NL\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+msgid "Bonus expiry notifications"
+msgstr "Meldingen over vervallende bonuspunten"
+
+msgid "The Bonus Points Expiry plugin is installed."
+msgstr "De plugin ‘Vervallen van bonuspunten’ is geïnstalleerd."
+
+msgid "Bonus expiry is configured in the “Marketing” section, in the <a href=\"%s\">affiliate program settings</a>."
+msgstr "Het vervallen van bonuspunten stelt u in onder ‘Marketing’, in de <a href=\"%s\">instellingen van het partnerprogramma</a>."
+
+msgid "Bonus Points Expiry"
+msgstr "Vervallen van bonuspunten"
+
+msgid "Bonus points with an expiry date encourage customers to use them more often and thus place repeat orders."
+msgstr "Bonuspunten met een vervaldatum stimuleren klanten om ze vaker te gebruiken en dus opnieuw te bestellen."
+
+msgid "Bonus write-off and notifications are handled by a special script run on a schedule (cron). Set up the command"
+msgstr "Het afschrijven van bonuspunten en het versturen van meldingen gebeurt door een speciaal script dat volgens een schema (cron) wordt uitgevoerd. Stel de opdracht"
+
+msgid "in your hosting control panel"
+msgstr "in via het beheerpaneel van uw hosting"
+
+msgid "https://developers.webasyst.com/docs/tips/cron/"
+msgstr "https://developers.webasyst.com/docs/tips/cron/"
+
+msgid "setup guide"
+msgstr "installatiehandleiding"
+
+msgid "We recommend running it once an hour."
+msgstr "We raden aan het eenmaal per uur uit te voeren."
+
+msgid "Bonus lifetime"
+msgstr "Geldigheidsduur van bonuspunten"
+
+msgid "days"
+msgstr "dagen"
+
+msgid "Expiry schedule"
+msgstr "Vervalschema"
+
+msgid "Never"
+msgstr "Nooit"
+
+msgid "— the plugin is disabled"
+msgstr "— de plugin is uitgeschakeld"
+
+msgid "Weekly"
+msgstr "Wekelijks"
+
+msgid "— at the beginning of each week, on Mondays"
+msgstr "— aan het begin van elke week, op maandag"
+
+msgid "Monthly"
+msgstr "Maandelijks"
+
+msgid "— at the beginning of each month, on the 1st"
+msgstr "— aan het begin van elke maand, op de 1e"
+
+msgid "Postpone write-off start"
+msgstr "Begin van afschrijving uitstellen"
+
+msgid "until"
+msgstr "tot"
+
+msgid "This setting is useful if customers already have accumulated bonuses and you want to give them some time to receive notifications and spend their bonuses."
+msgstr "Deze instelling is handig als klanten al bonuspunten hebben gespaard en u hun tijd wilt geven om meldingen te ontvangen en hun punten te besteden."
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "[path to php interpreter]"
+msgstr "[pad naar PHP-interpreter]"
+
+msgid "Saved"
+msgstr "Opgeslagen"
+
+msgid "Error saving settings"
+msgstr "Fout bij het opslaan van de instellingen"
+
+msgid "Also set up <a href=\"%s\">bonus expiry notifications</a> to remind customers about your store and encourage them to order again."
+msgstr "Stel ook <a href=\"%s\">meldingen over vervallende bonuspunten</a> in om klanten aan uw winkel te herinneren en hen aan te moedigen opnieuw te bestellen."
+
+msgid "<b>%s</b> depends on your hosting — ask your administrator or hosting provider how to specify the path to PHP 7.4 or later."
+msgstr "<b>%s</b> hangt af van uw hosting — vraag uw beheerder of hostingprovider hoe u het pad naar PHP 7.4 of hoger opgeeft."
+
+msgid "Also set up bonus expiry notifications to remind customers about your store and encourage them to order again."
+msgstr "Stel ook meldingen over vervallende bonuspunten in om klanten aan uw winkel te herinneren en hen aan te moedigen opnieuw te bestellen."
+
+msgid "Invalid notification data"
+msgstr "Ongeldige meldingsgegevens"
+
+msgid "Notification not found. It may have been deleted already."
+msgstr "Melding niet gevonden. Mogelijk is deze al verwijderd."
+
+msgid "Invalid sender address"
+msgstr "Ongeldig afzenderadres"
+
+msgid "Sender is too long"
+msgstr "Afzender is te lang"
+
+msgid "Notification schedule is not specified"
+msgstr "Schema van de melding ontbreekt"
+
+msgid "Day of month must be between 1 and 31"
+msgstr "De dag van de maand moet tussen 1 en 31 liggen"
+
+msgid "Invalid day of week"
+msgstr "Ongeldige dag van de week"
+
+msgid "Invalid sending time"
+msgstr "Ongeldige verzendtijd"
+
+msgid "Message text is required"
+msgstr "Berichttekst ontbreekt"
+
+msgid "Message subject is required"
+msgstr "Onderwerp ontbreekt"
+
+msgid "Default message text is required"
+msgstr "Tekst van de standaardversie ontbreekt"
+
+msgid "ID is not specified"
+msgstr "ID ontbreekt"
+
+msgid "Notification ID is not specified"
+msgstr "ID van de melding ontbreekt"
+
+msgid "Bonus write-off is disabled or the bonus lifetime is not set in the settings"
+msgstr "Het afschrijven van bonuspunten is uitgeschakeld of de geldigheidsduur is niet ingesteld"
+
+msgid "Notification sent successfully"
+msgstr "Melding verzonden"
+
+msgid "Failed to send notification"
+msgstr "Melding kon niet worden verzonden"
+
+msgid "Delivery method %s is not supported"
+msgstr "Verzendmethode %s wordt niet ondersteund"
+
+msgid "Unknown language: %s"
+msgstr "Onbekende taal: %s"
+
+msgid "Language %s is added twice"
+msgstr "Taal %s is twee keer toegevoegd"
+
+msgid "Message text is required (%s)"
+msgstr "Berichttekst ontbreekt (%s)"
+
+msgid "Message subject is required (%s)"
+msgstr "Onderwerp ontbreekt (%s)"
+
+msgid "Unknown write-off schedule: %s"
+msgstr "Onbekend afschrijvingsschema: %s"
+
+msgid "Customer with ID=%d does not exist"
+msgstr "Klant met ID=%d bestaat niet"
+
+msgid "Customer with ID=%d has no bonuses to write off"
+msgstr "Klant met ID=%d heeft geen bonuspunten om af te schrijven"
+
+msgid "Template error: %s"
+msgstr "Sjabloonfout: %s"
+
+msgid "Bonus write-off is disabled in the settings"
+msgstr "Het afschrijven van bonuspunten is uitgeschakeld in de instellingen"
+
+msgid "Bonus lifetime is not set in the settings"
+msgstr "De geldigheidsduur van bonuspunten is niet ingesteld"
+
+msgid "Failed to determine the next write-off date"
+msgstr "Datum van de volgende afschrijving kon niet worden bepaald"
+
+msgid "Unknown expiry schedule"
+msgstr "Onbekend vervalschema"
+
+msgid "Invalid write-off start date"
+msgstr "Ongeldige begindatum van de afschrijving"
+
+msgid "Recipient address is not specified"
+msgstr "Adres van de ontvanger ontbreekt"
+
+msgid "Notification has no message text"
+msgstr "De melding heeft geen berichttekst"
+
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d dag"
+msgstr[1] "%d dagen"
+
+msgid "Delete notification?"
+msgstr "Melding verwijderen?"
+
+msgid "Delete"
+msgstr "Verwijderen"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "New notification"
+msgstr "Nieuwe melding"
+
+msgid "<untitled>"
+msgstr "<zonder titel>"
+
+msgid "(untitled)"
+msgstr "(zonder titel)"
+
+msgid "Notification name"
+msgstr "Naam van de melding"
+
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+msgid "Delivery method"
+msgstr "Verzendmethode"
+
+msgid "Sender"
+msgstr "Afzender"
+
+msgid "Default address"
+msgstr "Standaardadres"
+
+msgid "Other email…"
+msgstr "Ander e-mailadres…"
+
+msgid "Default (set by the SMS gateway)"
+msgstr "Standaard (bepaald door de sms-gateway)"
+
+msgid "Other ID…"
+msgstr "Ander ID…"
+
+msgid "When to send"
+msgstr "Wanneer versturen"
+
+msgid "On day {input} of each month"
+msgstr "Op dag {input} van elke maand"
+
+msgid "In months without day %d, the notification is sent on the last day of the month"
+msgstr "In maanden zonder dag %d wordt de melding op de laatste dag van de maand verstuurd"
+
+msgid "Every Monday"
+msgstr "Elke maandag"
+
+msgid "Every Tuesday"
+msgstr "Elke dinsdag"
+
+msgid "Every Wednesday"
+msgstr "Elke woensdag"
+
+msgid "Every Thursday"
+msgstr "Elke donderdag"
+
+msgid "Every Friday"
+msgstr "Elke vrijdag"
+
+msgid "Every Saturday"
+msgstr "Elke zaterdag"
+
+msgid "Every Sunday"
+msgstr "Elke zondag"
+
+msgid "Sending time"
+msgstr "Verzendtijd"
+
+msgid "after {time}"
+msgstr "na {time}"
+
+msgid "any time"
+msgstr "op elk moment"
+
+msgid "Notifications are sent as soon as the script runs on the specified day."
+msgstr "Meldingen worden verstuurd zodra het script op de opgegeven dag draait."
+
+msgid "Notifications are sent as soon as the script runs on the specified day after {time}."
+msgstr "Meldingen worden verstuurd zodra het script op de opgegeven dag na {time} draait."
+
+msgid "If the script does not run on that day, the notifications will not be sent."
+msgstr "Als het script op die dag niet draait, worden de meldingen niet verstuurd."
+
+msgid "Message language"
+msgstr "Taal van de tekst"
+
+msgid "Default"
+msgstr "Standaard"
+
+msgid "+ Add language"
+msgstr "+ Taal toevoegen"
+
+msgid "Delete version"
+msgstr "Versie verwijderen"
+
+msgid "Delete the %s version?"
+msgstr "Versie ‘%s’ verwijderen?"
+
+msgid "Customers whose language has no version of its own receive this text."
+msgstr "Deze tekst ontvangen klanten voor wier taal geen eigen versie bestaat."
+
+msgid "Message subject"
+msgstr "Onderwerp"
+
+msgid "Message text"
+msgstr "Berichttekst"
+
+msgid "Test sending"
+msgstr "Testverzending"
+
+msgid "Test message"
+msgstr "Testbericht"
+
+msgid "To"
+msgstr "Aan"
+
+msgid "Select a contact to get test data from"
+msgstr "Kies een contact waarvan de testgegevens worden gebruikt"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Current balance"
+msgstr "Huidig saldo"
+
+msgid "Will expire"
+msgstr "Vervalt"
+
+msgid "Will remain"
+msgstr "Blijft over"
+
+msgid "Text version"
+msgstr "Tekstversie"
+
+msgid "Test sending requires at least one customer whose bonuses expire at the next write-off. There are none at the moment."
+msgstr "Voor een testverzending is ten minste één klant nodig van wie bonuspunten bij de volgende afschrijving vervallen. Die zijn er op dit moment niet."
+
+msgid "Try again"
+msgstr "Opnieuw proberen"
+
+msgid "try again"
+msgstr "opnieuw proberen"
+
+msgid "Close"
+msgstr "Sluiten"
+
+msgid "or"
+msgstr "of"
+
+msgid "cancel"
+msgstr "annuleren"
+
+msgid "Error:"
+msgstr "Fout:"
+
+msgid "Notification sent"
+msgstr "Melding verzonden"
+
+msgid "Empty error list"
+msgstr "Lege foutenlijst"
+
+msgid "Controller execution error"
+msgstr "Fout bij het uitvoeren van de controller"
+
+msgid "Unknown error"
+msgstr "Onbekende fout"
+
+msgid "Writes off expired bonuses"
+msgstr "Schrijft vervallen bonuspunten af"
+
+msgid "Write-off of unused expired bonus points"
+msgstr "Afschrijving van ongebruikte vervallen bonuspunten"
+
+msgid "Sends notifications"
+msgstr "Verstuurt meldingen"

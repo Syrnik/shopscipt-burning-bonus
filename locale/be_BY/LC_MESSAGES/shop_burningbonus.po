@@ -1,0 +1,389 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/burningbonus\n"
+"POT-Creation-Date: 2026-11-17 18:22+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: shop/plugins/burningbonus\n"
+"Language-Team: shop/plugins/burningbonus\n"
+"Language: be_BY\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: be_BY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+msgid "Bonus expiry notifications"
+msgstr "Апавяшчэнні пра згаранне бонусаў"
+
+msgid "The Bonus Points Expiry plugin is installed."
+msgstr "Плагін «Згаранне бонусаў» усталяваны."
+
+msgid "Bonus expiry is configured in the “Marketing” section, in the <a href=\"%s\">affiliate program settings</a>."
+msgstr "Наладзіць згаранне бонусаў можна ў раздзеле «Маркетынг», у <a href=\"%s\">наладах партнёрскай праграмы</a>."
+
+msgid "Bonus Points Expiry"
+msgstr "Згаранне бонусаў"
+
+msgid "Bonus points with an expiry date encourage customers to use them more often and thus place repeat orders."
+msgstr "Бонусы з тэрмінам дзеяння заахвочваюць пакупнікоў часцей імі карыстацца і такім чынам рабіць паўторныя заказы."
+
+msgid "Bonus write-off and notifications are handled by a special script run on a schedule (cron). Set up the command"
+msgstr "Спісанне бонусаў і адпраўку апавяшчэнняў выконвае спецыяльны скрыпт, які запускаецца па раскладзе (cron). Наладзьце выкананне каманды"
+
+msgid "in your hosting control panel"
+msgstr "у панэлі кіравання вашага хостынгу"
+
+msgid "https://developers.webasyst.com/docs/tips/cron/"
+msgstr "https://developers.webasyst.com/docs/tips/cron/"
+
+msgid "setup guide"
+msgstr "інструкцыя па наладзе"
+
+msgid "We recommend running it once an hour."
+msgstr "Рэкамендуем запускаць яго раз на гадзіну."
+
+msgid "Bonus lifetime"
+msgstr "Тэрмін дзеяння бонусаў"
+
+msgid "days"
+msgstr "дзён"
+
+msgid "Expiry schedule"
+msgstr "Перыядычнасць згарання"
+
+msgid "Never"
+msgstr "Ніколі"
+
+msgid "— the plugin is disabled"
+msgstr "— плагін выключаны"
+
+msgid "Weekly"
+msgstr "Штотыдзень"
+
+msgid "— at the beginning of each week, on Mondays"
+msgstr "— у пачатку кожнага тыдня, па панядзелках"
+
+msgid "Monthly"
+msgstr "Штомесяц"
+
+msgid "— at the beginning of each month, on the 1st"
+msgstr "— у пачатку кожнага месяца, 1-га чысла"
+
+msgid "Postpone write-off start"
+msgstr "Адкласці пачатак спісання"
+
+msgid "until"
+msgstr "да"
+
+msgid "This setting is useful if customers already have accumulated bonuses and you want to give them some time to receive notifications and spend their bonuses."
+msgstr "Гэтая налада спатрэбіцца, калі ў пакупнікоў ужо ёсць назапашаныя бонусы і трэба даць ім час, каб яны атрымалі апавяшчэнні і паспелі патраціць бонусы."
+
+msgid "Save"
+msgstr "Захаваць"
+
+msgid "[path to php interpreter]"
+msgstr "[шлях да інтэрпрэтатара php]"
+
+msgid "Saved"
+msgstr "Захавана"
+
+msgid "Error saving settings"
+msgstr "Памылка захавання налад"
+
+msgid "Also set up <a href=\"%s\">bonus expiry notifications</a> to remind customers about your store and encourage them to order again."
+msgstr "Наладзьце таксама <a href=\"%s\">апавяшчэнні пра згаранне бонусаў</a>, каб нагадаць пакупнікам пра краму і заахвоціць іх зрабіць яшчэ адзін заказ."
+
+msgid "<b>%s</b> depends on your hosting — ask your administrator or hosting provider how to specify the path to PHP 7.4 or later."
+msgstr "<b>%s</b> залежыць ад хостынгу — даведайцеся ў вашага адміністратара або хостынг-правайдара, як указаць шлях да PHP версіі 7.4 або вышэй."
+
+msgid "Also set up bonus expiry notifications to remind customers about your store and encourage them to order again."
+msgstr "Наладзьце таксама апавяшчэнні пра згаранне бонусаў, каб нагадаць пакупнікам пра краму і заахвоціць іх зрабіць яшчэ адзін заказ."
+
+msgid "Invalid notification data"
+msgstr "Некарэктныя даныя апавяшчэння"
+
+msgid "Notification not found. It may have been deleted already."
+msgstr "Апавяшчэнне не знойдзена. Магчыма, яго ўжо выдалілі."
+
+msgid "Invalid sender address"
+msgstr "Адрас адпраўніка ўказаны няправільна"
+
+msgid "Sender is too long"
+msgstr "Занадта доўгі адпраўнік"
+
+msgid "Notification schedule is not specified"
+msgstr "Не ўказана, калі адпраўляць апавяшчэнне"
+
+msgid "Day of month must be between 1 and 31"
+msgstr "Дзень месяца павінен быць ад 1 да 31"
+
+msgid "Invalid day of week"
+msgstr "Няправільны дзень тыдня"
+
+msgid "Invalid sending time"
+msgstr "Час адпраўкі ўказаны няправільна"
+
+msgid "Message text is required"
+msgstr "Не ўказаны тэкст паведамлення"
+
+msgid "Message subject is required"
+msgstr "Не ўказана тэма паведамлення"
+
+msgid "Default message text is required"
+msgstr "Не ўказаны тэкст версіі па змаўчанні"
+
+msgid "ID is not specified"
+msgstr "Не ўказаны ідэнтыфікатар"
+
+msgid "Notification ID is not specified"
+msgstr "Не ўказаны ідэнтыфікатар апавяшчэння"
+
+msgid "Bonus write-off is disabled or the bonus lifetime is not set in the settings"
+msgstr "Спісанне бонусаў выключана або не ўказаны тэрмін дзеяння бонусаў у наладах"
+
+msgid "Notification sent successfully"
+msgstr "Апавяшчэнне паспяхова адпраўлена"
+
+msgid "Failed to send notification"
+msgstr "Не ўдалося адправіць апавяшчэнне"
+
+msgid "Delivery method %s is not supported"
+msgstr "Спосаб адпраўкі %s не падтрымліваецца"
+
+msgid "Unknown language: %s"
+msgstr "Невядомая мова: %s"
+
+msgid "Language %s is added twice"
+msgstr "Мова %s дададзена двойчы"
+
+msgid "Message text is required (%s)"
+msgstr "Не ўказаны тэкст паведамлення (%s)"
+
+msgid "Message subject is required (%s)"
+msgstr "Не ўказана тэма паведамлення (%s)"
+
+msgid "Unknown write-off schedule: %s"
+msgstr "Невядомы расклад спісання: %s"
+
+msgid "Customer with ID=%d does not exist"
+msgstr "Пакупніка з ID=%d не існуе"
+
+msgid "Customer with ID=%d has no bonuses to write off"
+msgstr "У пакупніка з ID=%d няма бонусаў для спісання"
+
+msgid "Template error: %s"
+msgstr "Памылка шаблону: %s"
+
+msgid "Bonus write-off is disabled in the settings"
+msgstr "Спісанне бонусаў выключана ў наладах"
+
+msgid "Bonus lifetime is not set in the settings"
+msgstr "Не ўказаны тэрмін дзеяння бонусаў у наладах"
+
+msgid "Failed to determine the next write-off date"
+msgstr "Не ўдалося вызначыць дату бліжэйшага спісання"
+
+msgid "Unknown expiry schedule"
+msgstr "Невядомая перыядычнасць згарання"
+
+msgid "Invalid write-off start date"
+msgstr "Дата пачатку спісання ўказана няправільна"
+
+msgid "Recipient address is not specified"
+msgstr "Не ўказаны адрас атрымальніка"
+
+msgid "Notification has no message text"
+msgstr "У апавяшчэння няма тэксту паведамлення"
+
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d дзень"
+msgstr[1] "%d дні"
+msgstr[2] "%d дзён"
+
+msgid "Delete notification?"
+msgstr "Выдаліць апавяшчэнне?"
+
+msgid "Delete"
+msgstr "Выдаліць"
+
+msgid "Cancel"
+msgstr "Скасаваць"
+
+msgid "New notification"
+msgstr "Новае апавяшчэнне"
+
+msgid "<untitled>"
+msgstr "<без назвы>"
+
+msgid "(untitled)"
+msgstr "(без назвы)"
+
+msgid "Notification name"
+msgstr "Назва апавяшчэння"
+
+msgid "Enabled"
+msgstr "Уключана"
+
+msgid "Delivery method"
+msgstr "Спосаб адпраўкі"
+
+msgid "Sender"
+msgstr "Адпраўнік"
+
+msgid "Default address"
+msgstr "Адрас па змаўчанні"
+
+msgid "Other email…"
+msgstr "Іншы email…"
+
+msgid "Default (set by the SMS gateway)"
+msgstr "Па змаўчанні (прызначае SMS-шлюз)"
+
+msgid "Other ID…"
+msgstr "Іншы ID…"
+
+msgid "When to send"
+msgstr "Калі адпраўляць"
+
+msgid "On day {input} of each month"
+msgstr "Штомесяц {input} чысла"
+
+msgid "In months without day %d, the notification is sent on the last day of the month"
+msgstr "У месяцах, дзе няма %d-га чысла, апавяшчэнне прыйдзе ў апошні дзень месяца"
+
+msgid "Every Monday"
+msgstr "Па панядзелках"
+
+msgid "Every Tuesday"
+msgstr "Па аўторках"
+
+msgid "Every Wednesday"
+msgstr "Па серадах"
+
+msgid "Every Thursday"
+msgstr "Па чацвяргах"
+
+msgid "Every Friday"
+msgstr "Па пятніцах"
+
+msgid "Every Saturday"
+msgstr "Па суботах"
+
+msgid "Every Sunday"
+msgstr "Па нядзелях"
+
+msgid "Sending time"
+msgstr "Час адпраўкі"
+
+msgid "after {time}"
+msgstr "пасля {time}"
+
+msgid "any time"
+msgstr "у любы час"
+
+msgid "Notifications are sent as soon as the script runs on the specified day."
+msgstr "Апавяшчэнні адпраўляюцца, як толькі скрыпт запусціцца ў указаны дзень."
+
+msgid "Notifications are sent as soon as the script runs on the specified day after {time}."
+msgstr "Апавяшчэнні адпраўляюцца, як толькі скрыпт запусціцца ў указаны дзень пасля {time}."
+
+msgid "If the script does not run on that day, the notifications will not be sent."
+msgstr "Калі ў гэты дзень скрыпт не запусціцца, апавяшчэнні не будуць адпраўлены."
+
+msgid "Message language"
+msgstr "Мова тэксту"
+
+msgid "Default"
+msgstr "Па змаўчанні"
+
+msgid "+ Add language"
+msgstr "+ Дадаць мову"
+
+msgid "Delete version"
+msgstr "Выдаліць версію"
+
+msgid "Delete the %s version?"
+msgstr "Выдаліць версію «%s»?"
+
+msgid "Customers whose language has no version of its own receive this text."
+msgstr "Гэты тэкст атрымаюць пакупнікі, для мовы якіх няма асобнай версіі."
+
+msgid "Message subject"
+msgstr "Тэма паведамлення"
+
+msgid "Message text"
+msgstr "Тэкст паведамлення"
+
+msgid "Test sending"
+msgstr "Праверыць адпраўку"
+
+msgid "Test message"
+msgstr "Пробнае паведамленне"
+
+msgid "To"
+msgstr "Каму"
+
+msgid "Select a contact to get test data from"
+msgstr "Выберыце кантакт, з якога ўзяць тэставыя даныя"
+
+msgid "Name"
+msgstr "Імя"
+
+msgid "Current balance"
+msgstr "Бонусаў зараз"
+
+msgid "Will expire"
+msgstr "Згарыць"
+
+msgid "Will remain"
+msgstr "Застанецца"
+
+msgid "Text version"
+msgstr "Версія тэксту"
+
+msgid "Test sending requires at least one customer whose bonuses expire at the next write-off. There are none at the moment."
+msgstr "Для пробнай адпраўкі патрэбны хоць адзін пакупнік, у якога пры бліжэйшым спісанні згараць бонусы. Зараз такіх няма."
+
+msgid "Try again"
+msgstr "Паспрабаваць яшчэ раз"
+
+msgid "try again"
+msgstr "паспрабаваць яшчэ раз"
+
+msgid "Close"
+msgstr "Закрыць"
+
+msgid "or"
+msgstr "або"
+
+msgid "cancel"
+msgstr "скасаваць"
+
+msgid "Error:"
+msgstr "Памылка:"
+
+msgid "Notification sent"
+msgstr "Апавяшчэнне адпраўлена"
+
+msgid "Empty error list"
+msgstr "Пусты спіс памылак"
+
+msgid "Controller execution error"
+msgstr "Памылка выканання кантролера"
+
+msgid "Unknown error"
+msgstr "Невядомая памылка"
+
+msgid "Writes off expired bonuses"
+msgstr "Спісвае пратэрмінаваныя бонусы"
+
+msgid "Write-off of unused expired bonus points"
+msgstr "Спісанне невыкарыстаных пратэрмінаваных бонусных балаў"
+
+msgid "Sends notifications"
+msgstr "Адпраўляе апавяшчэнні"

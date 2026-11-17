@@ -1,0 +1,11 @@
+<p>Сәлеметсіз бе, <b>{$customer->get('firstname')}</b>!</p>
+
+<p>Біздің дүкендегі шотыңызда {$customer->affiliateBonus()} бонустық ұпай бар, оларды тапсырыстарды төлеуге пайдалана аласыз. Бонустық бағдарламамыздың ережелері бойынша ұпайлар есептелген күннен бастап {$wa->shop->burningbonusPlugin->duration()} күн әрекет етеді, ал пайдаланылмаған ұпайлар әр аптаның басында жойылады.</p>
+
+<p>Егер осы аптада <b>{$burning_amount}</b> бонустық ұпайды пайдаланбасаңыз, олар күйіп кетеді!</p>
+
+<p>--<br>
+{$wa->shop->settings("name")}<br>
+<a href="mailto:{$wa->shop->settings("email")}">{$wa->shop->settings("email")}</a><br>
+{$wa->shop->settings("phone")}<br>
+</p>

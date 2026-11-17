@@ -1,0 +1,389 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/burningbonus\n"
+"POT-Creation-Date: 2026-11-17 18:22+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: shop/plugins/burningbonus\n"
+"Language-Team: shop/plugins/burningbonus\n"
+"Language: uk_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: uk_UA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+msgid "Bonus expiry notifications"
+msgstr "Сповіщення про згоряння бонусів"
+
+msgid "The Bonus Points Expiry plugin is installed."
+msgstr "Плагін «Згоряння бонусів» встановлено."
+
+msgid "Bonus expiry is configured in the “Marketing” section, in the <a href=\"%s\">affiliate program settings</a>."
+msgstr "Налаштувати згоряння бонусів можна в розділі «Маркетинг», у <a href=\"%s\">налаштуваннях партнерської програми</a>."
+
+msgid "Bonus Points Expiry"
+msgstr "Згоряння бонусів"
+
+msgid "Bonus points with an expiry date encourage customers to use them more often and thus place repeat orders."
+msgstr "Бонуси з терміном дії спонукають покупців частіше ними користуватися і таким чином робити повторні замовлення."
+
+msgid "Bonus write-off and notifications are handled by a special script run on a schedule (cron). Set up the command"
+msgstr "Списання бонусів і надсилання сповіщень виконує спеціальний скрипт, що запускається за розкладом (cron). Налаштуйте виконання команди"
+
+msgid "in your hosting control panel"
+msgstr "у панелі керування вашого хостингу"
+
+msgid "https://developers.webasyst.com/docs/tips/cron/"
+msgstr "https://developers.webasyst.com/docs/tips/cron/"
+
+msgid "setup guide"
+msgstr "інструкція з налаштування"
+
+msgid "We recommend running it once an hour."
+msgstr "Рекомендуємо запускати його раз на годину."
+
+msgid "Bonus lifetime"
+msgstr "Термін дії бонусів"
+
+msgid "days"
+msgstr "днів"
+
+msgid "Expiry schedule"
+msgstr "Періодичність згоряння"
+
+msgid "Never"
+msgstr "Ніколи"
+
+msgid "— the plugin is disabled"
+msgstr "— плагін вимкнено"
+
+msgid "Weekly"
+msgstr "Щотижня"
+
+msgid "— at the beginning of each week, on Mondays"
+msgstr "— на початку кожного тижня, по понеділках"
+
+msgid "Monthly"
+msgstr "Щомісяця"
+
+msgid "— at the beginning of each month, on the 1st"
+msgstr "— на початку кожного місяця, 1-го числа"
+
+msgid "Postpone write-off start"
+msgstr "Відкласти початок списання"
+
+msgid "until"
+msgstr "до"
+
+msgid "This setting is useful if customers already have accumulated bonuses and you want to give them some time to receive notifications and spend their bonuses."
+msgstr "Це налаштування знадобиться, якщо в покупців уже є накопичені бонуси і потрібно дати їм час, щоб вони отримали сповіщення й встигли витратити бонуси."
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "[path to php interpreter]"
+msgstr "[шлях до інтерпретатора php]"
+
+msgid "Saved"
+msgstr "Збережено"
+
+msgid "Error saving settings"
+msgstr "Помилка збереження налаштувань"
+
+msgid "Also set up <a href=\"%s\">bonus expiry notifications</a> to remind customers about your store and encourage them to order again."
+msgstr "Налаштуйте також <a href=\"%s\">сповіщення про згоряння бонусів</a>, щоб нагадати покупцям про магазин і заохотити їх зробити ще одне замовлення."
+
+msgid "<b>%s</b> depends on your hosting — ask your administrator or hosting provider how to specify the path to PHP 7.4 or later."
+msgstr "<b>%s</b> залежить від хостингу — дізнайтеся у вашого адміністратора або хостинг-провайдера, як вказати шлях до PHP версії 7.4 або вище."
+
+msgid "Also set up bonus expiry notifications to remind customers about your store and encourage them to order again."
+msgstr "Налаштуйте також сповіщення про згоряння бонусів, щоб нагадати покупцям про магазин і заохотити їх зробити ще одне замовлення."
+
+msgid "Invalid notification data"
+msgstr "Некоректні дані сповіщення"
+
+msgid "Notification not found. It may have been deleted already."
+msgstr "Сповіщення не знайдено. Можливо, його вже видалили."
+
+msgid "Invalid sender address"
+msgstr "Адресу відправника вказано неправильно"
+
+msgid "Sender is too long"
+msgstr "Задовгий відправник"
+
+msgid "Notification schedule is not specified"
+msgstr "Не вказано, коли надсилати сповіщення"
+
+msgid "Day of month must be between 1 and 31"
+msgstr "День місяця має бути від 1 до 31"
+
+msgid "Invalid day of week"
+msgstr "Неправильний день тижня"
+
+msgid "Invalid sending time"
+msgstr "Час надсилання вказано неправильно"
+
+msgid "Message text is required"
+msgstr "Не вказано текст повідомлення"
+
+msgid "Message subject is required"
+msgstr "Не вказано тему повідомлення"
+
+msgid "Default message text is required"
+msgstr "Не вказано текст версії за замовчуванням"
+
+msgid "ID is not specified"
+msgstr "Не вказано ідентифікатор"
+
+msgid "Notification ID is not specified"
+msgstr "Не вказано ідентифікатор сповіщення"
+
+msgid "Bonus write-off is disabled or the bonus lifetime is not set in the settings"
+msgstr "Списання бонусів вимкнено або не вказано термін дії бонусів у налаштуваннях"
+
+msgid "Notification sent successfully"
+msgstr "Сповіщення успішно надіслано"
+
+msgid "Failed to send notification"
+msgstr "Не вдалося надіслати сповіщення"
+
+msgid "Delivery method %s is not supported"
+msgstr "Спосіб надсилання %s не підтримується"
+
+msgid "Unknown language: %s"
+msgstr "Невідома мова: %s"
+
+msgid "Language %s is added twice"
+msgstr "Мову %s додано двічі"
+
+msgid "Message text is required (%s)"
+msgstr "Не вказано текст повідомлення (%s)"
+
+msgid "Message subject is required (%s)"
+msgstr "Не вказано тему повідомлення (%s)"
+
+msgid "Unknown write-off schedule: %s"
+msgstr "Невідомий розклад списання: %s"
+
+msgid "Customer with ID=%d does not exist"
+msgstr "Покупця з ID=%d не існує"
+
+msgid "Customer with ID=%d has no bonuses to write off"
+msgstr "У покупця з ID=%d немає бонусів для списання"
+
+msgid "Template error: %s"
+msgstr "Помилка шаблону: %s"
+
+msgid "Bonus write-off is disabled in the settings"
+msgstr "Списання бонусів вимкнено в налаштуваннях"
+
+msgid "Bonus lifetime is not set in the settings"
+msgstr "Не вказано термін дії бонусів у налаштуваннях"
+
+msgid "Failed to determine the next write-off date"
+msgstr "Не вдалося визначити дату найближчого списання"
+
+msgid "Unknown expiry schedule"
+msgstr "Невідома періодичність згоряння"
+
+msgid "Invalid write-off start date"
+msgstr "Дату початку списання вказано неправильно"
+
+msgid "Recipient address is not specified"
+msgstr "Не вказано адресу одержувача"
+
+msgid "Notification has no message text"
+msgstr "У сповіщення немає тексту повідомлення"
+
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d день"
+msgstr[1] "%d дні"
+msgstr[2] "%d днів"
+
+msgid "Delete notification?"
+msgstr "Видалити сповіщення?"
+
+msgid "Delete"
+msgstr "Видалити"
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "New notification"
+msgstr "Нове сповіщення"
+
+msgid "<untitled>"
+msgstr "<без назви>"
+
+msgid "(untitled)"
+msgstr "(без назви)"
+
+msgid "Notification name"
+msgstr "Назва сповіщення"
+
+msgid "Enabled"
+msgstr "Увімкнено"
+
+msgid "Delivery method"
+msgstr "Спосіб надсилання"
+
+msgid "Sender"
+msgstr "Відправник"
+
+msgid "Default address"
+msgstr "Адреса за замовчуванням"
+
+msgid "Other email…"
+msgstr "Інший email…"
+
+msgid "Default (set by the SMS gateway)"
+msgstr "За замовчуванням (призначає SMS-шлюз)"
+
+msgid "Other ID…"
+msgstr "Інший ID…"
+
+msgid "When to send"
+msgstr "Коли надсилати"
+
+msgid "On day {input} of each month"
+msgstr "Щомісяця {input} числа"
+
+msgid "In months without day %d, the notification is sent on the last day of the month"
+msgstr "У місяцях, де немає %d-го числа, сповіщення надійде в останній день місяця"
+
+msgid "Every Monday"
+msgstr "Щопонеділка"
+
+msgid "Every Tuesday"
+msgstr "Щовівторка"
+
+msgid "Every Wednesday"
+msgstr "Щосереди"
+
+msgid "Every Thursday"
+msgstr "Щочетверга"
+
+msgid "Every Friday"
+msgstr "Щоп’ятниці"
+
+msgid "Every Saturday"
+msgstr "Щосуботи"
+
+msgid "Every Sunday"
+msgstr "Щонеділі"
+
+msgid "Sending time"
+msgstr "Час надсилання"
+
+msgid "after {time}"
+msgstr "після {time}"
+
+msgid "any time"
+msgstr "будь-коли"
+
+msgid "Notifications are sent as soon as the script runs on the specified day."
+msgstr "Сповіщення надсилаються, щойно скрипт запуститься у вказаний день."
+
+msgid "Notifications are sent as soon as the script runs on the specified day after {time}."
+msgstr "Сповіщення надсилаються, щойно скрипт запуститься у вказаний день після {time}."
+
+msgid "If the script does not run on that day, the notifications will not be sent."
+msgstr "Якщо цього дня скрипт не запуститься, сповіщення не буде надіслано."
+
+msgid "Message language"
+msgstr "Мова тексту"
+
+msgid "Default"
+msgstr "За замовчуванням"
+
+msgid "+ Add language"
+msgstr "+ Додати мову"
+
+msgid "Delete version"
+msgstr "Видалити версію"
+
+msgid "Delete the %s version?"
+msgstr "Видалити версію «%s»?"
+
+msgid "Customers whose language has no version of its own receive this text."
+msgstr "Цей текст отримають покупці, для мови яких немає окремої версії."
+
+msgid "Message subject"
+msgstr "Тема повідомлення"
+
+msgid "Message text"
+msgstr "Текст повідомлення"
+
+msgid "Test sending"
+msgstr "Перевірити надсилання"
+
+msgid "Test message"
+msgstr "Пробне повідомлення"
+
+msgid "To"
+msgstr "Кому"
+
+msgid "Select a contact to get test data from"
+msgstr "Виберіть контакт, з якого взяти тестові дані"
+
+msgid "Name"
+msgstr "Ім’я"
+
+msgid "Current balance"
+msgstr "Бонусів зараз"
+
+msgid "Will expire"
+msgstr "Згорить"
+
+msgid "Will remain"
+msgstr "Залишиться"
+
+msgid "Text version"
+msgstr "Версія тексту"
+
+msgid "Test sending requires at least one customer whose bonuses expire at the next write-off. There are none at the moment."
+msgstr "Для пробного надсилання потрібен хоча б один покупець, у якого під час найближчого списання згорять бонуси. Зараз таких немає."
+
+msgid "Try again"
+msgstr "Спробувати ще раз"
+
+msgid "try again"
+msgstr "спробувати ще раз"
+
+msgid "Close"
+msgstr "Закрити"
+
+msgid "or"
+msgstr "або"
+
+msgid "cancel"
+msgstr "скасувати"
+
+msgid "Error:"
+msgstr "Помилка:"
+
+msgid "Notification sent"
+msgstr "Сповіщення надіслано"
+
+msgid "Empty error list"
+msgstr "Порожній список помилок"
+
+msgid "Controller execution error"
+msgstr "Помилка виконання контролера"
+
+msgid "Unknown error"
+msgstr "Невідома помилка"
+
+msgid "Writes off expired bonuses"
+msgstr "Списує прострочені бонуси"
+
+msgid "Write-off of unused expired bonus points"
+msgstr "Списання невикористаних прострочених бонусних балів"
+
+msgid "Sends notifications"
+msgstr "Надсилає сповіщення"

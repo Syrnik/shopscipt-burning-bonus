@@ -1,0 +1,388 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/burningbonus\n"
+"POT-Creation-Date: 2026-11-17 18:22+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: shop/plugins/burningbonus\n"
+"Language-Team: shop/plugins/burningbonus\n"
+"Language: kk_KZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: kk_KZ\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+msgid "Bonus expiry notifications"
+msgstr "Бонустардың күйіп кетуі туралы хабарландырулар"
+
+msgid "The Bonus Points Expiry plugin is installed."
+msgstr "«Бонустардың күйіп кетуі» плагині орнатылды."
+
+msgid "Bonus expiry is configured in the “Marketing” section, in the <a href=\"%s\">affiliate program settings</a>."
+msgstr "Бонустардың күйіп кетуін «Маркетинг» бөліміндегі <a href=\"%s\">серіктестік бағдарлама баптауларында</a> реттеуге болады."
+
+msgid "Bonus Points Expiry"
+msgstr "Бонустардың күйіп кетуі"
+
+msgid "Bonus points with an expiry date encourage customers to use them more often and thus place repeat orders."
+msgstr "Әрекет ету мерзімі бар бонустар сатып алушыларды оларды жиірек пайдалануға, демек, қайта тапсырыс беруге ынталандырады."
+
+msgid "Bonus write-off and notifications are handled by a special script run on a schedule (cron). Set up the command"
+msgstr "Бонустарды есептен шығаруды және хабарландыруларды жіберуді кесте бойынша (cron) іске қосылатын арнайы скрипт орындайды. Мына команданың орындалуын"
+
+msgid "in your hosting control panel"
+msgstr "хостингіңіздің басқару панелінде баптаңыз"
+
+msgid "https://developers.webasyst.com/docs/tips/cron/"
+msgstr "https://developers.webasyst.com/docs/tips/cron/"
+
+msgid "setup guide"
+msgstr "баптау нұсқаулығы"
+
+msgid "We recommend running it once an hour."
+msgstr "Оны сағатына бір рет іске қосуды ұсынамыз."
+
+msgid "Bonus lifetime"
+msgstr "Бонустардың әрекет ету мерзімі"
+
+msgid "days"
+msgstr "күн"
+
+msgid "Expiry schedule"
+msgstr "Күйіп кету кезеңділігі"
+
+msgid "Never"
+msgstr "Ешқашан"
+
+msgid "— the plugin is disabled"
+msgstr "— плагин өшірулі"
+
+msgid "Weekly"
+msgstr "Апта сайын"
+
+msgid "— at the beginning of each week, on Mondays"
+msgstr "— әр аптаның басында, дүйсенбі күндері"
+
+msgid "Monthly"
+msgstr "Ай сайын"
+
+msgid "— at the beginning of each month, on the 1st"
+msgstr "— әр айдың басында, 1-күні"
+
+msgid "Postpone write-off start"
+msgstr "Есептен шығаруды кейінге қалдыру"
+
+msgid "until"
+msgstr "дейін"
+
+msgid "This setting is useful if customers already have accumulated bonuses and you want to give them some time to receive notifications and spend their bonuses."
+msgstr "Бұл баптау сатып алушыларда жинақталған бонустар болса және оларға хабарландыру алып, бонустарды жұмсап үлгеруі үшін уақыт беру қажет болса пайдалы."
+
+msgid "Save"
+msgstr "Сақтау"
+
+msgid "[path to php interpreter]"
+msgstr "[php интерпретаторына жол]"
+
+msgid "Saved"
+msgstr "Сақталды"
+
+msgid "Error saving settings"
+msgstr "Баптауларды сақтау қатесі"
+
+msgid "Also set up <a href=\"%s\">bonus expiry notifications</a> to remind customers about your store and encourage them to order again."
+msgstr "Сатып алушыларға дүкенді еске салып, оларды қайта тапсырыс беруге ынталандыру үшін <a href=\"%s\">бонустардың күйіп кетуі туралы хабарландыруларды</a> да баптаңыз."
+
+msgid "<b>%s</b> depends on your hosting — ask your administrator or hosting provider how to specify the path to PHP 7.4 or later."
+msgstr "<b>%s</b> хостингке байланысты — PHP 7.4 немесе одан жоғары нұсқасына жолды қалай көрсету керектігін әкімшіңізден немесе хостинг провайдеріңізден біліңіз."
+
+msgid "Also set up bonus expiry notifications to remind customers about your store and encourage them to order again."
+msgstr "Сатып алушыларға дүкенді еске салып, оларды қайта тапсырыс беруге ынталандыру үшін бонустардың күйіп кетуі туралы хабарландыруларды да баптаңыз."
+
+msgid "Invalid notification data"
+msgstr "Хабарландыру деректері қате"
+
+msgid "Notification not found. It may have been deleted already."
+msgstr "Хабарландыру табылмады. Мүмкін, ол жойылып кеткен."
+
+msgid "Invalid sender address"
+msgstr "Жіберушінің мекенжайы қате көрсетілген"
+
+msgid "Sender is too long"
+msgstr "Жіберуші тым ұзын"
+
+msgid "Notification schedule is not specified"
+msgstr "Хабарландыруды қашан жіберу керектігі көрсетілмеген"
+
+msgid "Day of month must be between 1 and 31"
+msgstr "Айдың күні 1-ден 31-ге дейін болуы керек"
+
+msgid "Invalid day of week"
+msgstr "Апта күні қате"
+
+msgid "Invalid sending time"
+msgstr "Жіберу уақыты қате көрсетілген"
+
+msgid "Message text is required"
+msgstr "Хабарлама мәтіні көрсетілмеген"
+
+msgid "Message subject is required"
+msgstr "Хабарлама тақырыбы көрсетілмеген"
+
+msgid "Default message text is required"
+msgstr "Әдепкі нұсқаның мәтіні көрсетілмеген"
+
+msgid "ID is not specified"
+msgstr "Идентификатор көрсетілмеген"
+
+msgid "Notification ID is not specified"
+msgstr "Хабарландыру идентификаторы көрсетілмеген"
+
+msgid "Bonus write-off is disabled or the bonus lifetime is not set in the settings"
+msgstr "Бонустарды есептен шығару өшірулі немесе баптауларда бонустардың әрекет ету мерзімі көрсетілмеген"
+
+msgid "Notification sent successfully"
+msgstr "Хабарландыру сәтті жіберілді"
+
+msgid "Failed to send notification"
+msgstr "Хабарландыруды жіберу мүмкін болмады"
+
+msgid "Delivery method %s is not supported"
+msgstr "%s жіберу тәсіліне қолдау көрсетілмейді"
+
+msgid "Unknown language: %s"
+msgstr "Белгісіз тіл: %s"
+
+msgid "Language %s is added twice"
+msgstr "%s тілі екі рет қосылған"
+
+msgid "Message text is required (%s)"
+msgstr "Хабарлама мәтіні көрсетілмеген (%s)"
+
+msgid "Message subject is required (%s)"
+msgstr "Хабарлама тақырыбы көрсетілмеген (%s)"
+
+msgid "Unknown write-off schedule: %s"
+msgstr "Есептен шығарудың белгісіз кестесі: %s"
+
+msgid "Customer with ID=%d does not exist"
+msgstr "ID=%d сатып алушы жоқ"
+
+msgid "Customer with ID=%d has no bonuses to write off"
+msgstr "ID=%d сатып алушыда есептен шығаратын бонустар жоқ"
+
+msgid "Template error: %s"
+msgstr "Үлгі қатесі: %s"
+
+msgid "Bonus write-off is disabled in the settings"
+msgstr "Бонустарды есептен шығару баптауларда өшірулі"
+
+msgid "Bonus lifetime is not set in the settings"
+msgstr "Баптауларда бонустардың әрекет ету мерзімі көрсетілмеген"
+
+msgid "Failed to determine the next write-off date"
+msgstr "Ең жақын есептен шығару күнін анықтау мүмкін болмады"
+
+msgid "Unknown expiry schedule"
+msgstr "Күйіп кетудің белгісіз кезеңділігі"
+
+msgid "Invalid write-off start date"
+msgstr "Есептен шығарудың басталу күні қате көрсетілген"
+
+msgid "Recipient address is not specified"
+msgstr "Алушының мекенжайы көрсетілмеген"
+
+msgid "Notification has no message text"
+msgstr "Хабарландыруда хабарлама мәтіні жоқ"
+
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d күн"
+msgstr[1] "%d күн"
+
+msgid "Delete notification?"
+msgstr "Хабарландыруды жою керек пе?"
+
+msgid "Delete"
+msgstr "Жою"
+
+msgid "Cancel"
+msgstr "Болдырмау"
+
+msgid "New notification"
+msgstr "Жаңа хабарландыру"
+
+msgid "<untitled>"
+msgstr "<атауы жоқ>"
+
+msgid "(untitled)"
+msgstr "(атауы жоқ)"
+
+msgid "Notification name"
+msgstr "Хабарландыру атауы"
+
+msgid "Enabled"
+msgstr "Қосулы"
+
+msgid "Delivery method"
+msgstr "Жіберу тәсілі"
+
+msgid "Sender"
+msgstr "Жіберуші"
+
+msgid "Default address"
+msgstr "Әдепкі мекенжай"
+
+msgid "Other email…"
+msgstr "Басқа email…"
+
+msgid "Default (set by the SMS gateway)"
+msgstr "Әдепкі (SMS-шлюз тағайындайды)"
+
+msgid "Other ID…"
+msgstr "Басқа ID…"
+
+msgid "When to send"
+msgstr "Қашан жіберу"
+
+msgid "On day {input} of each month"
+msgstr "Әр айдың {input}-күні"
+
+msgid "In months without day %d, the notification is sent on the last day of the month"
+msgstr "%d-күні жоқ айларда хабарландыру айдың соңғы күні жіберіледі"
+
+msgid "Every Monday"
+msgstr "Әр дүйсенбі"
+
+msgid "Every Tuesday"
+msgstr "Әр сейсенбі"
+
+msgid "Every Wednesday"
+msgstr "Әр сәрсенбі"
+
+msgid "Every Thursday"
+msgstr "Әр бейсенбі"
+
+msgid "Every Friday"
+msgstr "Әр жұма"
+
+msgid "Every Saturday"
+msgstr "Әр сенбі"
+
+msgid "Every Sunday"
+msgstr "Әр жексенбі"
+
+msgid "Sending time"
+msgstr "Жіберу уақыты"
+
+msgid "after {time}"
+msgstr "{time} кейін"
+
+msgid "any time"
+msgstr "кез келген уақытта"
+
+msgid "Notifications are sent as soon as the script runs on the specified day."
+msgstr "Хабарландырулар көрсетілген күні скрипт іске қосылған бойда жіберіледі."
+
+msgid "Notifications are sent as soon as the script runs on the specified day after {time}."
+msgstr "Хабарландырулар көрсетілген күні {time} кейін скрипт іске қосылған бойда жіберіледі."
+
+msgid "If the script does not run on that day, the notifications will not be sent."
+msgstr "Егер сол күні скрипт іске қосылмаса, хабарландырулар жіберілмейді."
+
+msgid "Message language"
+msgstr "Мәтін тілі"
+
+msgid "Default"
+msgstr "Әдепкі"
+
+msgid "+ Add language"
+msgstr "+ Тіл қосу"
+
+msgid "Delete version"
+msgstr "Нұсқаны жою"
+
+msgid "Delete the %s version?"
+msgstr "«%s» нұсқасын жою керек пе?"
+
+msgid "Customers whose language has no version of its own receive this text."
+msgstr "Бұл мәтінді өз тіліне жеке нұсқасы жоқ сатып алушылар алады."
+
+msgid "Message subject"
+msgstr "Хабарлама тақырыбы"
+
+msgid "Message text"
+msgstr "Хабарлама мәтіні"
+
+msgid "Test sending"
+msgstr "Жіберуді тексеру"
+
+msgid "Test message"
+msgstr "Сынақ хабарлама"
+
+msgid "To"
+msgstr "Кімге"
+
+msgid "Select a contact to get test data from"
+msgstr "Сынақ деректерін алу үшін контактіні таңдаңыз"
+
+msgid "Name"
+msgstr "Аты"
+
+msgid "Current balance"
+msgstr "Қазіргі бонустар"
+
+msgid "Will expire"
+msgstr "Күйіп кетеді"
+
+msgid "Will remain"
+msgstr "Қалады"
+
+msgid "Text version"
+msgstr "Мәтін нұсқасы"
+
+msgid "Test sending requires at least one customer whose bonuses expire at the next write-off. There are none at the moment."
+msgstr "Сынақ жіберу үшін ең жақын есептен шығаруда бонустары күйіп кететін кемінде бір сатып алушы қажет. Қазір ондайлар жоқ."
+
+msgid "Try again"
+msgstr "Қайталап көру"
+
+msgid "try again"
+msgstr "қайталап көру"
+
+msgid "Close"
+msgstr "Жабу"
+
+msgid "or"
+msgstr "немесе"
+
+msgid "cancel"
+msgstr "болдырмау"
+
+msgid "Error:"
+msgstr "Қате:"
+
+msgid "Notification sent"
+msgstr "Хабарландыру жіберілді"
+
+msgid "Empty error list"
+msgstr "Қателер тізімі бос"
+
+msgid "Controller execution error"
+msgstr "Контроллерді орындау қатесі"
+
+msgid "Unknown error"
+msgstr "Белгісіз қате"
+
+msgid "Writes off expired bonuses"
+msgstr "Мерзімі өткен бонустарды есептен шығарады"
+
+msgid "Write-off of unused expired bonus points"
+msgstr "Пайдаланылмаған мерзімі өткен бонустық ұпайларды есептен шығару"
+
+msgid "Sends notifications"
+msgstr "Хабарландыруларды жібереді"

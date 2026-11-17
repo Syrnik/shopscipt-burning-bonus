@@ -1,0 +1,11 @@
+<p>Ciao <b>{$customer->get('firstname')}</b>,</p>
+
+<p>sul tuo account nel nostro negozio hai {$customer->affiliateBonus()} punti bonus, che puoi usare per pagare i tuoi ordini. Secondo le regole del nostro programma bonus, i punti sono validi {$wa->shop->burningbonusPlugin->duration()} giorni dalla data di accredito e i punti non utilizzati vengono annullati all’inizio di ogni mese.</p>
+
+<p>Se non usi <b>{$burning_amount}</b> punti bonus questo mese, scadranno!</p>
+
+<p>--<br>
+{$wa->shop->settings("name")}<br>
+<a href="mailto:{$wa->shop->settings("email")}">{$wa->shop->settings("email")}</a><br>
+{$wa->shop->settings("phone")}<br>
+</p>

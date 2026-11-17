@@ -27,9 +27,9 @@ rather than someday.
 - Test sending of a notification to any address before turning it on.
 - Supports both Webasyst UI 1.3 and UI 2.0.
 
-The plugin's backend screens are available in English and Russian. Default
-notification texts are provided in both languages as well and are fully
-editable, so you can write them in any language.
+The plugin's backend screens are available in English, Russian, Ukrainian, Belarusian, Kazakh, German, Dutch, French, Italian and Spanish.
+Default notification texts are provided in the same languages and are fully
+editable; one notification can hold versions in several languages.
 
 ## How expiry is calculated
 

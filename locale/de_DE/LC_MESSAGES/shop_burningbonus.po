@@ -1,0 +1,388 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shop/plugins/burningbonus\n"
+"POT-Creation-Date: 2026-11-17 18:22+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: shop/plugins/burningbonus\n"
+"Language-Team: shop/plugins/burningbonus\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: de_DE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+msgid "Bonus expiry notifications"
+msgstr "Benachrichtigungen über verfallende Bonuspunkte"
+
+msgid "The Bonus Points Expiry plugin is installed."
+msgstr "Das Plugin „Verfall von Bonuspunkten“ ist installiert."
+
+msgid "Bonus expiry is configured in the “Marketing” section, in the <a href=\"%s\">affiliate program settings</a>."
+msgstr "Der Verfall von Bonuspunkten wird im Bereich „Marketing“ in den <a href=\"%s\">Einstellungen des Partnerprogramms</a> konfiguriert."
+
+msgid "Bonus Points Expiry"
+msgstr "Verfall von Bonuspunkten"
+
+msgid "Bonus points with an expiry date encourage customers to use them more often and thus place repeat orders."
+msgstr "Bonuspunkte mit Ablaufdatum regen Kunden dazu an, sie häufiger einzulösen und dadurch erneut zu bestellen."
+
+msgid "Bonus write-off and notifications are handled by a special script run on a schedule (cron). Set up the command"
+msgstr "Abschreibung und Benachrichtigungen übernimmt ein spezielles Skript, das nach Zeitplan (cron) ausgeführt wird. Richten Sie den Befehl"
+
+msgid "in your hosting control panel"
+msgstr "in der Verwaltungsoberfläche Ihres Hostings ein"
+
+msgid "https://developers.webasyst.com/docs/tips/cron/"
+msgstr "https://developers.webasyst.com/docs/tips/cron/"
+
+msgid "setup guide"
+msgstr "Anleitung zur Einrichtung"
+
+msgid "We recommend running it once an hour."
+msgstr "Wir empfehlen, es einmal pro Stunde auszuführen."
+
+msgid "Bonus lifetime"
+msgstr "Gültigkeitsdauer der Bonuspunkte"
+
+msgid "days"
+msgstr "Tage"
+
+msgid "Expiry schedule"
+msgstr "Verfallsrhythmus"
+
+msgid "Never"
+msgstr "Nie"
+
+msgid "— the plugin is disabled"
+msgstr "— das Plugin ist deaktiviert"
+
+msgid "Weekly"
+msgstr "Wöchentlich"
+
+msgid "— at the beginning of each week, on Mondays"
+msgstr "— zu Beginn jeder Woche, montags"
+
+msgid "Monthly"
+msgstr "Monatlich"
+
+msgid "— at the beginning of each month, on the 1st"
+msgstr "— zu Beginn jedes Monats, am 1."
+
+msgid "Postpone write-off start"
+msgstr "Beginn der Abschreibung verschieben"
+
+msgid "until"
+msgstr "bis"
+
+msgid "This setting is useful if customers already have accumulated bonuses and you want to give them some time to receive notifications and spend their bonuses."
+msgstr "Diese Einstellung ist nützlich, wenn Kunden bereits Bonuspunkte gesammelt haben und Sie ihnen Zeit geben möchten, Benachrichtigungen zu erhalten und ihre Punkte einzulösen."
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "[path to php interpreter]"
+msgstr "[Pfad zum PHP-Interpreter]"
+
+msgid "Saved"
+msgstr "Gespeichert"
+
+msgid "Error saving settings"
+msgstr "Fehler beim Speichern der Einstellungen"
+
+msgid "Also set up <a href=\"%s\">bonus expiry notifications</a> to remind customers about your store and encourage them to order again."
+msgstr "Richten Sie auch <a href=\"%s\">Benachrichtigungen über verfallende Bonuspunkte</a> ein, um Kunden an Ihren Shop zu erinnern und sie zu einer weiteren Bestellung anzuregen."
+
+msgid "<b>%s</b> depends on your hosting — ask your administrator or hosting provider how to specify the path to PHP 7.4 or later."
+msgstr "<b>%s</b> hängt von Ihrem Hosting ab — fragen Sie Ihren Administrator oder Hosting-Anbieter, wie der Pfad zu PHP 7.4 oder höher anzugeben ist."
+
+msgid "Also set up bonus expiry notifications to remind customers about your store and encourage them to order again."
+msgstr "Richten Sie auch Benachrichtigungen über verfallende Bonuspunkte ein, um Kunden an Ihren Shop zu erinnern und sie zu einer weiteren Bestellung anzuregen."
+
+msgid "Invalid notification data"
+msgstr "Ungültige Benachrichtigungsdaten"
+
+msgid "Notification not found. It may have been deleted already."
+msgstr "Benachrichtigung nicht gefunden. Möglicherweise wurde sie bereits gelöscht."
+
+msgid "Invalid sender address"
+msgstr "Ungültige Absenderadresse"
+
+msgid "Sender is too long"
+msgstr "Absender ist zu lang"
+
+msgid "Notification schedule is not specified"
+msgstr "Zeitplan der Benachrichtigung fehlt"
+
+msgid "Day of month must be between 1 and 31"
+msgstr "Der Tag des Monats muss zwischen 1 und 31 liegen"
+
+msgid "Invalid day of week"
+msgstr "Ungültiger Wochentag"
+
+msgid "Invalid sending time"
+msgstr "Ungültige Versandzeit"
+
+msgid "Message text is required"
+msgstr "Nachrichtentext fehlt"
+
+msgid "Message subject is required"
+msgstr "Betreff fehlt"
+
+msgid "Default message text is required"
+msgstr "Text der Standardversion fehlt"
+
+msgid "ID is not specified"
+msgstr "ID fehlt"
+
+msgid "Notification ID is not specified"
+msgstr "ID der Benachrichtigung fehlt"
+
+msgid "Bonus write-off is disabled or the bonus lifetime is not set in the settings"
+msgstr "Die Abschreibung von Bonuspunkten ist deaktiviert oder die Gültigkeitsdauer ist in den Einstellungen nicht festgelegt"
+
+msgid "Notification sent successfully"
+msgstr "Benachrichtigung erfolgreich gesendet"
+
+msgid "Failed to send notification"
+msgstr "Benachrichtigung konnte nicht gesendet werden"
+
+msgid "Delivery method %s is not supported"
+msgstr "Versandart %s wird nicht unterstützt"
+
+msgid "Unknown language: %s"
+msgstr "Unbekannte Sprache: %s"
+
+msgid "Language %s is added twice"
+msgstr "Sprache %s wurde doppelt hinzugefügt"
+
+msgid "Message text is required (%s)"
+msgstr "Nachrichtentext fehlt (%s)"
+
+msgid "Message subject is required (%s)"
+msgstr "Betreff fehlt (%s)"
+
+msgid "Unknown write-off schedule: %s"
+msgstr "Unbekannter Abschreibungsrhythmus: %s"
+
+msgid "Customer with ID=%d does not exist"
+msgstr "Kunde mit ID=%d existiert nicht"
+
+msgid "Customer with ID=%d has no bonuses to write off"
+msgstr "Kunde mit ID=%d hat keine Bonuspunkte zum Abschreiben"
+
+msgid "Template error: %s"
+msgstr "Vorlagenfehler: %s"
+
+msgid "Bonus write-off is disabled in the settings"
+msgstr "Die Abschreibung von Bonuspunkten ist in den Einstellungen deaktiviert"
+
+msgid "Bonus lifetime is not set in the settings"
+msgstr "Die Gültigkeitsdauer der Bonuspunkte ist in den Einstellungen nicht festgelegt"
+
+msgid "Failed to determine the next write-off date"
+msgstr "Datum der nächsten Abschreibung konnte nicht ermittelt werden"
+
+msgid "Unknown expiry schedule"
+msgstr "Unbekannter Verfallsrhythmus"
+
+msgid "Invalid write-off start date"
+msgstr "Ungültiges Startdatum der Abschreibung"
+
+msgid "Recipient address is not specified"
+msgstr "Empfängeradresse fehlt"
+
+msgid "Notification has no message text"
+msgstr "Die Benachrichtigung hat keinen Nachrichtentext"
+
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d Tag"
+msgstr[1] "%d Tage"
+
+msgid "Delete notification?"
+msgstr "Benachrichtigung löschen?"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "New notification"
+msgstr "Neue Benachrichtigung"
+
+msgid "<untitled>"
+msgstr "<ohne Titel>"
+
+msgid "(untitled)"
+msgstr "(ohne Titel)"
+
+msgid "Notification name"
+msgstr "Name der Benachrichtigung"
+
+msgid "Enabled"
+msgstr "Aktiviert"
+
+msgid "Delivery method"
+msgstr "Versandart"
+
+msgid "Sender"
+msgstr "Absender"
+
+msgid "Default address"
+msgstr "Standardadresse"
+
+msgid "Other email…"
+msgstr "Andere E-Mail…"
+
+msgid "Default (set by the SMS gateway)"
+msgstr "Standard (vom SMS-Gateway festgelegt)"
+
+msgid "Other ID…"
+msgstr "Andere ID…"
+
+msgid "When to send"
+msgstr "Versandzeitpunkt"
+
+msgid "On day {input} of each month"
+msgstr "Am {input}. jedes Monats"
+
+msgid "In months without day %d, the notification is sent on the last day of the month"
+msgstr "In Monaten ohne den %d. wird die Benachrichtigung am letzten Tag des Monats gesendet"
+
+msgid "Every Monday"
+msgstr "Jeden Montag"
+
+msgid "Every Tuesday"
+msgstr "Jeden Dienstag"
+
+msgid "Every Wednesday"
+msgstr "Jeden Mittwoch"
+
+msgid "Every Thursday"
+msgstr "Jeden Donnerstag"
+
+msgid "Every Friday"
+msgstr "Jeden Freitag"
+
+msgid "Every Saturday"
+msgstr "Jeden Samstag"
+
+msgid "Every Sunday"
+msgstr "Jeden Sonntag"
+
+msgid "Sending time"
+msgstr "Versandzeit"
+
+msgid "after {time}"
+msgstr "nach {time}"
+
+msgid "any time"
+msgstr "beliebig"
+
+msgid "Notifications are sent as soon as the script runs on the specified day."
+msgstr "Benachrichtigungen werden gesendet, sobald das Skript am festgelegten Tag ausgeführt wird."
+
+msgid "Notifications are sent as soon as the script runs on the specified day after {time}."
+msgstr "Benachrichtigungen werden gesendet, sobald das Skript am festgelegten Tag nach {time} ausgeführt wird."
+
+msgid "If the script does not run on that day, the notifications will not be sent."
+msgstr "Wird das Skript an diesem Tag nicht ausgeführt, werden keine Benachrichtigungen gesendet."
+
+msgid "Message language"
+msgstr "Sprache des Textes"
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "+ Add language"
+msgstr "+ Sprache hinzufügen"
+
+msgid "Delete version"
+msgstr "Version löschen"
+
+msgid "Delete the %s version?"
+msgstr "Version „%s“ löschen?"
+
+msgid "Customers whose language has no version of its own receive this text."
+msgstr "Diesen Text erhalten Kunden, für deren Sprache es keine eigene Version gibt."
+
+msgid "Message subject"
+msgstr "Betreff"
+
+msgid "Message text"
+msgstr "Nachrichtentext"
+
+msgid "Test sending"
+msgstr "Testversand"
+
+msgid "Test message"
+msgstr "Testnachricht"
+
+msgid "To"
+msgstr "An"
+
+msgid "Select a contact to get test data from"
+msgstr "Wählen Sie einen Kontakt, dessen Daten für den Test verwendet werden"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Current balance"
+msgstr "Aktueller Stand"
+
+msgid "Will expire"
+msgstr "Verfällt"
+
+msgid "Will remain"
+msgstr "Verbleibt"
+
+msgid "Text version"
+msgstr "Textversion"
+
+msgid "Test sending requires at least one customer whose bonuses expire at the next write-off. There are none at the moment."
+msgstr "Für den Testversand wird mindestens ein Kunde benötigt, dessen Bonuspunkte bei der nächsten Abschreibung verfallen. Derzeit gibt es keinen."
+
+msgid "Try again"
+msgstr "Erneut versuchen"
+
+msgid "try again"
+msgstr "erneut versuchen"
+
+msgid "Close"
+msgstr "Schließen"
+
+msgid "or"
+msgstr "oder"
+
+msgid "cancel"
+msgstr "abbrechen"
+
+msgid "Error:"
+msgstr "Fehler:"
+
+msgid "Notification sent"
+msgstr "Benachrichtigung gesendet"
+
+msgid "Empty error list"
+msgstr "Leere Fehlerliste"
+
+msgid "Controller execution error"
+msgstr "Fehler bei der Ausführung des Controllers"
+
+msgid "Unknown error"
+msgstr "Unbekannter Fehler"
+
+msgid "Writes off expired bonuses"
+msgstr "Schreibt verfallene Bonuspunkte ab"
+
+msgid "Write-off of unused expired bonus points"
+msgstr "Abschreibung ungenutzter verfallener Bonuspunkte"
+
+msgid "Sends notifications"
+msgstr "Sendet Benachrichtigungen"

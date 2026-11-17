@@ -1,0 +1,11 @@
+<p>Beste <b>{$customer->get('firstname')}</b>,</p>
+
+<p>U heeft {$customer->affiliateBonus()} bonuspunten op uw account in onze winkel, waarmee u uw bestellingen kunt betalen. Volgens de regels van ons bonusprogramma zijn punten {$wa->shop->burningbonusPlugin->duration()} dagen geldig vanaf de datum van bijschrijving, en ongebruikte punten vervallen aan het begin van elke week.</p>
+
+<p>Als u <b>{$burning_amount}</b> bonuspunten deze week niet gebruikt, vervallen ze!</p>
+
+<p>--<br>
+{$wa->shop->settings("name")}<br>
+<a href="mailto:{$wa->shop->settings("email")}">{$wa->shop->settings("email")}</a><br>
+{$wa->shop->settings("phone")}<br>
+</p>

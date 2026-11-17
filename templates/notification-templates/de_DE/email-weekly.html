@@ -1,0 +1,11 @@
+<p>Hallo <b>{$customer->get('firstname')}</b>,</p>
+
+<p>auf Ihrem Konto in unserem Shop befinden sich {$customer->affiliateBonus()} Bonuspunkte, mit denen Sie Ihre Bestellungen bezahlen können. Gemäß den Regeln unseres Bonusprogramms sind Punkte ab der Gutschrift {$wa->shop->burningbonusPlugin->duration()} Tage gültig, und nicht eingelöste Punkte verfallen zu Beginn jeder Woche.</p>
+
+<p>Wenn Sie <b>{$burning_amount}</b> Bonuspunkte in dieser Woche nicht einlösen, verfallen sie!</p>
+
+<p>--<br>
+{$wa->shop->settings("name")}<br>
+<a href="mailto:{$wa->shop->settings("email")}">{$wa->shop->settings("email")}</a><br>
+{$wa->shop->settings("phone")}<br>
+</p>

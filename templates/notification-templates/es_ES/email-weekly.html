@@ -1,0 +1,11 @@
+<p>Hola, <b>{$customer->get('firstname')}</b>:</p>
+
+<p>Tiene {$customer->affiliateBonus()} puntos de bonificación en su cuenta de nuestra tienda, que puede usar para pagar sus pedidos. Según las reglas de nuestro programa de bonificación, los puntos son válidos durante {$wa->shop->burningbonusPlugin->duration()} días desde la fecha en que se abonan, y los puntos no utilizados se cancelan al comienzo de cada semana.</p>
+
+<p>Si no usa <b>{$burning_amount}</b> puntos de bonificación esta semana, ¡caducarán!</p>
+
+<p>--<br>
+{$wa->shop->settings("name")}<br>
+<a href="mailto:{$wa->shop->settings("email")}">{$wa->shop->settings("email")}</a><br>
+{$wa->shop->settings("phone")}<br>
+</p>

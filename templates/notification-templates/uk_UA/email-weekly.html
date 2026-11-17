@@ -1,0 +1,11 @@
+<p>Вітаємо, <b>{$customer->get('firstname')}</b>!</p>
+
+<p>Бонусних балів на вашому рахунку в нашому магазині: {$customer->affiliateBonus()}. Їх можна використати для оплати замовлень. За правилами нашої бонусної програми бали діють {$wa->shop->burningbonusPlugin->duration()} дн. з моменту нарахування, а невикористані бали анулюються на початку кожного тижня.</p>
+
+<p>Якщо цього тижня ви не використаєте <b>{$burning_amount}</b> бонусних балів, вони згорять!</p>
+
+<p>--<br>
+{$wa->shop->settings("name")}<br>
+<a href="mailto:{$wa->shop->settings("email")}">{$wa->shop->settings("email")}</a><br>
+{$wa->shop->settings("phone")}<br>
+</p>
