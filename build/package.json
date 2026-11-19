@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "number-formatter": "^1.2.0",
     "vue": "^3.4.21"
   },
   "devDependencies": {

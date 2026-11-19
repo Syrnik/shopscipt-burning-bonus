@@ -33,9 +33,9 @@
                     @click="selected_contact = r.contact_id">
                   <td><input type="radio" :value="r.contact_id" v-model="selected_contact"></td>
                   <td>{{ !!r.customer_name ? r.customer_name : `(contact id=${r.contact_id})` }}</td>
-                  <td style="text-align: center">{{ numFormat('0.####', r.actual_balance) }}</td>
-                  <td style="text-align: center">{{ numFormat('0.####', r.to_burn) }}</td>
-                  <td style="text-align: center">{{ numFormat('0.####', r.actual_balance - r.to_burn) }}</td>
+                  <td style="text-align: center">{{ num(r.actual_balance) }}</td>
+                  <td style="text-align: center">{{ num(r.to_burn) }}</td>
+                  <td style="text-align: center">{{ num(r.actual_balance - r.to_burn) }}</td>
                   <td v-if="multilingual">{{ versionFor(r.locale) }}</td>
                 </tr>
                 </tbody>
@@ -80,7 +80,7 @@
 <script setup>
 import {computed, inject, reactive, ref} from "vue";
 import {t} from "../components/i18n";
-import numFormat from 'number-formatter';
+import {formatNumber} from "./numbers";
 import Preloader from "./Preloader.vue";
 import ErrorParser from "../components/webasyst-error-parser";
 import {localeName} from "./locales";
@@ -90,6 +90,7 @@ const props = defineProps({notification: {type: Object}});
 
 const test_data = reactive([]);
 const references = inject('references');
+const num = value => formatNumber(value, references.number_format);
 const ui2 = inject('ui2', false);
 
 const loading_data = ref(true);

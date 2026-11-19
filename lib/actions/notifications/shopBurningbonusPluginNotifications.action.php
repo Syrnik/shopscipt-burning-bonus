@@ -30,6 +30,7 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
             'notification_template' => $this->getNotificationTemplate(),
             'locales'               => $locales,
             'text_templates'        => $this->getTextTemplates(array_column($locales, 'id')),
+            'number_format'         => $this->getNumberFormat(),
         ];
 
         $notifications_list = $this->getList();
@@ -109,6 +110,21 @@ class shopBurningbonusPluginNotificationsAction extends shopMarketingSettingsVie
         usort($result, fn($a, $b) => strcmp($a['name'], $b['name']));
 
         return $result;
+    }
+
+    /**
+     * Разделители чисел для локали пользователя — те же, что у waLocale::format() и wa_format_number
+     *
+     * @return array{decimal_point:string, thousands_sep:string}
+     */
+    protected function getNumberFormat(): array
+    {
+        $info = (array)waLocale::getInfo(wa()->getLocale());
+
+        return [
+            'decimal_point' => (string)($info['decimal_point'] ?? '.'),
+            'thousands_sep' => (string)($info['thousands_sep'] ?? ''),
+        ];
     }
 
     /**
