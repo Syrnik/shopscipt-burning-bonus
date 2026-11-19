@@ -8,7 +8,7 @@
 return [
     'name' => /*_wp*/('Bonus Points Expiry'),
     'img' => 'img/icon16.png',
-    'version' => '1.0.4',
+    'version' => '1.1.0',
     'vendor' => '670917',
     'shop_settings' => true,
     'handlers' => [
