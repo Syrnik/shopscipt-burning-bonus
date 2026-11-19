@@ -38,3 +38,14 @@ if ($drop) {
 // иначе модели продолжат видеть удалённые subject/body и не увидят новую таблицу
 (new shopBurningbonusNotificationsModel())->clearMetadataCache();
 (new shopBurningbonusNotificationTextsModel())->clearMetadataCache();
+
+// Файлы версии 1.0, которых больше нет: Инсталлер при обновлении их не удаляет.
+// Старый шаблон из actions-legacy в UI 1.3 перекрыл бы общий templates/actions/notifications/Notifications.html
+$plugin_path = wa('shop')->getConfig()->getPluginPath('burningbonus');
+foreach (['js/notifications-settings.js', 'templates/actions-legacy/notifications'] as $obsolete) {
+    try {
+        waFiles::delete($plugin_path . '/' . $obsolete);
+    } catch (waException $e) {
+        waLog::log("Shop/Burningbonus: can't delete obsolete $obsolete: " . $e->getMessage(), 'shop/plugins/burningbonus/update.log');
+    }
+}
